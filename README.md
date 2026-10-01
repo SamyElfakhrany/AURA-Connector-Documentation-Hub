@@ -1,6 +1,6 @@
 # AURA Connector Documentation Hub
 
-A static local website containing the AURA connector landing page and 29 local board briefings. Atlas is the only connector still marked as planned.
+A static local website containing the AURA connector landing page and 30 local board briefings. All prioritized connectors now have a local HTML briefing.
 
 ## Project structure
 
@@ -10,7 +10,7 @@ AURA-Connector-Documentation-Hub/
 ├── run-local.bat
 ├── README.md
 └── briefings/
-    └── 29 standalone connector briefing files
+    └── 30 standalone connector briefing files
 ```
 
 ## Run from the F: drive
