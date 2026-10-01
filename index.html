@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AURA connector documentation hub with prioritization scores, delivery waves, access status, and board briefing links.">
+  <meta name="theme-color" content="#10203c">
+  <title>AURA | Connector Documentation Hub</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310203c'/%3E%3Cpath d='M15 47 28 15h8l13 32h-9l-2-6H26l-2 6Zm14-14h6l-3-9Z' fill='%232fb4df'/%3E%3Ccircle cx='48' cy='16' r='6' fill='%23ea0a2a'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #10203c;
+      --ink-2: #253653;
+      --muted: #697384;
+      --accent: #2fb4df;
+      --accent-dark: #1688b3;
+      --accent-soft: #eaf8fd;
+      --red: #ea0a2a;
+      --red-soft: #fff0f3;
+      --green: #137a55;
+      --green-soft: #e9f8f2;
+      --amber: #8a5900;
+      --amber-soft: #fff6df;
+      --line: #dfe6ee;
+      --panel: #f5f7fa;
+      --white: #ffffff;
+      --radius: 18px;
+      --shadow: 0 18px 45px rgba(16, 32, 60, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% -5%, rgba(47, 180, 223, .12), transparent 26rem),
+        radial-gradient(circle at 96% 10%, rgba(234, 10, 42, .07), transparent 24rem),
+        #f3f5f8;
+      font: 16px/1.55 Arial, Helvetica, sans-serif;
+    }
+    button, input, select { font: inherit; }
+    a { color: inherit; }
+    .skip { position: absolute; left: -9999px; }
+    .skip:focus { left: 16px; top: 12px; z-index: 100; padding: 9px 12px; background: #fff; border: 2px solid var(--accent); border-radius: 8px; }
+
+    .shell { width: min(1240px, calc(100% - 28px)); margin: 0 auto; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 10px 0 0;
+      background: rgba(243, 245, 248, .86);
+      backdrop-filter: blur(12px);
+    }
+    .topbar-inner {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 13px 18px;
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(223,230,238,.9);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(16,32,60,.06);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 900; letter-spacing: .015em; }
+    .brand-mark { width: 21px; height: 31px; border-radius: 5px; background: linear-gradient(165deg, var(--accent) 0 33%, var(--ink) 34% 66%, var(--red) 67%); box-shadow: 5px 0 0 rgba(47,180,223,.18); transform: skewY(8deg); }
+    .brand span { color: var(--accent-dark); }
+    .top-actions { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 9px; }
+
+    .btn {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      color: #fff;
+      background: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 9px 20px rgba(16,32,60,.12); }
+    .btn:focus-visible, .filter-chip:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid rgba(47,180,223,.35); outline-offset: 2px; }
+    .btn.secondary { color: var(--ink); background: #fff; border-color: var(--line); }
+    .btn.accent { background: linear-gradient(135deg, var(--accent-dark), #0f789e); }
+    .btn.disabled { color: #7c8795; background: #edf1f5; border-color: #e1e6ec; pointer-events: none; box-shadow: none; }
+
+    main { padding: 14px 0 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr);
+      gap: 34px;
+      align-items: center;
+      padding: 48px;
+      background: linear-gradient(112deg, rgba(241,248,252,.98), rgba(255,255,255,.98) 55%, rgba(255,240,243,.96));
+      border: 1px solid rgba(223,230,238,.95);
+      border-radius: 24px;
+      box-shadow: 0 20px 55px rgba(16,32,60,.06);
+    }
+    .hero::after { content: ""; position: absolute; width: 330px; height: 330px; right: 18%; top: -260px; border-radius: 50%; background: radial-gradient(circle, rgba(47,180,223,.22), transparent 70%); pointer-events: none; }
+    .eyebrow { margin: 0 0 8px; color: var(--red); font-size: 12px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 0; max-width: 790px; font-size: clamp(36px, 5vw, 62px); line-height: 1.02; letter-spacing: -.045em; }
+    h1 span { color: var(--accent-dark); }
+    .lead { margin: 17px 0 0; max-width: 760px; color: var(--muted); font-size: 18px; }
+    .hero-note { padding: 24px; background: rgba(255,255,255,.9); border: 1px solid #dce8ee; border-radius: var(--radius); box-shadow: var(--shadow); }
+    .hero-note .kicker { color: var(--accent-dark); font-size: 12px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .hero-note strong { display: block; margin: 5px 0 8px; font-size: 23px; line-height: 1.2; }
+    .hero-note p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+    .stat { padding: 20px; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 28px rgba(16,32,60,.04); }
+    .stat-value { font-size: 31px; line-height: 1; font-weight: 900; letter-spacing: -.03em; }
+    .stat-label { margin-top: 7px; color: var(--muted); font-size: 13px; font-weight: 700; }
+    .stat.primary .stat-value { color: var(--accent-dark); }
+    .stat.attention .stat-value { color: var(--red); }
+
+    .workspace { margin-top: 18px; padding: 25px; background: rgba(255,255,255,.94); border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 14px 38px rgba(16,32,60,.05); }
+    .workspace-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
+    .workspace h2 { margin: 0; font-size: 28px; letter-spacing: -.025em; }
+    .result-count { color: var(--muted); font-size: 14px; font-weight: 700; }
+    .toolbar { display: grid; grid-template-columns: minmax(260px, 1.5fr) repeat(3, minmax(150px, .52fr)); gap: 12px; margin-top: 18px; }
+    .field { display: grid; gap: 6px; }
+    .field label { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .field input, .field select { width: 100%; min-height: 46px; padding: 10px 12px; color: var(--ink); background: #fff; border: 1px solid #cfd8e2; border-radius: 11px; }
+    .field input::placeholder { color: #98a1ad; }
+    .status-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 15px; }
+    .filter-chip { padding: 8px 12px; color: var(--ink-2); background: #f4f7f9; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 800; cursor: pointer; }
+    .filter-chip[aria-pressed="true"] { color: #fff; background: var(--ink); border-color: var(--ink); }
+
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+    .connector-card { position: relative; min-height: 328px; display: flex; flex-direction: column; padding: 20px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 12px 28px rgba(16,32,60,.055); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .connector-card:hover { transform: translateY(-2px); border-color: #c9dbe4; box-shadow: var(--shadow); }
+    .connector-card.available { border-top: 4px solid var(--accent); padding-top: 17px; }
+    .connector-card.planned { border-top: 4px solid #d9e0e7; padding-top: 17px; }
+    .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
+    .rank { color: var(--muted); font-size: 12px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .score { flex: 0 0 auto; width: 62px; height: 62px; display: grid; place-items: center; border-radius: 50%; background: conic-gradient(var(--score-color) calc(var(--score) * 1%), #e8edf2 0); }
+    .score::before { content: ""; grid-area: 1/1; width: 48px; height: 48px; background: #fff; border-radius: 50%; }
+    .score strong { position: relative; grid-area: 1/1; font-size: 17px; }
+    .score small { display: block; margin-top: -4px; color: var(--muted); font-size: 8px; text-align: center; text-transform: uppercase; }
+    .connector-card h3 { margin: 6px 0 10px; padding-right: 2px; font-size: 21px; line-height: 1.22; letter-spacing: -.02em; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+    .tag { display: inline-flex; align-items: center; min-height: 26px; padding: 4px 8px; border-radius: 999px; color: var(--ink-2); background: #eef2f6; font-size: 11px; font-weight: 900; }
+    .tag.enterprise { color: #0c6687; background: var(--accent-soft); }
+    .tag.saudi { color: #8f1429; background: var(--red-soft); }
+    .tag.ready { color: var(--green); background: var(--green-soft); }
+    .tag.discovery { color: var(--amber); background: var(--amber-soft); }
+    .summary { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+    .use-case { margin: 0 0 16px; padding: 11px 12px; color: var(--ink-2); background: #f6f8fa; border-radius: 10px; font-size: 13px; }
+    .card-footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .status { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; font-weight: 800; }
+    .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #aeb7c1; }
+    .available .status { color: var(--green); }
+    .available .status::before { background: var(--green); }
+    .card-footer .btn { min-height: 39px; padding: 8px 12px; font-size: 13px; }
+
+    .empty { display: none; margin-top: 20px; padding: 48px 24px; text-align: center; color: var(--muted); background: #f7f9fb; border: 1px dashed #cbd5df; border-radius: 16px; }
+    .empty strong { display: block; margin-bottom: 5px; color: var(--ink); font-size: 18px; }
+    .coverage { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+    .coverage-card { padding: 22px; background: #fff; border: 1px solid var(--line); border-radius: 18px; }
+    .coverage-card header { display: flex; justify-content: space-between; gap: 18px; }
+    .coverage-card h3 { margin: 0; font-size: 18px; }
+    .coverage-card strong { color: var(--accent-dark); }
+    .progress { height: 10px; margin-top: 13px; overflow: hidden; background: #e8edf2; border-radius: 999px; }
+    .progress span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-dark)); border-radius: inherit; }
+    .coverage-card p { margin: 10px 0 0; color: var(--muted); font-size: 13px; }
+
+    .source-strip { margin-top: 18px; padding: 20px 22px; display: flex; justify-content: space-between; gap: 22px; align-items: center; background: linear-gradient(135deg, var(--ink), #1a345c); border-radius: 18px; color: #fff; }
+    .source-strip h2 { margin: 0 0 4px; font-size: 20px; }
+    .source-strip p { margin: 0; color: rgba(255,255,255,.72); font-size: 13px; }
+    .source-strip .btn { color: var(--ink); background: #fff; white-space: nowrap; }
+    footer { padding: 26px 2px 0; display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; padding: 38px; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      .shell { width: min(100% - 20px, 1240px); }
+      .topbar-inner { align-items: flex-start; }
+      .top-actions .btn:first-child { display: none; }
+      .hero { padding: 32px 24px; }
+      .hero-note { padding: 20px; }
+      .stats, .toolbar, .cards, .coverage { grid-template-columns: 1fr; }
+      .workspace { padding: 20px 16px; }
+      .workspace-head, .source-strip, footer { align-items: flex-start; flex-direction: column; }
+      .connector-card { min-height: 0; }
+      .source-strip .btn { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+    @media print {
+      .topbar, .toolbar, .status-row, .source-strip, .card-footer .btn { display: none !important; }
+      body { background: #fff; }
+      .shell { width: 100%; }
+      main { padding: 0; }
+      .hero, .workspace, .stat, .connector-card, .coverage-card { box-shadow: none; break-inside: avoid; }
+      .hero { padding: 25px; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#connector-grid">Skip to connector documents</a>
+
+  <div class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top" aria-label="AURA Connector Documentation Hub home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        AURA <span>Connectors</span>
+      </a>
+      <div class="top-actions">
+        <a class="btn secondary" href="https://drive.google.com/drive/folders/1Yc6D6niwYnjmWIzRFgLP1OfVVcR03-OZ" target="_blank" rel="noopener">Detailed Documents</a>
+        <a class="btn accent" href="#connector-grid">Browse briefings</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top" class="shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">AURA decision library</p>
+        <h1 id="page-title">Connector <span>Documentation Hub</span></h1>
+        <p class="lead">One view of AURA connector priorities, delivery waves, access readiness, and the board briefings available for review.</p>
+      </div>
+      <aside class="hero-note" aria-label="Current documentation focus">
+        <span class="kicker">Current focus</span>
+        <strong>Build the strongest enterprise layer first.</strong>
+        <p>Advance Microsoft Graph/Entra, SAP S/4HANA, SuccessFactors, and ServiceNow. Run SPL as a conditional Saudi pilot after product access is confirmed.</p>
+      </aside>
+    </section>
+
+    <section class="stats" aria-label="Documentation summary">
+      <article class="stat"><div class="stat-value">30</div><div class="stat-label">Connectors prioritized</div></article>
+      <article class="stat primary"><div class="stat-value">16</div><div class="stat-label">HTML briefings available</div></article>
+      <article class="stat"><div class="stat-value">53%</div><div class="stat-label">Documentation coverage</div></article>
+      <article class="stat attention"><div class="stat-value">14</div><div class="stat-label">Briefings still planned</div></article>
+    </section>
+
+    <section class="workspace" aria-labelledby="library-title">
+      <div class="workspace-head">
+        <div>
+          <p class="eyebrow">Prioritized connector register</p>
+          <h2 id="library-title">Find a connector briefing</h2>
+        </div>
+        <div id="result-count" class="result-count" aria-live="polite">Showing 30 connectors</div>
+      </div>
+
+      <div class="toolbar" role="search">
+        <div class="field">
+          <label for="search">Search</label>
+          <input id="search" type="search" placeholder="Search connector or use case" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category">
+            <option value="all">All categories</option>
+            <option value="Enterprise">Enterprise</option>
+            <option value="Saudi">Saudi</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="wave">Delivery wave</label>
+          <select id="wave">
+            <option value="all">All waves</option>
+            <option value="1 - Build">Wave 1 - Build</option>
+            <option value="2 - Conditional">Wave 2 - Conditional</option>
+            <option value="3 - Demand led">Wave 3 - Demand led</option>
+            <option value="D - Discovery">Discovery</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="sort">Sort</label>
+          <select id="sort">
+            <option value="rank">Priority rank</option>
+            <option value="score-desc">Highest score</option>
+            <option value="name">Connector name</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="status-row" aria-label="Document status filter">
+        <button class="filter-chip" type="button" data-status="all" aria-pressed="true">All connectors</button>
+        <button class="filter-chip" type="button" data-status="available" aria-pressed="false">Available briefings</button>
+        <button class="filter-chip" type="button" data-status="planned" aria-pressed="false">Planned briefings</button>
+      </div>
+
+      <div id="connector-grid" class="cards" aria-live="polite"></div>
+      <div id="empty-state" class="empty">
+        <strong>No connectors match these filters.</strong>
+        Adjust the search or choose a broader category, wave, or status.
+      </div>
+    </section>
+
+    <section class="coverage" aria-label="Coverage by category">
+      <article class="coverage-card">
+        <header><h3>Enterprise connectors</h3><strong>4 of 6</strong></header>
+        <div class="progress" aria-label="Enterprise documentation coverage 67 percent"><span style="width:66.7%"></span></div>
+        <p>SuccessFactors, ServiceNow, Oracle Fusion, and Dynamics 365 have HTML briefings.</p>
+      </article>
+      <article class="coverage-card">
+        <header><h3>Saudi connectors</h3><strong>12 of 24</strong></header>
+        <div class="progress" aria-label="Saudi documentation coverage 50 percent"><span style="width:50%"></span></div>
+        <p>Coverage includes SPL, PayTabs, IATA, and nine government or regulated-service connectors.</p>
+      </article>
+    </section>
+
+    <section class="source-strip" aria-labelledby="source-title">
+      <div>
+        <h2 id="source-title">Priority source</h2>
+        <p>Ranks, scores, waves, access status, and use cases come from AURA_Connector_Prioritization_2026-09-29.xlsx.</p>
+      </div>
+      <a class="btn" href="https://drive.google.com/file/d/1-e-GRxaLLD3P52Wz7h3Hgk3ZQEXOGCOh/view" target="_blank" rel="noopener">Open source workbook</a>
+    </section>
+
+    <footer>
+      <span>AURA Connector Documentation Hub</span>
+      <span>Updated 1 October 2026</span>
+    </footer>
+  </main>
+
+  <script>
+    const connectors = [
+      {rank:1,name:"Microsoft 365 / Microsoft Graph + Entra",category:"Enterprise",wave:"1 - Build",score:85,access:"Build eligible",summary:"Broad daily reach and a reusable identity and collaboration layer.",useCase:"Employee sign-in, profiles, mail, calendar, Teams, and file actions.",url:""},
+      {rank:2,name:"SAP S/4HANA",category:"Enterprise",wave:"1 - Build",score:84,access:"Build eligible",summary:"Core enterprise execution system and the roadmap's first enterprise release.",useCase:"Create or track procurement requests, orders, invoices, suppliers, and approvals.",url:""},
+      {rank:3,name:"SAP SuccessFactors",category:"Enterprise",wave:"1 - Build",score:84,access:"Build eligible",summary:"Primary HR source for SAP customers.",useCase:"Employee and organization information, leave, and HR request status.",url:"briefings/sap-successfactors.html"},
+      {rank:4,name:"ServiceNow",category:"Enterprise",wave:"1 - Build",score:82,access:"Build eligible",summary:"Strong employee service-desk execution and ticket transparency.",useCase:"Submit IT incidents or service requests and display approvals and ticket status.",url:"briefings/servicenow.html"},
+      {rank:5,name:"SPL National Address",category:"Saudi",wave:"2 - Conditional",score:75,access:"Build eligible",summary:"Saudi-local onboarding quality with broad employee reach.",useCase:"Validate employee or office national addresses for onboarding and service delivery.",url:"briefings/spl-national-address.html"},
+      {rank:6,name:"Oracle Fusion ERP / HCM",category:"Enterprise",wave:"2 - Conditional",score:72,access:"Build eligible",summary:"Large-enterprise alternative to SAP.",useCase:"Read worker and leave information, and create or track procurement requisitions.",url:"briefings/oracle-fusion-erp-hcm.html"},
+      {rank:7,name:"Dynamics 365 / Dataverse",category:"Enterprise",wave:"2 - Conditional",score:70,access:"Build eligible",summary:"Reusable extension for Microsoft-based customer environments.",useCase:"Create or view employee service cases and show case progress in AURA.",url:"briefings/dynamics-365-dataverse.html"},
+      {rank:8,name:"PayTabs",category:"Saudi",wave:"2 - Conditional",score:63,access:"Build eligible",summary:"Payment capability where AURA owns a payable employee journey.",useCase:"Collect eligible service fees and reconcile payment before fulfilment.",url:"briefings/paytabs.html"},
+      {rank:9,name:"IATA",category:"Saudi",wave:"3 - Demand led",score:45,access:"Build eligible",summary:"Useful for a narrow travel-partner workflow.",useCase:"Validate travel-agency codes during onboarding and record result freshness.",url:"briefings/iata.html"},
+      {rank:10,name:"Nafath",category:"Saudi",wave:"D - Discovery",score:68,access:"Discovery required",summary:"High potential trust and reach for Saudi employee journeys.",useCase:"Verify national digital identity and support trusted sign-in or approval.",url:"briefings/nafath.html"},
+      {rank:11,name:"Qiwa",category:"Saudi",wave:"D - Discovery",score:65,access:"Discovery required",summary:"Major value across Saudi employee lifecycle services.",useCase:"Show contract or job-change status and guide employees through labor services.",url:"briefings/qiwa.html"},
+      {rank:12,name:"Etimad APIs",category:"Saudi",wave:"D - Discovery",score:64,access:"Discovery required",summary:"Strategic for AURA customers in the Saudi public sector.",useCase:"Show procurement information and track a selected government purchase request.",url:"briefings/etimad-apis.html"},
+      {rank:13,name:"Absher",category:"Saudi",wave:"D - Discovery",score:56,access:"Discovery required",summary:"Broad recognition, with direct execution rights still uncertain.",useCase:"Guide employees to government transactions and show status when authorized.",url:"briefings/absher.html"},
+      {rank:14,name:"GOSI",category:"Saudi",wave:"D - Discovery",score:56,access:"Discovery required",summary:"Useful for HR verification in Saudi employers.",useCase:"Show social-insurance status and employer contribution visibility when authorized.",url:"briefings/gosi.html"},
+      {rank:15,name:"Muqeem",category:"Saudi",wave:"D - Discovery",score:53,access:"Discovery required",summary:"Relevant to employer mobility and expatriate-service workflows.",useCase:"Track residency or visa services and present employee status or official handoff.",url:"briefings/muqeem.html"},
+      {rank:16,name:"Yaqeen",category:"Saudi",wave:"D - Discovery",score:53,access:"Discovery required",summary:"Improves onboarding data quality and fraud controls for eligible workflows.",useCase:"Verify selected identity fields and improve employee onboarding data quality.",url:"briefings/yaqeen.html"},
+      {rank:17,name:"ZATCA Integration Service",category:"Saudi",wave:"D - Discovery",score:49,access:"Discovery required",summary:"Relevant when AURA bills locally for a paid employee service.",useCase:"Issue invoices and retrieve invoice status or files for finance.",url:"briefings/zatca-integration-service.html"},
+      {rank:18,name:"NIC",category:"Saudi",wave:"D - Discovery",score:46,access:"Discovery required",summary:"High value for pilgrimage-sector operators, with limited general hub reach.",useCase:"Check Hajj eligibility and validate, create, or cancel worker permits when authorized.",url:"briefings/nic.html"},
+      {rank:19,name:"Ministry of Commerce",category:"Saudi",wave:"D - Discovery",score:44,access:"Discovery required",summary:"Relevant to external organization validation.",useCase:"Verify commercial registration and owner relationships when authorized.",url:""},
+      {rank:20,name:"Mudad",category:"Saudi",wave:"D - Discovery",score:44,access:"Discovery required",summary:"Valuable to HR and payroll customers, with a narrow employee-facing flow.",useCase:"Show payroll or WPS status and assist with salary-related requests.",url:""},
+      {rank:21,name:"SADAD",category:"Saudi",wave:"D - Discovery",score:44,access:"Discovery required",summary:"Alternative payment rail where a biller relationship exists.",useCase:"Issue bill references and reconcile settlement before service completion.",url:""},
+      {rank:22,name:"Ajeer",category:"Saudi",wave:"D - Discovery",score:41,access:"Discovery required",summary:"Sector-specific employee and temporary-work services.",useCase:"Show assignment or permit status and guide eligible employer requests.",url:""},
+      {rank:23,name:"CRS",category:"Saudi",wave:"D - Discovery",score:37,access:"Discovery required",summary:"Potential staff-travel value, but the provider identity is unresolved.",useCase:"Search hotel availability and reserve, modify, or cancel a booking.",url:""},
+      {rank:24,name:"SAR through Masar Integration Gateway",category:"Saudi",wave:"D - Discovery",score:37,access:"Discovery required",summary:"Sector-specific travel fulfilment for rail journeys.",useCase:"Search and book rail, pay, inquire, or cancel using a booking ID.",url:""},
+      {rank:25,name:"MOFA",category:"Saudi",wave:"D - Discovery",score:34,access:"Discovery required",summary:"Narrow travel and pilgrimage operations use case.",useCase:"Register an approved external agent and track acceptance or rejection.",url:""},
+      {rank:26,name:"MOI",category:"Saudi",wave:"D - Discovery",score:34,access:"Discovery required",summary:"Narrow sector execution use case.",useCase:"Create or update an Umrah agent record and track its status.",url:""},
+      {rank:27,name:"Nusuk Imtithal / Sahab",category:"Saudi",wave:"D - Discovery",score:34,access:"Discovery required",summary:"Pilgrimage operations outside the general employee-hub core.",useCase:"Send inspection and incident updates linked to tickets, employees, or locations.",url:""},
+      {rank:28,name:"Tasheer Connect",category:"Saudi",wave:"D - Discovery",score:34,access:"Discovery required",summary:"Travel-specialist request execution.",useCase:"Submit visa or travel forms and manage changes or holds.",url:""},
+      {rank:29,name:"Atlas",category:"Saudi",wave:"D - Discovery",score:29,access:"Discovery required",summary:"Supporting lookup data for pilgrimage travel, with narrow hub relevance.",useCase:"Synchronize nationality reference data and hotel lookup data.",url:""},
+      {rank:30,name:"Kidana",category:"Saudi",wave:"D - Discovery",score:29,access:"Discovery required",summary:"Specialized Hajj-operations document delivery.",useCase:"Retrieve handover report files and deliver them to authorized employees.",url:""}
+    ];
+
+    const grid = document.getElementById("connector-grid");
+    const search = document.getElementById("search");
+    const category = document.getElementById("category");
+    const wave = document.getElementById("wave");
+    const sort = document.getElementById("sort");
+    const count = document.getElementById("result-count");
+    const empty = document.getElementById("empty-state");
+    const chips = [...document.querySelectorAll(".filter-chip")];
+    let status = "all";
+
+    const escapeHtml = value => String(value).replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"})[char]);
+    const scoreColor = score => score >= 80 ? "#1688b3" : score >= 60 ? "#2fb4df" : score >= 45 ? "#d58b13" : "#a7b0ba";
+    const waveLabel = value => ({"1 - Build":"Wave 1","2 - Conditional":"Wave 2","3 - Demand led":"Wave 3","D - Discovery":"Discovery"})[value] || value;
+
+    function cardTemplate(item) {
+      const available = Boolean(item.url);
+      const accessClass = item.access === "Build eligible" ? "ready" : "discovery";
+      const action = available
+        ? `<a class="btn accent" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open ${escapeHtml(item.name)} board briefing">Open briefing</a>`
+        : `<span class="btn disabled" aria-disabled="true">Briefing planned</span>`;
+
+      return `<article class="connector-card ${available ? "available" : "planned"}" data-rank="${item.rank}">
+        <div class="card-head">
+          <div>
+            <div class="rank">Priority ${item.rank}</div>
+            <h3>${escapeHtml(item.name)}</h3>
+          </div>
+          <div class="score" style="--score:${item.score};--score-color:${scoreColor(item.score)}" aria-label="Priority score ${item.score} out of 100">
+            <strong>${item.score}<small>score</small></strong>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag ${item.category.toLowerCase()}">${escapeHtml(item.category)}</span>
+          <span class="tag">${escapeHtml(waveLabel(item.wave))}</span>
+          <span class="tag ${accessClass}">${escapeHtml(item.access)}</span>
+        </div>
+        <p class="summary">${escapeHtml(item.summary)}</p>
+        <p class="use-case"><strong>Use case:</strong> ${escapeHtml(item.useCase)}</p>
+        <div class="card-footer">
+          <span class="status">${available ? "Document available" : "Not yet documented"}</span>
+          ${action}
+        </div>
+      </article>`;
+    }
+
+    function render() {
+      const term = search.value.trim().toLowerCase();
+      let items = connectors.filter(item => {
+        const matchesText = !term || [item.name, item.summary, item.useCase, item.access, item.wave].join(" ").toLowerCase().includes(term);
+        const matchesCategory = category.value === "all" || item.category === category.value;
+        const matchesWave = wave.value === "all" || item.wave === wave.value;
+        const availability = item.url ? "available" : "planned";
+        const matchesStatus = status === "all" || availability === status;
+        return matchesText && matchesCategory && matchesWave && matchesStatus;
+      });
+
+      items = [...items].sort((a, b) => {
+        if (sort.value === "name") return a.name.localeCompare(b.name);
+        if (sort.value === "score-desc") return b.score - a.score || a.rank - b.rank;
+        return a.rank - b.rank;
+      });
+
+      grid.innerHTML = items.map(cardTemplate).join("");
+      count.textContent = `Showing ${items.length} of ${connectors.length} connectors`;
+      empty.style.display = items.length ? "none" : "block";
+    }
+
+    [search, category, wave, sort].forEach(control => control.addEventListener(control === search ? "input" : "change", render));
+    chips.forEach(chip => chip.addEventListener("click", () => {
+      status = chip.dataset.status;
+      chips.forEach(item => item.setAttribute("aria-pressed", String(item === chip)));
+      render();
+    }));
+
+    render();
+  </script>
+</body>
+</html>

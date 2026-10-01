@@ -1,0 +1,456 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AURA × Nafath | Board Presentation · Final</title><style>
+    :root {
+      --ink: #10203c;
+      --muted: #697384;
+      --accent: #2fb4df;
+      --accent-dark: #1688b3;
+      --accent-red: #ea0a2a;
+      --soft: #eef9fd;
+      --line: #dfe6ee;
+      --panel: #f5f7fa;
+      --amber: #8a5900;
+      --amber-soft: #fff6df;
+      --red: #b80e2b;
+      --red-soft: #fff0f3;
+      --radius: 18px;
+      --shadow: 0 18px 45px rgba(16, 32, 60, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #f3f5f8;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    a { color: var(--accent-dark); text-underline-offset: 3px; }
+    .skip { position: absolute; left: -9999px; }
+    .skip:focus { left: 16px; top: 12px; z-index: 100; background: #fff; padding: 8px 12px; border: 2px solid var(--accent); }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 10px 14px 0;
+      background: rgba(243,245,248,.9);
+      backdrop-filter: blur(12px);
+    }
+    .topbar-inner {
+      max-width: 1210px;
+      margin: auto;
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(223,230,238,.85);
+      border-radius: 21px;
+      box-shadow: 0 10px 30px rgba(16,32,60,.05);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 900; letter-spacing: .02em; }
+    .brand::before { content: ""; width: 18px; height: 27px; border-radius: 4px; background: linear-gradient(165deg, var(--accent) 0 33%, var(--ink) 34% 66%, var(--accent-red) 67%); box-shadow: 5px 0 0 rgba(47,180,223,.18); transform: skewY(8deg); }
+    .brand span { color: var(--accent-dark); }
+    nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 18px; font-size: 13px; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 700; }
+    nav a:hover, nav a:focus { color: var(--accent-dark); }
+
+    main { max-width: 1210px; margin: auto; padding: 12px 14px 70px; }
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 72px 46px 60px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, .7fr);
+      gap: 42px;
+      align-items: center;
+      background: linear-gradient(112deg, #f1f8fc 0%, #f7f9fc 54%, #fff1f3 100%);
+      border: 1px solid rgba(223,230,238,.85);
+      border-radius: 24px;
+    }
+    .hero::after { content: ""; position: absolute; z-index: -1; width: 380px; height: 380px; right: 12%; top: -250px; border-radius: 50%; background: radial-gradient(circle, rgba(47,180,223,.18), rgba(47,180,223,0) 70%); }
+    .eyebrow { color: var(--accent-red); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .13em; }
+    h1 { margin: 9px 0 15px; font-size: clamp(36px, 5.7vw, 64px); line-height: 1.03; letter-spacing: -.04em; }
+    h1 span { color: var(--accent-dark); }
+    .lead { margin: 0; color: var(--muted); font-size: 20px; max-width: 760px; }
+    .hero-decision { position: relative; overflow: hidden; padding: 25px; background: rgba(255,255,255,.94); border: 1px solid #dce8ee; border-radius: var(--radius); box-shadow: var(--shadow); }
+    .hero-decision::before { content: ""; position: absolute; inset: 0 0 auto; height: 5px; background: linear-gradient(90deg, var(--accent), var(--accent-red)); }
+    .hero-decision strong { display: block; margin-bottom: 7px; color: var(--ink); font-size: 18px; }
+
+    section { margin-top: 18px; padding: 46px; background: #fff; border: 1px solid rgba(223,230,238,.9); border-radius: 24px; box-shadow: 0 12px 36px rgba(16,32,60,.045); }
+    h2 { margin: 5px 0 14px; font-size: 31px; line-height: 1.2; letter-spacing: -.02em; }
+    h3 { margin: 0 0 8px; font-size: 19px; line-height: 1.3; }
+    p { margin: 0 0 13px; }
+    ul { margin: 8px 0; padding-left: 20px; }
+    li { margin: 5px 0; }
+    .intro { max-width: 790px; color: var(--muted); font-size: 17px; }
+    .small { color: var(--muted); font-size: 13px; }
+    .source { font-size: 12px; font-weight: 800; white-space: nowrap; }
+
+    .grid { display: grid; gap: 18px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card {
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .card.soft { box-shadow: none; background: linear-gradient(145deg, #f7f9fb, #fff); }
+    .card p:last-child, .card ul:last-child { margin-bottom: 0; }
+    .number { margin-bottom: 4px; color: var(--accent); font-size: 34px; line-height: 1.05; font-weight: 900; }
+    .label { color: var(--muted); font-size: 13px; font-weight: 800; }
+
+    .badge { display: inline-block; padding: 5px 9px; border-radius: 999px; font-size: 12px; font-weight: 900; }
+    .verified { color: #08789f; background: var(--soft); }
+    .proposed { color: var(--ink); background: #edf1f6; }
+    .confirm { color: var(--red); background: var(--red-soft); }
+
+    .callout { margin-top: 20px; padding: 17px 19px; border-left: 4px solid var(--accent); background: linear-gradient(90deg, var(--soft), #f8fcfe); border-radius: 0 12px 12px 0; }
+    .callout.warn { border-color: var(--amber); background: var(--amber-soft); }
+    .callout strong { display: block; margin-bottom: 3px; }
+
+    .table-wrap { margin-top: 20px; overflow-x: auto; border: 1px solid var(--line); border-radius: 13px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 13px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    th { color: var(--ink); background: #f1f6f9; font-size: 12px; text-transform: uppercase; letter-spacing: .045em; }
+    tr:last-child td { border-bottom: 0; }
+
+    /* Mind map */
+    .mindmap {
+      margin: 24px 0 8px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 54px;
+      align-items: center;
+    }
+    .mind-center {
+      position: relative;
+      padding: 24px 18px;
+      color: #fff;
+      background: linear-gradient(145deg, var(--accent), #188db9 55%, var(--ink));
+      border-radius: 50%;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 900;
+      aspect-ratio: 1.45;
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+    }
+    .mind-center::after { content: ""; position: absolute; right: -55px; top: 50%; width: 55px; border-top: 2px solid #9edced; }
+    .branches { display: grid; gap: 13px; }
+    .branch { position: relative; padding: 15px 18px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(90deg, #fff, #f8fbfd); box-shadow: 0 8px 22px rgba(16,32,60,.04); }
+    .branch::before { content: ""; position: absolute; left: -55px; top: 50%; width: 55px; border-top: 2px solid #9edced; }
+    .branch strong { color: var(--accent-dark); }
+
+    /* Flows */
+    .flow {
+      margin: 24px 0 8px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(110px, 1fr));
+      gap: 17px;
+      align-items: stretch;
+    }
+    .step { position: relative; padding: 17px 10px; display: grid; place-items: center; text-align: center; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(145deg, #fff, var(--panel)); font-weight: 800; }
+    .step:not(:last-child)::after { content: "→"; position: absolute; right: -15px; top: 50%; transform: translateY(-50%); color: var(--accent); font-size: 19px; font-weight: 900; }
+    .step.provider { color: #fff; background: linear-gradient(145deg, var(--accent), var(--accent-dark)); border-color: var(--accent); }
+
+    .build-flow { margin-top: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; counter-reset: stages; }
+    .flow-title { margin: 30px 0 6px; font-size: 21px; color: var(--accent-dark); }
+    .build-stage { position: relative; padding: 20px; border-top: 4px solid var(--accent); background: linear-gradient(145deg, #f6f8fb, #fff); border-radius: 0 0 12px 12px; counter-increment: stages; }
+    .build-stage::before { content: counter(stages); position: absolute; top: -16px; left: 17px; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: var(--accent-red); font-size: 13px; font-weight: 900; }
+    .build-stage h3 { margin-top: 7px; }
+
+    .score-bar { margin: 16px 0 7px; height: 14px; border-radius: 999px; background: #e8edef; overflow: hidden; }
+    .score-bar span { display: block; width: 75%; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-dark)); border-radius: inherit; }
+
+    .decision {
+      margin-top: 22px;
+      padding: 24px;
+      border: 2px solid var(--accent);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, #fff 35%, var(--soft));
+      box-shadow: 0 16px 38px rgba(47,180,223,.1);
+    }
+    footer { margin-top: 22px; padding: 26px 8px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 900px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; gap: 8px; }
+      nav { justify-content: flex-start; }
+      .hero { grid-template-columns: 1fr; gap: 24px; }
+      .grid-4, .grid-3, .build-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .mindmap { grid-template-columns: 180px 1fr; gap: 40px; }
+      .mind-center::after { right: -41px; width: 41px; }
+      .branch::before { left: -41px; width: 41px; }
+      .flow { grid-template-columns: 1fr; gap: 12px; }
+      .step:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -20px; transform: translateX(-50%); }
+    }
+    @media (max-width: 620px) {
+      main { padding-left: 16px; padding-right: 16px; }
+      .hero { padding: 45px 24px 36px; }
+      .grid-4, .grid-3, .grid-2, .build-flow, .mindmap { grid-template-columns: 1fr; }
+      .mind-center { width: 180px; margin: auto; }
+      section { padding: 34px 24px; }
+      .mind-center::after { right: 50%; top: auto; bottom: -28px; width: 0; height: 28px; border-top: 0; border-left: 2px solid #9edced; }
+      .branch::before { display: none; }
+    }
+    @media print {
+      @page { size: A4; margin: 14mm; }
+      body { font-size: 10pt; line-height: 1.42; }
+      .topbar, .skip { display: none; }
+      main { max-width: none; padding: 0; }
+      body { background: #fff; }
+      .hero { padding: 0 0 20px; background: #fff; border: 0; border-radius: 0; }
+      h1 { font-size: 31pt; }
+      h2 { font-size: 20pt; break-after: avoid; }
+      section { margin-top: 0; padding: 28px 0 0; border: 0; border-radius: 0; box-shadow: none; }
+      .card, .callout, .mindmap, .flow, .build-flow, .decision, .table-wrap { box-shadow: none; break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+      footer { margin-top: 28px; }
+    }
+  
+    details.research { margin-top: 16px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 15px; background: linear-gradient(145deg,#f7f9fb,#fff); }
+    details.research > summary { cursor: pointer; list-style: none; color: var(--accent-dark); font-size: 17px; font-weight: 900; }
+    details.research > summary::-webkit-details-marker { display: none; }
+    details.research > summary::after { content: "+"; float: right; color: var(--accent); font-size: 22px; line-height: 1; }
+    details.research[open] > summary::after { content: "−"; }
+    .research-content { padding-top: 15px; }
+    .research-content h3 { margin-top: 24px; color: var(--accent-dark); }
+    .research-content h4 { margin: 18px 0 7px; font-size: 16px; }
+    .research-content .table-wrap { margin-top: 12px; }
+    .research-content td, .research-content th { font-size: 13px; }
+    .research-content pre { padding: 16px; overflow: auto; border-radius: 12px; background: #10203c; color: #e8f7fc; font: 12px/1.5 Consolas,monospace; }
+    .research-content code { overflow-wrap: anywhere; }
+    .detail-note { margin: 10px 0; padding: 12px 14px; border-left: 3px solid var(--accent); background: var(--soft); border-radius: 0 10px 10px 0; color: var(--ink); }
+    @media print { details.research:not([open]) .research-content { display: block !important; } details.research:not([open]) > summary { display: none; } details.research { break-inside: auto; } }
+
+
+    .topbar-inner { max-width: 1280px; }
+    main { max-width: 1280px; }
+    .brand { font-size: 16px; }
+    .hero { margin-top: 8px; }
+    .hero h1 { max-width: 760px; }
+    .hero h1 span { color: var(--accent-dark); }
+    .hero .lead { max-width: 730px; }
+    .hero-decision p { margin: 0 0 9px; }
+    .hero-decision .badge { margin-bottom: 10px; }
+    .kpi-grid { margin: 16px 0 6px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+    .kpi { padding: 18px 20px; border: 1px solid var(--line); border-radius: 15px; background: #fff; box-shadow: 0 10px 26px rgba(16,32,60,.045); }
+    .kpi strong { display: block; color: var(--ink); font-size: 25px; line-height: 1.1; letter-spacing: -.025em; }
+    .kpi span { display: block; margin-top: 7px; color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+    .kpi.score { border-top: 4px solid var(--accent); }
+    .kpi.rank { border-top: 4px solid var(--accent-red); }
+    .kpi.stage { border-top: 4px solid #178b65; }
+    .kpi.method { border-top: 4px solid var(--accent-dark); }
+    .brief-section { scroll-margin-top: 88px; }
+    .brief-section > .eyebrow { margin-bottom: 8px; }
+    .brief-section > h2 { max-width: 900px; }
+    .brief-section p { max-width: 1020px; }
+    .brief-section .table-wrap { margin-top: 16px; }
+    .brief-section td, .brief-section th { overflow-wrap: anywhere; }
+    .brief-section table { min-width: 650px; }
+    #board .table-wrap, #value .table-wrap, #profile .table-wrap, #cost .table-wrap, #evidence .table-wrap { box-shadow: 0 10px 28px rgba(16,32,60,.035); }
+    .decision { border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: 16px; background: linear-gradient(145deg,#f7f9fb,#fff); box-shadow: var(--shadow); }
+    .decision h3 { color: var(--ink); }
+    .research-content .brief-section { margin-top: 14px; padding: 30px; border-radius: 18px; }
+    .research-content .brief-section h2 { font-size: 25px; }
+    .research-content .table-wrap { overflow-x: auto; }
+    .recommendation-note { margin: 18px 0 2px; padding: 16px 19px; border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; background: linear-gradient(90deg,var(--soft),#f8fcfe); }
+    .source-list { padding-left: 21px; }
+    .source-list li { margin: 9px 0; }
+    .source-list a { overflow-wrap: anywhere; }
+    @media (max-width: 900px) {
+      .kpi-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      nav { gap: 8px 12px; }
+    }
+    @media (max-width: 620px) {
+      .kpi-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .kpi { padding: 14px; }
+      .kpi strong { font-size: 20px; }
+      .research-content .brief-section { padding: 25px 18px; }
+      .brief-section table { min-width: 600px; }
+    }
+    @media print {
+      .kpi-grid { grid-template-columns: repeat(4,1fr); }
+      .topbar { position: static; padding: 0; background: #fff; }
+      .topbar-inner { border: 0; box-shadow: none; padding: 6px 0; }
+      nav { display: none; }
+      .brief-section table { min-width: 0; }
+      .research-content .brief-section { padding: 22px 0; border: 0; box-shadow: none; }
+    }
+
+    .score-pill { display:inline-block; padding:7px 12px; border-radius:999px; font-weight:800; background:#e9f8fc; color:#116b8d; }
+    .gate { border-left:4px solid var(--accent-red); background:#fff6f7; padding:18px 20px; border-radius:12px; margin:18px 0; }
+    .good { border-left:4px solid #15805d; background:#f0faf5; padding:18px 20px; border-radius:12px; margin:18px 0; }
+    .phase { font-weight:800; color:var(--accent-dark); }
+    .source-list li { margin:10px 0; }
+    .tag { display:inline-block; padding:4px 9px; border-radius:999px; font-size:11px; font-weight:800; background:#eef2f7; color:#48566c; }
+    .tag.amber { background:var(--amber-soft); color:var(--amber); }
+    .tag.red { background:var(--red-soft); color:var(--red); }
+</style></head><body><a class="skip" href="#main">Skip to content</a>
+<div class="topbar"><div class="topbar-inner">
+  <div class="brand">AURA <span>× Nafath</span></div>
+  <nav aria-label="Briefing sections"><a href="#verified-sources">Current source check</a>
+    <a href="#decision">Decision</a><a href="#score">Value score</a><a href="#usecases">Use cases</a>
+    <a href="#integration">Integration</a><a href="#cost">Cost</a><a href="#evidence">Evidence</a>
+  </nav>
+</div></div>
+<main id="main">
+  <header class="hero">
+    <div>
+      <div class="eyebrow">Board briefing · Saudi identity connector assessment · 30 Sep 2026</div>
+      <h1><span>Nafath</span><br>trusted identity journeys for AURA</h1>
+      <p class="lead">Nafath could add a Saudi national digital identity and verification option to AURA. Its value is high, but production integration is gated by relying-party eligibility, an approved technical contract, and a real test environment.</p>
+    </div>
+    <aside class="hero-decision">
+      <span class="badge proposed">Recommendation · discovery first</span>
+      <strong>Do not approve a production build yet.</strong>
+      <p>Start a time-boxed access and use-case discovery. Keep corporate SSO as the normal employee sign-in. Consider Nafath for a clearly approved high-risk identity check only after the provider authorizes AURA and supplies the integration contract.</p>
+      <p class="small">Register status: Discovery required · confidence: Low · rank: 10</p>
+    </aside>
+  </header>
+  <div class="kpi-grid">
+    <div class="kpi rank"><strong>10</strong><span>Saudi connector rank</span></div>
+    <div class="kpi score"><strong>68 / 100</strong><span>Cross-AURA value · register-weighted</span></div>
+    <div class="kpi score"><strong>53 / 100</strong><span>Employee Hub fit · provisional</span></div>
+    <div class="kpi stage"><strong>Discovery</strong><span>Provider access and contract unverified</span></div>
+  </div>
+  <div class="research-content">
+    <aside class="recommendation-note" id="verified-sources"><strong>Current provider-source check · 30 September 2026</strong><ul><li>The official Nafath listing describes secure access to government and private services and identity verification using biometrics. The public description supports the user-facing identity context only; it does not provide an AURA relying-party API contract or prove AURA’s eligibility. <a href="https://www.iam.gov.sa/nafath/app">Official Nafath app listing</a>.</li><li>Nafath’s published privacy policy says app user information is stored on servers specified by application management within Saudi Arabia. That statement concerns the Nafath app; it does not determine AURA’s own data-location, retention or processing obligations. <a href="https://www.iam.gov.sa/policy.html">Nafath privacy policy</a>.</li><li>No AURA-approved relying-party specification, test credentials, sandbox or current commercial offer is established in the public material reviewed. Keep discovery as the recommendation; require written authorization, approved technical materials, a real test environment and customer privacy/security approval before build.</li></ul><p class="small">The referenced Nafath/Absher testing folder and its closest NIC guide are covered in the detailed evidence section below. That guide is not Nafath sign-in documentation.</p></aside>
+    <section id="decision" class="brief-section">
+      <div class="eyebrow">01 · Board decision</div><h2>Authorize discovery, not implementation</h2>
+      <p class="intro">Nafath is a potential identity capability, not a general employee-service catalog. Official public guidance describes users responding to verification requests through the Nafath application before returning to the integrated service. It does not establish that AURA is eligible to integrate, disclose AURA-ready API details, or provide sandbox access. [1][2]</p>
+      <div class="good"><strong>Recommended board position</strong><p>Authorize a short discovery phase to identify an accountable Saudi relying-party sponsor, validate the right identity use case, request the approved technical pack and test access, and complete privacy/security review. Return for build approval only when these gates are evidenced.</p></div>
+      <div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Decision item</th><th>Recommendation</th><th>Evidence required to proceed</th></tr></thead><tbody>
+        <tr><td>First action</td><td>Provider/sponsor discovery and Employee Hub use-case validation.</td><td>Named provider contact, relying-party eligibility answer, written onboarding steps, owner, timeline, and commercial terms.</td></tr>
+        <tr><td>First product scope</td><td>One opt-in, high-risk verification step inside an employee workflow; retain the customer’s existing corporate SSO for normal access.</td><td>Customer policy and privacy approval; a specific protected action; accessible fallback for employees who cannot use Nafath.</td></tr>
+        <tr><td>Build gate</td><td>Do not select endpoints, protocol, claims, or credentials from assumptions.</td><td>Provider-approved contract, sandbox credentials and test identities, callback/response specification, security requirements, SLA, and test acceptance criteria.</td></tr>
+        <tr><td>Out of scope now</td><td>Replacing all employee login, bypassing consent, collecting Absher/Nafath passwords or OTPs, or treating NIC API material as Nafath SSO documentation.</td><td>Any broader identity scope would need a separate product and governance decision.</td></tr>
+      </tbody></table></div></div>
+    </section>
+    <section id="score" class="brief-section">
+      <div class="eyebrow">02 · Cross-AURA value and Employee Hub fit</div><h2>Strong platform potential; employee value is narrower</h2>
+      <p>These are prioritization estimates using the six weighted criteria in the AURA connector register. The register calculates its score from the six source ratings and workbook weights; <b>68/100 is the formula result for Nafath</b>. The Employee Hub score is a separate analyst estimate using the same weights. Neither score measures ROI, employee satisfaction, adoption, or provider quality.</p>
+      <div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Cross-AURA register dimension</th><th>Rating</th><th>Weight</th><th>Assessment</th></tr></thead><tbody>
+        <tr><td>AURA use-case value</td><td>5/5</td><td>25%</td><td>Trusted national identity could enable higher-assurance journeys across Saudi-facing AURA applications.</td></tr>
+        <tr><td>Employee reach</td><td>5/5</td><td>15%</td><td>Potentially broad where applications serve eligible Saudi digital-identity users; actual AURA customer coverage is unverified.</td></tr>
+        <tr><td>Strategic fit</td><td>5/5</td><td>20%</td><td>Direct fit with identity, trust, and secure digital service delivery.</td></tr>
+        <tr><td>Implementation ease</td><td>1/5</td><td>15%</td><td>High assurance, integration and security requirements; approved access is the main effort driver.</td></tr>
+        <tr><td>Dependency readiness</td><td>1/5</td><td>10%</td><td>No AURA-approved sandbox, credentials, sponsor or implementation specification is evidenced.</td></tr>
+        <tr><td>Access feasibility</td><td>1/5</td><td>15%</td><td>AURA’s relying-party route and eligibility are not established.</td></tr>
+        <tr><td><b>Weighted cross-AURA result</b></td><td colspan="2"><b>68 / 100</b></td><td>Register ratings and workbook scoring formula retained.</td></tr>
+      </tbody></table></div></div>
+      <h3>Employee Hub-specific fit: 53/100 · selective and conditional</h3>
+      <p>Nafath may improve confidence for a small number of sensitive employee actions, but ordinary access should remain through the employer’s identity provider. Requiring a national digital identity for everyday leave, payslips, letters, or routine HR requests can add friction and exclude employees or customer tenants for whom that route is unavailable. This explains the lower Employee Hub score.</p>
+      <div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Employee Hub dimension</th><th>Rating</th><th>Weight</th><th>Reason</th></tr></thead><tbody>
+        <tr><td>Value</td><td>4/5</td><td>25%</td><td>Meaningful for sensitive identity assurance; little incremental value for routine services.</td></tr>
+        <tr><td>Reach</td><td>3/5</td><td>15%</td><td>Could cover a broad subset, but employee nationality/residency, device access, employer policy and customer configuration need validation.</td></tr>
+        <tr><td>Strategic fit</td><td>4/5</td><td>20%</td><td>Fits secure employee journeys as an additional verification route, not as the universal Hub login.</td></tr>
+        <tr><td>Implementation ease</td><td>1/5</td><td>15%</td><td>Same high assurance, testing and security burden as the broader connector.</td></tr>
+        <tr><td>Dependency readiness</td><td>1/5</td><td>10%</td><td>No approved Employee Hub customer use case, sponsor or sandbox has been evidenced.</td></tr>
+        <tr><td>Access feasibility</td><td>1/5</td><td>15%</td><td>Relying-party approval and access path remain unknown.</td></tr>
+        <tr><td><b>Weighted Employee Hub result</b></td><td colspan="2"><b>53 / 100</b></td><td>Provisional product assessment; revise after customer and provider discovery.</td></tr>
+      </tbody></table></div></div>
+      <p class="small">Calculation: round((rating × criterion weight, summed across six criteria) ÷ 5). Keep the register’s rank 10 and Discovery required status separate from both scores.</p>
+    </section>
+    <section id="profile" class="brief-section">
+      <div class="eyebrow">03 · Product profile</div><h2>Nafath is a national digital identity and verification experience</h2>
+      <p>SDAIA describes Nafath as an application developed by the National Information Center to help users verify and authenticate digital identities and access integrated government and private-sector services. Public user guidance describes a verification request arriving in the Nafath app, followed by the user completing the verification and returning to the service provider. [1][2]</p>
+      <div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Capability in public guidance</th><th>Meaning for AURA</th><th>What remains unverified</th></tr></thead><tbody>
+        <tr><td>National digital identity / single sign-on</td><td>Potential Saudi identity proofing or a login option where AURA and the relying service are approved.</td><td>Protocol, endpoints, client registration, identity claims, authentication levels, and whether AURA may act as relying party.</td></tr>
+        <tr><td>User-approved verification request in app</td><td>Candidate step-up experience for a transaction that needs stronger confidence.</td><td>Request creation mechanics, user matching, approval state callback, timeout, cancel and retry semantics.</td></tr>
+        <tr><td>Biometric verification service</td><td>May be relevant to a separately authorized high-assurance journey.</td><td>Whether it is available to AURA, applicable onboarding, supported platforms, and required consent. Do not assume biometric API access. [3]</td></tr>
+      </tbody></table></div></div>
+      <div class="gate"><strong>Important distinction</strong><p>The reviewed internal document <code>04-nic.docx</code> is a NIC Java developer guide for person/eligibility, Hajj permit, visitor and worker gateway operations. It lists service-specific hosts, credentials and payloads. It does <b>not</b> describe Nafath relying-party sign-in or the Nafath app verification flow, and should not be used as Nafath API documentation. The project folder contained 14 numbered guides (01-zatca through 14-iata); no Nafath-branded identity integration guide was present in that folder review. [4]</p></div>
+    </section>
+    <section id="usecases" class="brief-section">
+      <div class="eyebrow">04 · AURA use cases and boundaries</div><h2>Use Nafath where identity assurance changes the outcome</h2>
+      <div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Use case</th><th>AURA application example</th><th>Priority</th><th>Condition</th></tr></thead><tbody>
+        <tr><td>Step-up verification for a sensitive employee change</td><td>Confirm identity before changing bank details or another high-risk employee record.</td><td><span class="tag amber">Best Employee Hub candidate</span></td><td>Employer policy, data minimization, approved relying-party flow and non-Nafath alternative are agreed.</td></tr>
+        <tr><td>Identity check for account recovery</td><td>Verify a claimant before recovering access where corporate identity controls cannot complete recovery.</td><td>Conditional</td><td>Do not make Nafath the only route; model lockout, lost-device and ineligible-user recovery.</td></tr>
+        <tr><td>High-risk approval confirmation</td><td>Confirm a specific sensitive action before AURA commits a change.</td><td>Discovery</td><td>Provider confirms the service supports the required transaction approval semantics; authentication alone is not treated as business approval.</td></tr>
+        <tr><td>National identity login across a Saudi customer app</td><td>Offer Nafath as an additional login route for an eligible application population.</td><td>Cross-AURA candidate</td><td>Customer and provider approve the relying-party model, assurance requirements, user coverage and support plan.</td></tr>
+        <tr><td>Routine HR navigation</td><td>Leave requests, payslips, letters, profile browsing.</td><td><span class="tag red">Do not route by default</span></td><td>Use the employee’s existing corporate SSO; avoid adding a national identity prompt without risk justification.</td></tr>
+      </tbody></table></div></div>
+      <h3>Example Employee Hub journey</h3>
+      <div class="callout"><strong>Target-state concept, pending provider validation</strong><p>Employee signs in through the employer’s existing SSO → starts a protected bank-detail change → AURA explains why an additional identity check is needed → AURA hands off through the provider-approved Nafath flow → employee reviews and approves the verification request in the Nafath app → the approved result returns to AURA → AURA records a minimal verification audit event and resumes the HR request. A denied, cancelled, timed-out or unavailable result keeps the HR change pending and offers an approved alternative.</p></div>
+      <p class="small">This is a product concept, not a confirmed Nafath protocol. Do not treat identity verification as consent to the underlying HR change; obtain explicit user confirmation for that action.</p>
+    </section>
+    <section id="integration" class="brief-section">
+      <div class="eyebrow">05 · Integration approach</div><h2>Secure a provider contract before designing the adapter</h2>
+      <p>The source register recommends an approved identity flow, provider contract before endpoint/auth decisions, and a governed handoff while access is unresolved. No AURA-ready public implementation contract was found. Use a provider-approved protocol and exact security profile once received; do not infer the API from public user instructions or the NIC guide. [4]</p>
+      <div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Layer</th><th>Target design</th><th>Provider / customer confirmation</th></tr></thead><tbody>
+        <tr><td>AURA identity broker</td><td>Keep tenant sign-in and policy control in AURA’s existing identity architecture; invoke Nafath only for approved users and use cases.</td><td>Supported relying-party topology, allowed redirect/app handoff, environment separation and customer/tenant model.</td></tr>
+        <tr><td>Nafath adapter</td><td>Isolate provider-specific request/response handling behind a versioned AURA connector; do not expose provider secrets to a browser.</td><td>Protocol, endpoints, client credential handling, callback signing, certificate rotation, claims and error codes.</td></tr>
+        <tr><td>Transaction protection</td><td>Bind the verification response to the initiating user, tenant, transaction, and short-lived session. Validate the provider-authenticated response before completing the action.</td><td>Provider-required correlation fields, replay controls, approved assurance indicators and response expiry.</td></tr>
+        <tr><td>Data and audit</td><td>Store the minimum result needed: operation reference, outcome, timestamp, assurance metadata if permitted, and audit trail. Avoid retaining national ID or biometric material unless expressly required and approved.</td><td>Allowed attribute list, retention, consent language, residency, data controller roles and deletion rules.</td></tr>
+        <tr><td>Failure and accessibility</td><td>Handle decline, cancellation, timeout, duplicate callback, app unavailable, unsupported identity and provider outage; provide a safe alternative or pending state.</td><td>Retry/backoff rules, service SLA, user support escalation and fallback policy.</td></tr>
+      </tbody></table></div></div>
+      <h3>Required integration handoff pack</h3>
+      <ul><li>Named government/provider sponsor and written confirmation of AURA/customer eligibility as a relying party.</li><li>Approved sandbox and production base URLs, test identities, credentials, certificate and network requirements, and credential rotation procedure.</li><li>Current technical contract: supported protocol, exact request/response schemas, claims, assurance levels, redirect/deep-link or callback behavior, errors, expiry, rate limits and version policy.</li><li>Security and privacy documentation: user notice/consent, data-processing terms, retention, logging constraints, incident reporting and security test requirements.</li><li>Commercial/operational pack: fees if any, SLA/support, onboarding timeline, change notification, production approval and acceptance sign-off.</li></ul>
+      <p class="small">The public user flow establishes that the user interacts with Nafath and returns to the service. It does not establish endpoint behavior, API authorization, token format, callback security, or entitlement for AURA.</p>
+    </section>
+    <section id="cost" class="brief-section">
+      <div class="eyebrow">06 · Commercial model and cost</div><h2>Provider pricing is unverified; internal delivery is substantial</h2>
+      <p>No official public fee schedule or AURA-specific quote for relying-party onboarding/API access was identified in the sources reviewed. Treat provider fees, licensing, integration-partner fees and test access charges as <b>unknown</b> until confirmed in writing. A public fee on a user-facing government service would not establish a fee for Nafath integration.</p>
+      <div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Potential cost item</th><th>Current status</th><th>What to obtain</th></tr></thead><tbody>
+        <tr><td>Nafath onboarding / usage fees</td><td>Unverified; no AURA offer located.</td><td>Written price schedule, transaction basis, minimums, tax treatment and change terms.</td></tr>
+        <tr><td>Identity integrator or sponsor costs</td><td>Unknown; direct eligibility is unresolved.</td><td>Confirm whether a licensed or approved integrator is required and request a quote.</td></tr>
+        <tr><td>AURA engineering and assurance</td><td>Planning estimate below.</td><td>Replace blended person-day assumption with AURA delivery rates after scope and protocol are known.</td></tr>
+        <tr><td>Ongoing operations</td><td>Not quantified.</td><td>Estimate support, monitoring, certificate rotation, security reviews, provider change management and tenant onboarding.</td></tr>
+      </tbody></table></div></div>
+      <div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>AURA delivery work</th><th>Planning range</th><th>Assumption</th></tr></thead><tbody>
+        <tr><td>Eligibility, sponsor, use-case and commercial discovery</td><td>5–8 person-days</td><td>Time-boxed discovery; provider responsiveness can extend calendar time.</td></tr>
+        <tr><td>Architecture, privacy and security design</td><td>7–10 person-days</td><td>One relying-party model, one tenant path and one protected employee workflow.</td></tr>
+        <tr><td>Connector and AURA workflow implementation</td><td>12–18 person-days</td><td>Assumes an approved stable specification and usable sandbox are provided.</td></tr>
+        <tr><td>Security testing, customer UAT, fallback and launch</td><td>12–18 person-days</td><td>Includes negative/timeout/replay tests, audit and runbook; excludes external certification delay.</td></tr>
+        <tr><td><b>Total initial delivery</b></td><td><b>36–54 person-days</b></td><td><b>At an illustrative SAR 1,500 blended person-day plus 15% contingency: SAR 62,100–93,150.</b></td></tr>
+      </tbody></table></div></div>
+      <p class="small">This is an internal planning scenario, not a provider quote or committed budget. It excludes Nafath/integrator charges, taxes, major customer-specific changes, and ongoing operations. External approval and contract lead time may dominate the calendar schedule.</p>
+    </section>
+    <section id="risks" class="brief-section">
+      <div class="eyebrow">07 · Risks and controls</div><h2>Identity trust requires narrow scope and explicit failure handling</h2>
+      <div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Risk</th><th>Why it matters</th><th>Control / owner</th></tr></thead><tbody>
+        <tr><td>Relying-party eligibility not confirmed</td><td>Technical feasibility does not grant permission to use a national identity service.</td><td>Provider sponsor and legal owner obtain written eligibility and terms before build.</td></tr>
+        <tr><td>Confusing authentication with transaction approval</td><td>A user’s identity verification does not itself authorize a bank-detail or HR change.</td><td>Product workflow separately asks for explicit transaction confirmation and applies HR approval rules.</td></tr>
+        <tr><td>Overuse in routine Employee Hub flows</td><td>Extra friction may reduce task completion and exclude users without an eligible identity/device.</td><td>Use risk-based step-up only; retain existing corporate SSO and accessible fallback.</td></tr>
+        <tr><td>Identity data overcollection</td><td>National identity attributes and biometrics are sensitive and create elevated breach/retention exposure.</td><td>Privacy/security approve minimum claims and retention; do not store biometric data.</td></tr>
+        <tr><td>Forged, replayed or misbound response</td><td>A stale or mismatched verification could be attached to the wrong employee or action.</td><td>Use only provider-specified response validation, correlation, state/nonce, expiry and anti-replay controls; test end-to-end.</td></tr>
+        <tr><td>Unavailable service or mobile device</td><td>Blocking all employee access on an external identity flow harms essential service completion.</td><td>Define pending, retry and alternate verification routes with a named HR/support owner.</td></tr>
+        <tr><td>Internal NIC guide misapplied</td><td>The reviewed NIC document covers separate data and permit APIs, not Nafath SSO.</td><td>Keep it as contextual NIC gateway material; request the Nafath-specific contract from the provider/sponsor.</td></tr>
+      </tbody></table></div></div>
+    </section>
+    <section id="roadmap" class="brief-section">
+      <div class="eyebrow">08 · Prioritized delivery path</div><h2>Resolve access and demand before committing engineering capacity</h2>
+      <div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Phase</th><th>Actions</th><th>Exit criteria</th><th>Decision</th></tr></thead><tbody>
+        <tr><td><span class="phase">0 · Discovery</span><br>2–4 weeks target, subject to provider response</td><td>Name Saudi sponsor; confirm direct vs integrator eligibility; validate one customer-backed sensitive employee use case; obtain commercial and privacy contacts.</td><td>Written eligibility route, accountable sponsor, named customer/use case, onboarding timeline and indicative cost.</td><td>Stop or proceed to technical validation.</td></tr>
+        <tr><td><span class="phase">1 · Contract and sandbox</span></td><td>Obtain approved technical pack, test environment, test users/credentials, data terms, SLA and security requirements.</td><td>Successful test handshake; documented request/response and denial/timeout scenarios; privacy/security sign-off.</td><td>Approve bounded prototype.</td></tr>
+        <tr><td><span class="phase">2 · Controlled pilot</span></td><td>Implement one step-up flow for one customer and one protected action; maintain existing login and fallback; run employee usability and security tests.</td><td>Provider acceptance; verified outcome mapping; measurable completion/failure rates; support and audit runbook.</td><td>Expand, revise or stop.</td></tr>
+        <tr><td><span class="phase">3 · Productize</span></td><td>Build reusable tenant controls, policy configuration, consent/notice, monitoring, credential rotation and version management.</td><td>Customer demand, stable provider agreement, service-level and security acceptance, support economics.</td><td>Prioritize portfolio rollout.</td></tr>
+      </tbody></table></div></div>
+      <h3>Discovery questions for the provider and business sponsor</h3>
+      <ol><li>Can AURA directly qualify as a relying party, or must an eligible customer or approved integrator own the relationship?</li><li>Is the desired product capability login, identity verification, biometric check, transaction approval, or a combination? Which of these are separately supported?</li><li>What are the exact onboarding prerequisites, technical protocol, claims, credentials, test identities, sandbox process and security acceptance gates?</li><li>What fees, minimums, support SLA, production approval and notice period apply?</li><li>Which employee populations and customer tenants are eligible, and what non-Nafath alternatives must be supported?</li><li>For the Employee Hub candidate, who owns the protected business action, employee communications, exception handling and audit retention?</li></ol>
+    </section>
+    <section id="evidence" class="brief-section">
+      <div class="eyebrow">09 · Evidence and sources</div><h2>Public evidence confirms the user-facing concept; the AURA contract is missing</h2>
+      <p>Research reviewed 30 September 2026. Official public service pages explain the user-facing Nafath purpose and verification interaction. They do not publish an AURA-specific onboarding contract, confirm AURA eligibility, or establish current integration pricing. Internal planning statements are explicitly labeled separately.</p>
+      <ol class="source-list">
+        <li><b>[1] SDAIA — Access to government and private services.</b> Official user guidance: user receives a Nafath app verification request, completes the step, then returns to the service provider. <a href="https://sdaia.gov.sa/en/Services/Pages/ServiceDetails.aspx?ServiceID=1" target="_blank" rel="noopener">Open service details</a>.</li>
+        <li><b>[2] SDAIA — Frequently asked questions.</b> Describes Nafath as an NIC-developed national application for digital identity verification/authentication and access to integrated government/private applications. <a href="https://sdaia.gov.sa/en/Contact/Pages/Faqs.aspx" target="_blank" rel="noopener">Open SDAIA FAQs</a>.</li>
+        <li><b>[3] SDAIA — Biometric Verification Service.</b> Public-facing service description for biometric verification through Nafath; it does not prove that AURA can access a biometric integration API. <a href="https://sdaia.gov.sa/en/Services/Pages/ServiceDetails.aspx?ServiceID=2" target="_blank" rel="noopener">Open service details</a>.</li>
+        <li><b>[4] Internal project evidence — AURA connector prioritization workbook and <code>Fw__Nafath_or_Absher_Existing_Testing_Environment_and_Integration</code> folder.</b> Register row 10 records rank 10, Discovery required, low confidence, source ratings 5/5/5/1/1/1 and no established AURA endpoint/access. Folder review found 14 numbered documents. The closest file, <code>04-nic.docx</code>, is a NIC Java developer guide for person/eligibility and Hajj/worker gateway operations; it is not Nafath SSO documentation. Reviewed from the user-provided Drive folder on 30 Sep 2026.</li>
+        <li><b>[5] National Platform — Nafath service record.</b> Source listed in the AURA workbook as the official national SSO service. It supports the service-level context only; no implementation details or AURA entitlement are inferred. <a href="https://my.gov.sa/en/services/119727" target="_blank" rel="noopener">Open service record</a>.</li>
+      </ol>
+      <div class="gate"><strong>Evidence gaps that block implementation approval</strong><p>No AURA-specific relying-party approval, technical specification, sandbox credential, test identity, commercial offer, SLA, production entitlement, customer commitment or privacy/legal approval was verified in this assessment. Resolve these with the provider and named customer sponsor before authorizing a production connector.</p></div>
+      <p class="small">Score and cost are analyst estimates, not promises. Provider access, terms, product behavior and pricing may change; revalidate with the official service owner at procurement and implementation.</p>
+    </section>
+  </div>
+  <footer class="small" style="text-align:center;padding:26px 10px 0"><span>AURA · Nafath · Final Board Presentation</span><span>Board-ready · detailed research included · 30 September 2026</span></footer>
+</main></body></html>

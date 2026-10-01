@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AURA × PayTabs | Board Presentation · Final</title>
+<style>
+    :root {
+      --ink: #10203c;
+      --muted: #697384;
+      --accent: #2fb4df;
+      --accent-dark: #1688b3;
+      --accent-red: #ea0a2a;
+      --soft: #eef9fd;
+      --line: #dfe6ee;
+      --panel: #f5f7fa;
+      --amber: #8a5900;
+      --amber-soft: #fff6df;
+      --red: #b80e2b;
+      --red-soft: #fff0f3;
+      --radius: 18px;
+      --shadow: 0 18px 45px rgba(16, 32, 60, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #f3f5f8;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    a { color: var(--accent-dark); text-underline-offset: 3px; }
+    .skip { position: absolute; left: -9999px; }
+    .skip:focus { left: 16px; top: 12px; z-index: 100; background: #fff; padding: 8px 12px; border: 2px solid var(--accent); }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 10px 14px 0;
+      background: rgba(243,245,248,.9);
+      backdrop-filter: blur(12px);
+    }
+    .topbar-inner {
+      max-width: 1210px;
+      margin: auto;
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(223,230,238,.85);
+      border-radius: 21px;
+      box-shadow: 0 10px 30px rgba(16,32,60,.05);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 900; letter-spacing: .02em; }
+    .brand::before { content: ""; width: 18px; height: 27px; border-radius: 4px; background: linear-gradient(165deg, var(--accent) 0 33%, var(--ink) 34% 66%, var(--accent-red) 67%); box-shadow: 5px 0 0 rgba(47,180,223,.18); transform: skewY(8deg); }
+    .brand span { color: var(--accent-dark); }
+    nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 18px; font-size: 13px; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 700; }
+    nav a:hover, nav a:focus { color: var(--accent-dark); }
+
+    main { max-width: 1210px; margin: auto; padding: 12px 14px 70px; }
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 72px 46px 60px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, .7fr);
+      gap: 42px;
+      align-items: center;
+      background: linear-gradient(112deg, #f1f8fc 0%, #f7f9fc 54%, #fff1f3 100%);
+      border: 1px solid rgba(223,230,238,.85);
+      border-radius: 24px;
+    }
+    .hero::after { content: ""; position: absolute; z-index: -1; width: 380px; height: 380px; right: 12%; top: -250px; border-radius: 50%; background: radial-gradient(circle, rgba(47,180,223,.18), rgba(47,180,223,0) 70%); }
+    .eyebrow { color: var(--accent-red); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .13em; }
+    h1 { margin: 9px 0 15px; font-size: clamp(36px, 5.7vw, 64px); line-height: 1.03; letter-spacing: -.04em; }
+    h1 span { color: var(--accent-dark); }
+    .lead { margin: 0; color: var(--muted); font-size: 20px; max-width: 760px; }
+    .hero-decision { position: relative; overflow: hidden; padding: 25px; background: rgba(255,255,255,.94); border: 1px solid #dce8ee; border-radius: var(--radius); box-shadow: var(--shadow); }
+    .hero-decision::before { content: ""; position: absolute; inset: 0 0 auto; height: 5px; background: linear-gradient(90deg, var(--accent), var(--accent-red)); }
+    .hero-decision strong { display: block; margin-bottom: 7px; color: var(--ink); font-size: 18px; }
+
+    section { margin-top: 18px; padding: 46px; background: #fff; border: 1px solid rgba(223,230,238,.9); border-radius: 24px; box-shadow: 0 12px 36px rgba(16,32,60,.045); }
+    h2 { margin: 5px 0 14px; font-size: 31px; line-height: 1.2; letter-spacing: -.02em; }
+    h3 { margin: 0 0 8px; font-size: 19px; line-height: 1.3; }
+    p { margin: 0 0 13px; }
+    ul { margin: 8px 0; padding-left: 20px; }
+    li { margin: 5px 0; }
+    .intro { max-width: 790px; color: var(--muted); font-size: 17px; }
+    .small { color: var(--muted); font-size: 13px; }
+    .source { font-size: 12px; font-weight: 800; white-space: nowrap; }
+
+    .grid { display: grid; gap: 18px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card {
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .card.soft { box-shadow: none; background: linear-gradient(145deg, #f7f9fb, #fff); }
+    .card p:last-child, .card ul:last-child { margin-bottom: 0; }
+    .number { margin-bottom: 4px; color: var(--accent); font-size: 34px; line-height: 1.05; font-weight: 900; }
+    .label { color: var(--muted); font-size: 13px; font-weight: 800; }
+
+    .badge { display: inline-block; padding: 5px 9px; border-radius: 999px; font-size: 12px; font-weight: 900; }
+    .verified { color: #08789f; background: var(--soft); }
+    .proposed { color: var(--ink); background: #edf1f6; }
+    .confirm { color: var(--red); background: var(--red-soft); }
+
+    .callout { margin-top: 20px; padding: 17px 19px; border-left: 4px solid var(--accent); background: linear-gradient(90deg, var(--soft), #f8fcfe); border-radius: 0 12px 12px 0; }
+    .callout.warn { border-color: var(--amber); background: var(--amber-soft); }
+    .callout strong { display: block; margin-bottom: 3px; }
+
+    .table-wrap { margin-top: 20px; overflow-x: auto; border: 1px solid var(--line); border-radius: 13px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 13px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    th { color: var(--ink); background: #f1f6f9; font-size: 12px; text-transform: uppercase; letter-spacing: .045em; }
+    tr:last-child td { border-bottom: 0; }
+
+    /* Mind map */
+    .mindmap {
+      margin: 24px 0 8px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 54px;
+      align-items: center;
+    }
+    .mind-center {
+      position: relative;
+      padding: 24px 18px;
+      color: #fff;
+      background: linear-gradient(145deg, var(--accent), #188db9 55%, var(--ink));
+      border-radius: 50%;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 900;
+      aspect-ratio: 1.45;
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+    }
+    .mind-center::after { content: ""; position: absolute; right: -55px; top: 50%; width: 55px; border-top: 2px solid #9edced; }
+    .branches { display: grid; gap: 13px; }
+    .branch { position: relative; padding: 15px 18px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(90deg, #fff, #f8fbfd); box-shadow: 0 8px 22px rgba(16,32,60,.04); }
+    .branch::before { content: ""; position: absolute; left: -55px; top: 50%; width: 55px; border-top: 2px solid #9edced; }
+    .branch strong { color: var(--accent-dark); }
+
+    /* Flows */
+    .flow {
+      margin: 24px 0 8px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(110px, 1fr));
+      gap: 17px;
+      align-items: stretch;
+    }
+    .step { position: relative; padding: 17px 10px; display: grid; place-items: center; text-align: center; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(145deg, #fff, var(--panel)); font-weight: 800; }
+    .step:not(:last-child)::after { content: "→"; position: absolute; right: -15px; top: 50%; transform: translateY(-50%); color: var(--accent); font-size: 19px; font-weight: 900; }
+    .step.provider { color: #fff; background: linear-gradient(145deg, var(--accent), var(--accent-dark)); border-color: var(--accent); }
+
+    .build-flow { margin-top: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; counter-reset: stages; }
+    .flow-title { margin: 30px 0 6px; font-size: 21px; color: var(--accent-dark); }
+    .build-stage { position: relative; padding: 20px; border-top: 4px solid var(--accent); background: linear-gradient(145deg, #f6f8fb, #fff); border-radius: 0 0 12px 12px; counter-increment: stages; }
+    .build-stage::before { content: counter(stages); position: absolute; top: -16px; left: 17px; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: var(--accent-red); font-size: 13px; font-weight: 900; }
+    .build-stage h3 { margin-top: 7px; }
+
+    .score-bar { margin: 16px 0 7px; height: 14px; border-radius: 999px; background: #e8edef; overflow: hidden; }
+    .score-bar span { display: block; width: 75%; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-dark)); border-radius: inherit; }
+
+    .decision {
+      margin-top: 22px;
+      padding: 24px;
+      border: 2px solid var(--accent);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, #fff 35%, var(--soft));
+      box-shadow: 0 16px 38px rgba(47,180,223,.1);
+    }
+    footer { margin-top: 22px; padding: 26px 8px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 900px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; gap: 8px; }
+      nav { justify-content: flex-start; }
+      .hero { grid-template-columns: 1fr; gap: 24px; }
+      .grid-4, .grid-3, .build-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .mindmap { grid-template-columns: 180px 1fr; gap: 40px; }
+      .mind-center::after { right: -41px; width: 41px; }
+      .branch::before { left: -41px; width: 41px; }
+      .flow { grid-template-columns: 1fr; gap: 12px; }
+      .step:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -20px; transform: translateX(-50%); }
+    }
+    @media (max-width: 620px) {
+      main { padding-left: 16px; padding-right: 16px; }
+      .hero { padding: 45px 24px 36px; }
+      .grid-4, .grid-3, .grid-2, .build-flow, .mindmap { grid-template-columns: 1fr; }
+      .mind-center { width: 180px; margin: auto; }
+      section { padding: 34px 24px; }
+      .mind-center::after { right: 50%; top: auto; bottom: -28px; width: 0; height: 28px; border-top: 0; border-left: 2px solid #9edced; }
+      .branch::before { display: none; }
+    }
+    @media print {
+      @page { size: A4; margin: 14mm; }
+      body { font-size: 10pt; line-height: 1.42; }
+      .topbar, .skip { display: none; }
+      main { max-width: none; padding: 0; }
+      body { background: #fff; }
+      .hero { padding: 0 0 20px; background: #fff; border: 0; border-radius: 0; }
+      h1 { font-size: 31pt; }
+      h2 { font-size: 20pt; break-after: avoid; }
+      section { margin-top: 0; padding: 28px 0 0; border: 0; border-radius: 0; box-shadow: none; }
+      .card, .callout, .mindmap, .flow, .build-flow, .decision, .table-wrap { box-shadow: none; break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+      footer { margin-top: 28px; }
+    }
+  
+    details.research { margin-top: 16px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 15px; background: linear-gradient(145deg,#f7f9fb,#fff); }
+    details.research > summary { cursor: pointer; list-style: none; color: var(--accent-dark); font-size: 17px; font-weight: 900; }
+    details.research > summary::-webkit-details-marker { display: none; }
+    details.research > summary::after { content: "+"; float: right; color: var(--accent); font-size: 22px; line-height: 1; }
+    details.research[open] > summary::after { content: "−"; }
+    .research-content { padding-top: 15px; }
+    .research-content h3 { margin-top: 24px; color: var(--accent-dark); }
+    .research-content h4 { margin: 18px 0 7px; font-size: 16px; }
+    .research-content .table-wrap { margin-top: 12px; }
+    .research-content td, .research-content th { font-size: 13px; }
+    .research-content pre { padding: 16px; overflow: auto; border-radius: 12px; background: #10203c; color: #e8f7fc; font: 12px/1.5 Consolas,monospace; }
+    .research-content code { overflow-wrap: anywhere; }
+    .detail-note { margin: 10px 0; padding: 12px 14px; border-left: 3px solid var(--accent); background: var(--soft); border-radius: 0 10px 10px 0; color: var(--ink); }
+    @media print { details.research:not([open]) .research-content { display: block !important; } details.research:not([open]) > summary { display: none; } details.research { break-inside: auto; } }
+
+
+    .topbar-inner { max-width: 1280px; }
+    main { max-width: 1280px; }
+    .brand { font-size: 16px; }
+    .hero { margin-top: 8px; }
+    .hero h1 { max-width: 760px; }
+    .hero h1 span { color: var(--accent-dark); }
+    .hero .lead { max-width: 730px; }
+    .hero-decision p { margin: 0 0 9px; }
+    .hero-decision .badge { margin-bottom: 10px; }
+    .kpi-grid { margin: 16px 0 6px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+    .kpi { padding: 18px 20px; border: 1px solid var(--line); border-radius: 15px; background: #fff; box-shadow: 0 10px 26px rgba(16,32,60,.045); }
+    .kpi strong { display: block; color: var(--ink); font-size: 25px; line-height: 1.1; letter-spacing: -.025em; }
+    .kpi span { display: block; margin-top: 7px; color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+    .kpi.score { border-top: 4px solid var(--accent); }
+    .kpi.rank { border-top: 4px solid var(--accent-red); }
+    .kpi.stage { border-top: 4px solid #178b65; }
+    .kpi.method { border-top: 4px solid var(--accent-dark); }
+    .brief-section { scroll-margin-top: 88px; }
+    .brief-section > .eyebrow { margin-bottom: 8px; }
+    .brief-section > h2 { max-width: 900px; }
+    .brief-section p { max-width: 1020px; }
+    .brief-section .table-wrap { margin-top: 16px; }
+    .brief-section td, .brief-section th { overflow-wrap: anywhere; }
+    .brief-section table { min-width: 650px; }
+    #board .table-wrap, #value .table-wrap, #profile .table-wrap, #cost .table-wrap, #evidence .table-wrap { box-shadow: 0 10px 28px rgba(16,32,60,.035); }
+    .decision { border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: 16px; background: linear-gradient(145deg,#f7f9fb,#fff); box-shadow: var(--shadow); }
+    .decision h3 { color: var(--ink); }
+    .research-content .brief-section { margin-top: 14px; padding: 30px; border-radius: 18px; }
+    .research-content .brief-section h2 { font-size: 25px; }
+    .research-content .table-wrap { overflow-x: auto; }
+    .recommendation-note { margin: 18px 0 2px; padding: 16px 19px; border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; background: linear-gradient(90deg,var(--soft),#f8fcfe); }
+    .source-list { padding-left: 21px; }
+    .source-list li { margin: 9px 0; }
+    .source-list a { overflow-wrap: anywhere; }
+    @media (max-width: 900px) {
+      .kpi-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      nav { gap: 8px 12px; }
+    }
+    @media (max-width: 620px) {
+      .kpi-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .kpi { padding: 14px; }
+      .kpi strong { font-size: 20px; }
+      .research-content .brief-section { padding: 25px 18px; }
+      .brief-section table { min-width: 600px; }
+    }
+    @media print {
+      .kpi-grid { grid-template-columns: repeat(4,1fr); }
+      .topbar { position: static; padding: 0; background: #fff; }
+      .topbar-inner { border: 0; box-shadow: none; padding: 6px 0; }
+      nav { display: none; }
+      .brief-section table { min-width: 0; }
+      .research-content .brief-section { padding: 22px 0; border: 0; box-shadow: none; }
+    }
+</style></head><body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="topbar"><div class="topbar-inner">
+  <div class="brand">AURA <span>× PayTabs</span></div>
+  <nav aria-label="Briefing sections"><a href="#verified-sources">Current source check</a>
+    <a href="#profile">Connector</a><a href="#value">Use cases</a><a href="#research-annex">Integration &amp; controls</a>
+    <a href="#score">Value score</a><a href="#cost">Cost</a><a href="#evidence">Evidence</a>
+  </nav>
+</div></div>
+<main id="main">
+  <header class="hero">
+    <div>
+      <div class="eyebrow">Board briefing · Saudi connector assessment · 30 Sep 2026</div>
+      <h1><span>PayTabs</span><br>payment collection for AURA</h1>
+      <p class="lead">A payment connector for AURA applications that collect a fee. Start with one named service journey, hosted checkout, verified transaction status, and a clear owner for settlement and refunds.</p>
+    </div>
+    <aside class="hero-decision">
+      <span class="badge proposed">Recommendation · validate and pilot</span>
+      <strong>Decision requested</strong>
+      <p>Approve provider discovery and a controlled sandbox pilot. Confirm the merchant model, current KSA price, and reconciliation owner before production.</p>
+      <p class="small">Employee Hub fit is selective; ordinary HR services and payroll are outside this connector’s scope.</p>
+    </aside>
+  </header>
+  <div class="kpi-grid" aria-label="AURA connector summary">
+    <div class="kpi rank"><strong>08</strong><span>Cross-AURA connector rank</span></div>
+    <div class="kpi score"><strong>40 / 100</strong><span>Employee Hub fit · provisional</span></div>
+    <div class="kpi stage"><strong>Conditional</strong><span>Employee Hub readiness</span></div>
+    <div class="kpi method"><strong>Hosted checkout</strong><span>Recommended first pattern</span></div>
+  </div>
+  <aside class="recommendation-note" id="verified-sources"><strong>Current provider-source check · 30 September 2026</strong><ul><li>PayTabs’ current technical portal documents the KSA Hosted Payment Page request endpoint as <code>https://secure.paytabs.sa/payment/request</code>. Use the merchant’s assigned regional profile and confirm test/live configuration. <a href="https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-2-Configure-Integration-Method/HPP-Step-2-Landing/">Official endpoint guidance</a>.</li><li>PayTabs describes IPN as a server-to-server status notification. AURA should treat it as a signal, validate the transaction and match amount, currency, profile and business reference before fulfilment. <a href="https://support.paytabs.com/en/support/solutions/articles/60000978877-step-6-hosted-payment-page-apis-handle-the-post-payment-responses-notifications-">Official notification guidance</a>.</li><li>Published Saudi pricing must stay labeled as indicative: the Paymes figures are marked as testing-phase prices; the public gateway agreement has a specific fee schedule and may not be AURA’s offer. Secure a current written merchant quote before final economics. <a href="https://paytabs.com/en/pricing/">Pricing page</a> · <a href="https://paytabs.com/documents/Platform-Payment-Gateway-Usage-Agreement.pdf">Saudi usage agreement</a>.</li></ul><p class="small">These provider sources verify product mechanics and published examples; they do not establish AURA’s merchant eligibility, account model, customer demand, or negotiated fees. The detailed research and original project-guide caveats are preserved below.</p></aside>
+    <section id="board" class="brief-section"><div class="eyebrow">01 · Board recommendation</div><h2>Validate one real payment journey before funding production work</h2><p>Recommendation: keep PayTabs as a build-eligible connector and approve a time-boxed discovery and sandbox pilot. The current AURA connector register places PayTabs at rank 8. The first release should support payment collection for a named AURA workflow, not general payment processing across every tenant by default.</p>
+<p>PayTabs can let an AURA application create a payment request, send the customer to a hosted checkout, receive a server-side transaction update, confirm the result, and continue or stop the underlying business workflow. This can remove manual payment links and spreadsheet reconciliation where a real payable journey exists.</p>
+<p>The main decision blocker is commercial and operational ownership. AURA must identify the merchant of record, the legal entity receiving funds, the settlement account, the paid service, the refund owner, and the account model. The public fee schedule found is one contract schedule, not a universal API rate card; obtain a current written KSA quote before investment approval.</p>
+<div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Board question</th><th>Recommended position</th></tr></thead><tbody>
+<tr><td>AURA value</td><td>Reusable payment initiation and status handling for applications that collect a fee.</td></tr>
+<tr><td>Employee Hub fit</td><td>Selective. Use only for optional, policy-approved paid journeys such as training or event enrollment; do not route payroll or ordinary HR services through a payment gateway.</td></tr>
+<tr><td>Decision now</td><td>Approve discovery, merchant-model confirmation, and a sandbox proof of concept. Defer production approval until pricing, ownership, legal review, and reconciliation pass.</td></tr>
+<tr><td>First release</td><td>Hosted Payment Page (HPP), one payment method set, one payable workflow, server-side confirmation, and full/partial refund handling.</td></tr>
+</tbody></table></div></div></section><section id="score" class="brief-section"><div class="eyebrow">02 · Cross-AURA value and Employee Hub fit</div><h2>Separate reusable platform value from employee experience value</h2><p>Two scores are shown because they answer different questions. The <b>63/100 cross-AURA score</b> carries the existing connector register’s six ratings into an equal-weight normalization; it reflects broad potential across AURA apps with payable workflows. It is a prioritization hypothesis, not measured ROI or a provider quality rating. The workbook’s “Priority Score /100” field is blank, so 63/100 is calculated here as 19/30 and is not a stored workbook score.</p>
+<div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Dimension from the AURA register</th><th>Rating</th><th>Assessment</th></tr></thead><tbody>
+<tr><td>Value</td><td>3/5</td><td>Payment collection helps only when AURA owns or controls an eligible payable journey.</td></tr>
+<tr><td>Reach</td><td>3/5</td><td>Reusable across apps, but only a subset of AURA workflows need to collect money.</td></tr>
+<tr><td>Fit</td><td>3/5</td><td>Strong fit for checkout and payment-state orchestration; limited fit for general employee services.</td></tr>
+<tr><td>Ease</td><td>3/5</td><td>Documented API patterns help; financial edge cases, refunds, idempotency, and reconciliation add work.</td></tr>
+<tr><td>Readiness</td><td>3/5</td><td>API documentation is available, but a merchant profile, approved business use, and test credentials are prerequisites.</td></tr>
+<tr><td>Access</td><td>4/5</td><td>KSA API endpoint and onboarding path are documented; payment methods and MADA activation remain account/bank dependent.</td></tr>
+<tr><td>Normalized total</td><td>19/30 = 63/100</td><td>Equal-weight calculation solely for legibility; retain rank 8 and Build eligible status from the register.</td></tr>
+</tbody></table></div></div>
+<h3>Employee Hub-specific fit: 40/100 · low and conditional</h3><p>This provisional score evaluates usefulness for the employee experience itself. It is low because most Employee Hub journeys—leave, letters, payroll information, and routine HR requests—do not involve employee payments. The score should rise only if a named, policy-approved paid service has a clear merchant, payment, refund, and support owner. It is a prioritization estimate, not a measured employee satisfaction or ROI result.</p><div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Employee Hub dimension</th><th>Rating</th><th>Reason</th></tr></thead><tbody><tr><td>Value</td><td>2/5</td><td>Useful for a few optional paid journeys; little effect on everyday HR tasks.</td></tr><tr><td>Reach</td><td>2/5</td><td>Only employees who choose an eligible paid offering benefit.</td></tr><tr><td>Fit</td><td>2/5</td><td>Fits checkout, but payment is peripheral to the Hub’s core employee-service experience.</td></tr><tr><td>Ease</td><td>2/5</td><td>Hosted checkout is documented, while refunds, status handling, support, and reconciliation add operational work.</td></tr><tr><td>Readiness</td><td>1/5</td><td>No specific approved paid Employee Hub service or accountable payment owner is established in this assessment.</td></tr><tr><td>Access</td><td>3/5</td><td>KSA API and onboarding guidance exist; merchant approval, payment methods, and commercial terms still need confirmation.</td></tr><tr><td>Employee Hub total</td><td>12/30 = 40/100</td><td>Equal-weight provisional estimate; revisit if a validated use case emerges.</td></tr></tbody></table></div></div><p>Board interpretation: keep the 63/100 score for cross-app connector potential and use 40/100 for Employee Hub fit. PayTabs is not a standalone employee-experience feature; the Hub’s priority remains low until an approved paid journey is identified.</p></section><section id="profile" class="brief-section"><div class="eyebrow">03 · Connector profile</div><h2>One payment platform supports several integration patterns</h2><p>PayTabs is a payment gateway and payments platform for merchants. Its technical portal documents five API integration types: Hosted Payment Page, Invoices, PayLinks, Managed Form, and Own Form. It also documents backend packages including Laravel and Node.js. The regional KSA transaction endpoint is shown as https://secure.paytabs.sa/payment/request. [1][2]</p>
+<div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Capability</th><th>What it does for an AURA use case</th><th>Product boundary</th></tr></thead><tbody>
+<tr><td>Hosted checkout</td><td>AURA backend creates a payment request; PayTabs returns a checkout URL; the payer completes payment on a PayTabs-hosted page.</td><td>Recommended first integration. AURA does not handle raw card fields.</td></tr>
+<tr><td>Invoices and PayLinks</td><td>Create a payable link/invoice that can be shared through an approved journey.</td><td>Useful for payment requests that do not begin inside a live checkout.</td></tr>
+<tr><td>Managed Form</td><td>Merchant-branded fields use PayTabs JavaScript tokenization so raw card details are removed before they reach the merchant backend.</td><td>More UI control; additional front-end and PCI review.</td></tr>
+<tr><td>Own Form</td><td>Merchant captures and sends card details to the gateway.</td><td>Avoid for AURA MVP due to the increased card-data and PCI burden.</td></tr>
+<tr><td>Transactions and refunds</td><td>Query transaction outcomes and submit refunds using follow-up APIs; full or partial refund support is documented.</td><td>Requires finance controls, approval rules, and reconciliation.</td></tr>
+</tbody></table></div></div>
+<p>Saudi payment methods include mada and other methods that PayTabs lists by market and enables on merchant accounts. Do not promise a method just because it appears in general marketing: exact eligibility, bank sponsorship, currencies, fees, settlement timing, and test access must be confirmed for the selected KSA merchant profile. [3][11]</p></section><section id="value" class="brief-section"><div class="eyebrow">04 · Use cases and scope</div><h2>Payments fit selected workflows, not everyday HR</h2><div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Use case</th><th>AURA application example</th><th>Priority</th></tr></thead><tbody>
+<tr><td>Fee-based request</td><td>Collect an approved application or service fee before marking a request as paid and sending it for fulfilment.</td><td>MVP candidate if a named AURA customer owns the service and funds.</td></tr>
+<tr><td>Training or event enrollment</td><td>Take payment for an optional paid course or event and confirm the seat only after verified payment.</td><td>Possible Employee Hub use case; confirm HR policy and employee experience first.</td></tr>
+<tr><td>Invoice or payment link</td><td>Generate a payment link for a billable service and show status in the originating AURA application.</td><td>Later phase; requires an invoice owner and communication controls.</td></tr>
+<tr><td>Recurring charge</td><td>Automate a subscription or scheduled charge only where the payment method and contract permit it.</td><td>Not in the KSA mada MVP: PayTabs documents that mada does not support recurring transactions. [3]</td></tr>
+</tbody></table></div></div>
+<p>Employee Hub boundary: most HR journeys should remain free to the employee and should not depend on a card gateway. A limited, explicitly approved transaction such as optional paid training/event registration may fit. The strongest broad-AURA value is reusable payment collection in customer-facing or fee-bearing applications, with Employee Hub as a conditional channel.</p>
+<h3>Possible Employee Hub journeys</h3><div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Example</th><th>Employee experience</th><th>Condition before build</th></tr></thead><tbody><tr><td>Optional paid training or certification</td><td>Choose a course, review the fee, pay through hosted checkout, then see confirmed registration and payment status in the Hub.</td><td>HR approves the offering and fee; a named owner handles refunds and support.</td></tr><tr><td>Company event ticket</td><td>Select an event, pay for a ticket, and receive booking confirmation after verified payment.</td><td>The event is explicitly paid and the organizer owns capacity, cancellation, and refund rules.</td></tr><tr><td>Approved employee offer or purchase</td><td>Open an optional paid offer from the Hub, complete checkout, and view the transaction result.</td><td>Confirm the legal merchant, settlement path, eligibility, and whether PayTabs supports the required account model.</td></tr></tbody></table></div></div><div class="callout"><strong>Example journey</strong>Employee selects an optional paid course → AURA displays the fee → PayTabs hosted checkout collects payment → AURA verifies the result server-side → the Hub confirms the seat and shows the status. Failed or uncertain payments must not create a confirmed booking.</div>
+<p>Out of scope for this connector: employee payroll, salary disbursements, expense reimbursements, vendor payouts, wallet balances, AURA acting as a payment institution, storing card numbers/CVV, automatic approval of disputed/ambiguous payments, and marketplace split settlement unless PayTabs separately confirms a supported KSA product and legal model.</p></section><section id="cost" class="brief-section"><div class="eyebrow">06 · Commercial model and cost</div><h2>Confirm the current KSA rate card before modelling production</h2><p>PayTabs’ public pricing page currently publishes Paymes SuperApp testing-phase prices in Saudi Arabia, including SAR 49/month, 1% mada, and 2.25% + SAR 1 for credit cards. The page explicitly says those prices are in a testing phase and may change; these are not a confirmed API gateway quote for AURA. [9]</p>
+<p>A Saudi Payment Gateway Usage Agreement schedule available publicly lists a one-time SAR 999 setup fee, SAR 199 monthly platform-access fee, and SAR 1 per transaction, excluding VAT. The schedule also describes services such as hosted payment pages, instant notifications, invoices, reports, and integrations. It is a specific published contract schedule and may not apply to AURA or a current account. The agreement allows fee changes with notice. Confirm whether card acquiring/MDR, payment-method charges, refunds, settlement, minimums, and any platform/marketplace charges are additional. [10]</p>
+<div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Illustrative volume</th><th>Published schedule line items only</th><th>First month incl. setup</th><th>Recurring monthly after setup</th></tr></thead><tbody>
+<tr><td>500 billable transactions</td><td>SAR 199 monthly + SAR 1 × 500</td><td>SAR 1,698</td><td>SAR 699</td></tr>
+<tr><td>2,000 billable transactions</td><td>SAR 199 monthly + SAR 1 × 2,000</td><td>SAR 3,198</td><td>SAR 2,199</td></tr>
+<tr><td>5,000 billable transactions</td><td>SAR 199 monthly + SAR 1 × 5,000</td><td>SAR 6,198</td><td>SAR 5,199</td></tr>
+</tbody></table></div></div>
+<p>These figures exclude percentage-based acquiring/MDR, any separate fees, refunds, VAT, AURA infrastructure, and internal support. They are not a payable quote. Total payment cost should be modeled as: setup + monthly platform fee + per-transaction fee + (gross payment volume × confirmed MDR) + other contracted charges + applicable VAT.</p>
+<div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>AURA delivery estimate</th><th>Planning range</th><th>Cost conversion example</th></tr></thead><tbody>
+<tr><td>Discovery, merchant model, contract/security review</td><td>5–8 person-days</td><td>Estimate after merchant-of-record and settlement path are named.</td></tr>
+<tr><td>Reusable connector and hosted checkout</td><td>12–18 person-days</td><td>Payment intent, secrets, request mapping, redirect, provider IDs.</td></tr>
+<tr><td>Callback verification, status and refund</td><td>10–14 person-days</td><td>Signature/authentication checks, query, idempotency, refunds, state machine.</td></tr>
+<tr><td>AURA workflow, finance reconciliation, test and launch</td><td>15–22 person-days</td><td>One payable journey, reporting, monitoring, UAT, runbook.</td></tr>
+<tr><td>Total</td><td>42–62 person-days</td><td>At an illustrative SAR 1,500 blended person-day plus 15% contingency: SAR 72,450–106,950. Replace the day rate with AURA’s approved delivery cost.</td></tr>
+</tbody></table></div></div>
+<p>Economics gate: confirm the exact contract rate card and monthly minimums; obtain expected ticket size and volume; model successful, failed, refunded, and disputed payments; identify who pays the gateway fees; and show a transparent fee or allowance to the customer where appropriate. Do not use “payment volume” as AURA revenue unless the commercial and legal model explicitly supports it.</p></section><section id="evidence" class="brief-section"><div class="eyebrow">09 · Evidence and sources</div><h2>Provider documents support the integration pattern; demand still needs proof</h2><p>Provider evidence reviewed on 30 September 2026. Product availability and pricing can change. Provider documentation establishes technical patterns and onboarding requirements; it does not independently prove AURA customer demand, expected conversion, profitability, or a current commercial offer. No named PayTabs customer case was used as proof of AURA demand in this assessment.</p>
+<ol class="source-list">
+<li><b>[1]</b> <a href="https://docs.paytabs.com/" target="_blank" rel="noopener">PayTabs Technical Portal — API integration types and backend packages</a></li>
+<li><b>[2]</b> <a href="https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Hosted-Payment-Page/HPP-Step-3-Initiating-Payment/HPP-Initiating-Payment/" target="_blank" rel="noopener">PayTabs Technical Portal — Hosted Payment Page initiation and KSA endpoint</a></li>
+<li><b>[3]</b> <a href="https://support.paytabs.com/en/support/solutions/articles/60001041280" target="_blank" rel="noopener">PayTabs — Saudi MADA activation and workflow</a></li>
+<li><b>[4]</b> <a href="https://support.paytabs.com/en/support/solutions/articles/60000965104-the-different-integration-types-supported-by-paytabs-apis" target="_blank" rel="noopener">PayTabs — Integration types and payment lifecycle</a></li>
+<li><b>[5]</b> <a href="https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Request-Response-Parameters/Request-Response-Callback/" target="_blank" rel="noopener">PayTabs Technical Portal — Callback and server-to-server notification</a></li>
+<li><b>[6]</b> <a href="https://docs.paytabs.com/manuals/Backend-Web-Packages/Laravel/handle-the-post-payment-responses-notifications/" target="_blank" rel="noopener">PayTabs Technical Portal — Verify payment notifications</a></li>
+<li><b>[7]</b> <a href="https://docs.paytabs.com/manuals/PT-API-Endpoints/Integration-Types-Manuals/Invoices-APIs/Invoices-Step-7-Manage-Transactions/Invoices-Step-7-Refund-Transaction/" target="_blank" rel="noopener">PayTabs Technical Portal — Refund transaction</a></li>
+<li><b>[8]</b> <a href="https://paytabshelp.freshdesk.com/en/support/solutions/articles/60000716345-merchant-s-onboarding-journey" target="_blank" rel="noopener">PayTabs merchant onboarding journey</a></li>
+<li><b>[9]</b> <a href="https://paytabs.com/en/pricing/" target="_blank" rel="noopener">PayTabs public pricing page</a></li>
+<li><b>[10]</b> <a href="https://paytabs.com/documents/Platform-Payment-Gateway-Usage-Agreement.pdf" target="_blank" rel="noopener">PayTabs Payment Gateway Usage Agreement — Saudi Arabia fee schedule</a></li>
+<li><b>[11]</b> <a href="https://paytabs.com/en/payment-methods/" target="_blank" rel="noopener">PayTabs payment methods by market</a></li>
+<li><b>[12]</b> AURA Connector Prioritization Register — internal workbook, PayTabs entry reviewed 30 September 2026</li>
+<li><b>[13]</b> <a href="https://docs.google.com/document/d/1pG7gzAyW0edpHblTjfC5YV9W5zGO9QBI/edit" target="_blank" rel="noopener">AURA Drive source: 02-paytabs.docx — PayTabs Java Developer Guide, contract baseline dated 28 Sep 2026.</a> The project gateway route and credential header require provider/owner confirmation.</li>
+</ol></section>
+  <details class="research" id="research-annex">
+    <summary>Open detailed integration, control, and delivery research</summary>
+    <div class="research-content"><section id="integration" class="brief-section"><div class="eyebrow">05 · Integration design</div><h2>Create payment intent, verify result, then fulfil</h2><p>Start with Hosted Payment Page. PayTabs documents a server-side transaction request that returns a payment-page link. A payer is redirected to that URL and then returned to AURA; a server-to-server callback/IPN reports the payment result. The return-to-browser page is for user experience and must not be treated as proof of settlement. AURA should confirm the transaction with the provider before changing the business request to paid. [2][4][5]</p>
+<p>The project guide defines a gateway contract baseline of <code>POST /request</code> to create a payment and <code>POST /query</code> to verify it by transaction reference or cart ID. It sends the server authorization value unchanged in the <code>Authorization</code> header, paired with the merchant profile selected for that payment category. These are guide-level gateway details; confirm the production host, path mapping, auth semantics, required request fields, callback signature, and refund contract with the integration owner and PayTabs before release. The guide’s route list does not define a refund operation. [13]</p>
+<div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Step</th><th>AURA / PayTabs action</th><th>Control</th></tr></thead><tbody>
+<tr><td>1. Create intent</td><td>AURA records the business request, amount, currency, tenant, payer, and internal correlation ID.</td><td>Validate amount and currency server-side; prevent client-side edits.</td></tr>
+<tr><td>2. Request checkout</td><td>Project guide: AURA backend calls <code>POST /request</code> with the server Authorization value and matching merchant profile. [13]</td><td>Store credentials server-side; pass Authorization unchanged per guide, select the profile/key pair on the backend, and confirm how the gateway maps to PayTabs’ KSA endpoint.</td></tr>
+<tr><td>3. Pay</td><td>Redirect payer to the returned hosted checkout URL.</td><td>Show amount, merchant identity, cancellation path, and accessible Arabic/English text.</td></tr>
+<tr><td>4. Notify and verify</td><td>Use the callback/IPN as a notification, then verify with project-guide <code>POST /query</code> by transaction reference or cart ID. [13]</td><td>Confirm callback authentication/signature rules with PayTabs; match cart, profile, currency, and amount; handle duplicates, delays, and out-of-order updates.</td></tr>
+<tr><td>5. Fulfil or stop</td><td>Mark paid only after verified success; otherwise keep pending/failed/expired and leave the underlying service unfulfilled.</td><td>Atomic state transition, immutable audit event, and no double fulfilment.</td></tr>
+<tr><td>6. Refund and reconcile</td><td>Use a finance-admin workflow; automate refunds only after an approved refund endpoint/contract is confirmed. Reconcile provider references against AURA requests and settlement reports.</td><td>The project guide’s route list does not cover refunds. Obtain a separate tested refund contract; apply role gates, amount limits, approvals, and exception review. [7][13]</td></tr>
+</tbody></table></div></div>
+<p>AURA connector components: tenant-aware connection/profile record; secret reference; payment-intent API; hosted checkout action; callback/IPN endpoint; transaction-query action; canonical payment status model; audit log; reconciliation export; monitoring and finance exception queue. Add a refund action only after its separate contract is confirmed. Keep execution server-side; use only non-sensitive correlation identifiers.</p>
+<p>Canonical states: Created, Pending, Authorized (only if the selected flow uses authorization), Paid, Failed, Cancelled, Expired, Partially Refunded, Refunded, and Review Required. Preserve the provider reference and timestamps. Do not translate an unknown provider response into Paid.</p></section><section id="governance" class="brief-section"><div class="eyebrow">07 · Access and controls</div><h2>Merchant ownership and financial controls are production gates</h2><p>PayTabs onboarding requests company, trading, bank, ownership, and business documents; the provider says account type and pricing depend in part on estimated monthly sales volume. KSA mada activation requires a Saudi business license or qualifying freelancer certificate, the relevant bank application, and approval by the supported bank. MADA transactions are SAR-only in the cited PayTabs workflow and support sale/refund, but not authorization/capture or recurring payments. [3][8]</p>
+<div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Control area</th><th>Required AURA decision or control</th></tr></thead><tbody>
+<tr><td>Merchant ownership</td><td>Name the legal merchant of record for every payment flow. Decide whether each customer uses its own PayTabs profile or a centrally contracted model; do not assume submerchant support.</td></tr>
+<tr><td>Funds and settlement</td><td>Document the bank account that receives funds, settlement timing, reconciliation owner, tax treatment, refund liability, and customer support path.</td></tr>
+<tr><td>Payment-data security</td><td>Use hosted checkout for MVP. Never log or store PAN/CVV. Store provider keys only in a managed secret store; mask transaction data in logs.</td></tr>
+<tr><td>Webhook integrity</td><td>Validate the provider notification as described in the technical guidance, verify the transaction server-side, and reject unexpected amount, currency, profile, or correlation values. [5][6]</td></tr>
+<tr><td>Privacy and retention</td><td>Minimize payer data; establish purpose, access roles, retention, deletion, and data-location terms with Legal/Security before production.</td></tr>
+<tr><td>Financial operations</td><td>Set refund limits and approvals, dispute handling, failed-payment retry rules, month-end reconciliation, and exception ownership.</td></tr>
+<tr><td>Availability</td><td>Use bounded retries, idempotent requests, duplicate-notification handling, timeout recovery, provider status monitoring, and a manual fallback.</td></tr>
+</tbody></table></div></div>
+<p>This assessment is a product and integration review, not a legal or payment-services authorization. AURA Legal/Compliance must review the KSA commercial structure, consumer/payment obligations, data terms, and any platform or agent role before production.</p></section><section id="delivery" class="brief-section"><div class="eyebrow">08 · Delivery plan</div><h2>Prove one controlled journey before expanding</h2><div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Stage</th><th>Work</th><th>Exit evidence</th></tr></thead><tbody>
+<tr><td>1. Scope and merchant discovery</td><td>Select one named payable workflow; identify payer, service owner, merchant of record, receiving account, volume, and refund owner.</td><td>Approved use case and ownership map.</td></tr>
+<tr><td>2. Commercial and provider access</td><td>Obtain current KSA quote, agreement, test profile, live/test endpoint details, enabled methods, credentials, support SLA, and settlement terms.</td><td>Written rate card and successful sandbox access.</td></tr>
+<tr><td>3. Connector foundation</td><td>Implement secrets, payment intent, hosted URL, callbacks, transaction query, canonical states, idempotency, and audit.</td><td>Contract tests pass; no secrets or card data reach the client/logs.</td></tr>
+<tr><td>4. First AURA journey</td><td>Bind one payment request to one AURA business process; handle paid, failed, cancelled, duplicate, timeout, and refund cases.</td><td>Business and finance UAT passed; reconciliation balanced.</td></tr>
+<tr><td>5. Production approval</td><td>Complete security, legal, finance, monitoring, runbook, access review, and rollback.</td><td>Named approvers sign production gate.</td></tr>
+<tr><td>6. Expansion</td><td>Add payment methods, invoices/links, or new applications only where demand and economics justify each.</td><td>Per-journey value and merchant rights confirmed.</td></tr>
+</tbody></table></div></div>
+<div style="overflow-x:auto"><div class="table-wrap"><table><thead><tr><th>Open decision</th><th>Question to resolve before production</th></tr></thead><tbody>
+<tr><td>Merchant of record</td><td>Is the AURA customer or AURA the legal merchant for each charge?</td></tr>
+<tr><td>Tenant/payment account model</td><td>Does PayTabs approve one profile per customer, or an AURA platform/partner model? Are submerchants and split settlement available in KSA under the relevant contract?</td></tr>
+<tr><td>First payable journey</td><td>What specific service is being charged for, and why should the payer use AURA rather than an external payment link?</td></tr>
+<tr><td>Pricing</td><td>What are the current KSA gateway fees by payment method, fixed fees, minimums, refund/dispute fees, settlement costs, and VAT treatment?</td></tr>
+<tr><td>Success/failure rules</td><td>Which exact provider statuses qualify as paid, and how are delayed or ambiguous outcomes resolved?</td></tr>
+<tr><td>Employee Hub policy</td><td>Are optional paid employee services allowed, and which services must always remain free?</td></tr>
+</tbody></table></div></div>
+<p>Final decision gate: proceed to a controlled pilot only after the account model, fee schedule, eligible payment methods, legal position, reconciliation owner, and a named customer workflow are confirmed. Return with a pilot result, measured completion rate, manual minutes saved, exception/refund rate, total cost per successful payment, and a build/expand/stop recommendation.</p></section></div>
+  </details>
+  <footer><span>AURA · PayTabs · Final Board Presentation</span><span>Board-ready · detailed research included · 30 September 2026</span></footer>
+</main></body></html>
