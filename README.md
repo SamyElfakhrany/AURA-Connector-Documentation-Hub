@@ -1,6 +1,6 @@
 # AURA Connector Documentation Hub
 
-A static local website containing the AURA connector landing page and 16 completed board briefings.
+A static local website containing the AURA connector landing page, 22 local board briefings, and verified Drive links to 7 additional HTML briefings. Atlas is the only connector still marked as planned.
 
 ## Project structure
 
@@ -10,23 +10,10 @@ AURA-Connector-Documentation-Hub/
 ├── run-local.bat
 ├── README.md
 └── briefings/
-    ├── absher.html
-    ├── dynamics-365-dataverse.html
-    ├── etimad-apis.html
-    ├── gosi.html
-    ├── iata.html
-    ├── muqeem.html
-    ├── nafath.html
-    ├── nic.html
-    ├── oracle-fusion-erp-hcm.html
-    ├── paytabs.html
-    ├── qiwa.html
-    ├── sap-successfactors.html
-    ├── servicenow.html
-    ├── spl-national-address.html
-    ├── yaqeen.html
-    └── zatca-integration-service.html
+    └── 22 standalone connector briefing files
 ```
+
+The landing page labels local files as **Local document available** and Drive-only files as **Drive HTML linked**. Internet and Drive access are required to open the seven Drive-linked briefings.
 
 ## Run from the F: drive
 
