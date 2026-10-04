@@ -93,6 +93,7 @@
     .source-list li { break-inside:avoid; margin-bottom:10px; }
     .source-list a { overflow-wrap:anywhere; }
     .tight td { padding:10px 14px; }
+    .price-table { min-width:760px; }
     .cost-formula { padding:18px; background:var(--ink); color:#fff; border-radius:12px; margin-top:18px; font-weight:700; }
     .decision { margin-top:22px; padding:24px; border:2px solid var(--accent); border-radius:var(--radius); background:linear-gradient(135deg,#fff 35%,var(--soft)); box-shadow:0 16px 38px rgba(47,180,223,.1); }
     footer { margin-top:22px; padding:26px 8px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:20px; color:var(--muted); font-size:13px; }
@@ -109,7 +110,7 @@
       main { padding-left:16px; padding-right:16px; } .grid-4,.grid-3,.grid-2,.build-flow,.mindmap { grid-template-columns:1fr; }
       .mind-center { width:180px; margin:auto; } section { padding:28px 22px; }
       .mind-center::after { right:50%; top:auto; bottom:-28px; width:0; height:28px; border-top:0; border-left:2px solid #9edced; }
-      .branch::before,.branches::before { display:none; } .source-list { column-count:1; } footer { flex-direction:column; }
+      .branch::before,.branches::before { display:none; } .source-list { column-count:1; } .price-table { min-width:690px; } footer { flex-direction:column; }
     }
     @media print {
       @page { size:A4; margin:14mm; } body { font-size:10pt; line-height:1.42; background:#fff; }
@@ -135,7 +136,7 @@
   <main id="main">
     <header class="hero">
       <div>
-        <div class="eyebrow">Short board briefing · 01 Oct 2026</div>
+        <div class="eyebrow">Short board briefing · Updated 04 Oct 2026</div>
         <h1><span>Microsoft 365</span><br>Graph + Entra</h1>
         <p class="lead">Give employees one secure Aura entry point to their Microsoft identity, workday, documents and approved collaboration actions.</p>
         <div class="reading"><span class="badge verified">Official Microsoft evidence</span><span class="badge proposed">Proposed Aura scope</span><button type="button" onclick="window.print()">Print / save as PDF</button></div>
@@ -156,6 +157,19 @@
         <article class="card soft"><span class="badge verified">Identity layer</span><h3>Microsoft Entra ID</h3><p>The customer identity and access service. It registers Aura, signs users in, issues tokens and controls consent and access policy. <a class="source" href="#s2">[2]</a></p></article>
       </div>
       <div class="callout"><strong>Simple distinction</strong>Microsoft 365 holds the work data. Microsoft Graph is the API door. Entra proves who Aura is and what it may do. Graph is not a separate data store.</div>
+      <details><summary>Additional service coverage from the supplied overview</summary>
+        <div class="table-wrap"><table class="tight"><thead><tr><th>Area</th><th>What it adds</th><th>Aura relevance</th></tr></thead><tbody>
+          <tr><td><b>Microsoft 365 apps</b></td><td>Exchange mail/calendar, Teams, SharePoint, OneDrive and Office apps across supported web, mobile and desktop plans.</td><td>Source workloads for the employee hub; storage and client entitlements vary by plan.</td></tr>
+          <tr><td><b>Microsoft Graph</b></td><td>One API surface for users, groups, org chart, mail, calendar, contacts, Teams, files, presence, tasks, notifications, security and reports.</td><td>Lets Aura add capabilities incrementally, with a separate permission decision for each resource.</td></tr>
+          <tr><td><b>Entra Free</b></td><td>Directory and basic single sign-on with a Microsoft cloud subscription.</td><td>Baseline identity and app registration.</td></tr>
+          <tr><td><b>Entra ID P1</b></td><td>Conditional Access and other advanced identity controls.</td><td>Policy-based access may be required by the customer.</td></tr>
+          <tr><td><b>Entra ID P2</b></td><td>Identity-risk detection and privileged-access features on top of P1.</td><td>Higher-assurance customers may require these controls.</td></tr>
+          <tr><td><b>Governance / Entra Suite</b></td><td>Access reviews, lifecycle workflows and additional access products.</td><td>Optional governance layer, not a prerequisite for the read-first pilot.</td></tr>
+          <tr><td><b>Copilot and AI</b></td><td>Microsoft 365 Copilot and a Graph-connected AI ecosystem.</td><td>Separate future workstream and paid add-on; excluded from Wave 1.</td></tr>
+          <tr><td><b>Security and devices</b></td><td>Defender, Intune and compliance capabilities included in selected plans.</td><td>May shape access policy but is not delivered by this connector.</td></tr>
+        </tbody></table></div>
+        <p class="small" style="margin-top:10px">Coverage summary comes from the supplied October 2026 research brief. Exact plan entitlements remain customer- and contract-specific. <a href="#s15">[15]</a></p>
+      </details>
     </section>
 
     <section id="value">
@@ -175,6 +189,7 @@
         <tr><td><b>Sign in + profile</b></td><td>Use work identity; display name, role, location and contact details approved by the customer.</td><td>Entra app registration and delegated permissions; request only selected fields. <a href="#s3">[3]</a></td></tr>
         <tr><td><b>My day</b></td><td>See today’s meetings and open the source event in Microsoft 365.</td><td>Calendar permission, privacy rules and time-zone handling.</td></tr>
         <tr><td><b>My files</b></td><td>Find and open permitted OneDrive/SharePoint content from an Aura journey.</td><td>Existing employee access; limited file/site scope. <a href="#s4">[4]</a></td></tr>
+        <tr><td><b>People and org context</b></td><td>Show profile photo, manager, direct reports, group/Teams membership and, if approved, presence.</td><td>Each data type needs its own least-privilege permission and privacy decision; presence is not required for the pilot.</td></tr>
         <tr><td><b>Notify or act — later</b></td><td>Send an approved email or Teams channel/chat message from a defined workflow.</td><td>Separate write approval; Teams messaging constraints apply. <a href="#s5">[5]</a></td></tr>
       </tbody></table></div>
       <p class="small" style="margin-top:12px">These are proposed Aura journeys, not evidence that every customer tenant, plan or policy permits them. Confirm Arabic labels, privacy notices, retention and customer data-handling requirements during the pilot.</p>
@@ -196,20 +211,34 @@
 
     <section id="integration">
       <div class="eyebrow">04 · How to integrate</div>
-      <h2>Use delegated access first; add background access only when justified</h2>
-      <h3 class="flow-title">A · Customer onboarding</h3>
+      <h2>Connect directly to Graph through Entra; add middleware only for a clear need</h2>
+      <p class="intro">Aura can call Microsoft Graph over HTTPS and authenticate with Entra ID using OAuth 2.0 and OpenID Connect. Microsoft Graph SDKs can simplify token use and API calls; Graph Explorer is the quickest place to prove scopes and responses before coding. No middleware is required for the first pilot. <a href="#s1">[1]</a><a href="#s2">[2]</a><a href="#s15">[15]</a></p>
+      <div class="table-wrap"><table class="tight"><thead><tr><th>Integration option</th><th>How it works</th><th>Decision</th></tr></thead><tbody>
+        <tr><td><b>Direct Graph + Entra SSO</b></td><td>Register Aura in Entra, sign employees in through OIDC, then call Graph from the Aura backend with HTTPS or an SDK.</td><td><span class="badge verified">Recommended</span> Simplest and lowest-cost starting point.</td></tr>
+        <tr><td><b>Optional middleware</b></td><td>Add an integration/API layer for shared caching, throttling control or multi-system orchestration.</td><td>Use only when those cross-system needs are proven.</td></tr>
+        <tr><td><b>Sandbox first</b></td><td>Prototype calls in Graph Explorer and a non-production Microsoft 365 tenant.</td><td>Required before customer production access; Developer Program eligibility can change.</td></tr>
+      </tbody></table></div>
+      <h3 class="flow-title">A · Setup and onboarding checklist</h3>
       <div class="build-flow">
-        <article class="build-stage"><h3>Choose one journey</h3><p class="small">Name the tenant, users, workloads, fields and read/write operations for the pilot.</p></article>
-        <article class="build-stage"><h3>Register Aura</h3><p class="small">Create a single-tenant Entra app, approved redirect URI and server credential; assign an owner.</p></article>
-        <article class="build-stage"><h3>Grant least privilege</h3><p class="small">Prefer delegated permissions for user-facing journeys. Record every permission and consent owner. <a href="#s2">[2]</a></p></article>
-        <article class="build-stage"><h3>Test and release</h3><p class="small">Use test users/content; verify access boundaries, audit logs, errors, revocation and support.</p></article>
+        <article class="build-stage"><h3>Prove the calls</h3><p class="small">Get a test tenant or trial and use Graph Explorer to validate the exact endpoints and returned fields.</p></article>
+        <article class="build-stage"><h3>Register Aura</h3><p class="small">Create the Entra app, approved OIDC redirect URIs and a server credential; prefer a certificate for production and assign an owner.</p></article>
+        <article class="build-stage"><h3>Choose access</h3><p class="small">Use delegated permissions for employee features and application permissions only for approved background jobs.</p></article>
+        <article class="build-stage"><h3>Request minimum scopes</h3><p class="small">Start with only what the journey needs, such as <code>User.Read</code>, <code>Calendars.Read</code> and <code>Files.Read</code>; include <code>offline_access</code> only when refresh tokens are required.</p></article>
+        <article class="build-stage"><h3>Obtain consent</h3><p class="small">Record tenant-admin approval where required; it is always required for application permissions and selected high-privilege delegated scopes.</p></article>
+        <article class="build-stage"><h3>Build the runtime</h3><p class="small">Implement OIDC sign-in and server-side token handling, then add paging, throttling, audit events and optional change notifications.</p></article>
+        <article class="build-stage"><h3>Test and release</h3><p class="small">Verify in non-production, then launch with monitoring, revocation support and certificate/secret rotation.</p></article>
       </div>
       <h3 class="flow-title">B · Employee request flow</h3>
       <div class="flow" role="img" aria-label="Employee uses Aura, Entra authenticates the employee, the Aura backend calls Microsoft Graph, and permitted Microsoft 365 data is returned to Aura">
         <div class="step">Employee</div><div class="step provider">Entra sign-in</div><div class="step">Aura backend</div><div class="step provider">Microsoft Graph</div><div class="step">M365 workload</div><div class="step">Aura view / action</div>
       </div>
       <p class="small"><b>Proposed architecture.</b> Tokens and app credentials stay on the server. Aura requests only the fields needed for the screen, applies tenant isolation, stores the minimum necessary data and links users back to Microsoft 365 for full content where possible.</p>
-      <details><summary>Access model, API examples and operating controls</summary>
+      <div class="callout"><strong>Tenant pattern must be chosen deliberately</strong>For a dedicated customer deployment, a single-tenant registration gives the clearest isolation. If one shared Aura SaaS app serves several companies, configure it as multi-tenant: every customer grants consent in its own tenant, tenant IDs must be isolated in data and logs, and publisher verification should be completed to build administrator trust. <a href="#s15">[15]</a></div>
+      <details><summary>Access models, API examples and operating controls</summary>
+        <div class="table-wrap"><table class="tight"><thead><tr><th>Access model</th><th>How it works</th><th>Use in Aura</th></tr></thead><tbody>
+          <tr><td><b>Delegated permissions</b></td><td>Aura acts for a signed-in employee and can access only what that employee and the granted scopes allow. User or tenant-admin consent applies.</td><td>SSO, my profile, my calendar and my files. Preferred for employee-facing features.</td></tr>
+          <tr><td><b>Application permissions</b></td><td>Aura runs as itself through the client-credentials flow with no signed-in user. Tenant-admin consent is always required.</td><td>Approved directory sync, org-chart refresh or bulk reporting. Add workload-specific scoping and a documented retention purpose.</td></tr>
+        </tbody></table></div>
         <div class="table-wrap"><table class="tight"><thead><tr><th>Pattern / endpoint</th><th>Purpose</th><th>Control</th></tr></thead><tbody>
           <tr><td><code>GET /me?$select=...</code></td><td>Signed-in employee profile.</td><td>Delegated access only for <code>/me</code>; select approved properties. <a href="#s3">[3]</a></td></tr>
           <tr><td><code>GET /me/calendarView</code></td><td>Events within a defined time range.</td><td>Read-only pilot; do not expose private details without approval. <a href="#s12">[12]</a></td></tr>
@@ -218,7 +247,7 @@
           <tr><td><code>POST /me/sendMail</code></td><td>Later: send an employee-approved message.</td><td>Separate write consent, confirmation screen and audit event. <a href="#s13">[13]</a></td></tr>
           <tr><td><code>POST /teams/.../messages</code></td><td>Later: post to an approved Teams destination.</td><td>Normal send uses delegated permissions; app-only permission is for migration, not routine posting. <a href="#s5">[5]</a></td></tr>
         </tbody></table></div>
-        <p class="small" style="margin-top:12px"><b>Runtime:</b> follow <code>@odata.nextLink</code>, retry HTTP 429 after <code>Retry-After</code>, and use delta queries/change notifications instead of frequent polling. Renew subscriptions and reconcile missed events. <a href="#s6">[6]</a><a href="#s7">[7]</a><a href="#s8">[8]</a></p>
+        <p class="small" style="margin-top:12px"><b>Runtime:</b> follow <code>@odata.nextLink</code>, retry HTTP 429 after <code>Retry-After</code>, and use delta queries/change notifications instead of frequent polling. Renew subscriptions, reconcile missed events, monitor failures and rotate credentials. <a href="#s6">[6]</a><a href="#s7">[7]</a><a href="#s8">[8]</a></p>
       </details>
     </section>
 
@@ -249,6 +278,7 @@
           <li id="s12"><a href="https://learn.microsoft.com/en-us/graph/api/calendar-list-calendarview?view=graph-rest-1.0">List calendarView</a> — events within a defined time range.</li>
           <li id="s13"><a href="https://learn.microsoft.com/en-us/graph/api/user-sendmail?view=graph-rest-1.0">Send mail</a> — delegated/application permissions and request contract.</li>
           <li id="s14"><a href="https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products">Microsoft 365 business plans</a> — official public plan comparison and list pricing.</li>
+          <li id="s15"><b>Supplied research brief:</b> <i>Microsoft 365 / Microsoft Graph + Entra — Overview for Aura</i> (October 2026) — integration checklist, capability coverage and planning-price snapshot. Its price inputs cite third-party trackers and require a current Microsoft/CSP quote.</li>
         </ol>
       </details>
     </section>
@@ -265,7 +295,7 @@
           <li>Saudi Microsoft/CSP confirmation of product, licensing and regional terms.</li>
         </ul></article>
         <article class="card soft"><span class="badge proposed">Delivery controls</span><h3>Recommended guardrails</h3><ul>
-          <li>Use a single-tenant registration for each customer and separate credentials per environment.</li>
+          <li>Choose single-tenant per customer or a verified multi-tenant SaaS registration deliberately; isolate every tenant and keep separate credentials per environment.</li>
           <li>Prefer delegated access for employee screens; avoid broad tenant-wide application roles.</li>
           <li>For app-only mail/calendar access, use an approved resource scope such as Exchange Application RBAC. <a href="#s9">[9]</a></li>
           <li>Exclude beta endpoints and bulk extraction from the first release.</li>
@@ -284,20 +314,40 @@
     <section id="cost">
       <div class="eyebrow">07 · Cost</div>
       <h2>No blanket per-call charge for standard Graph APIs</h2>
-      <p class="intro">Microsoft states that standard APIs within defined usage thresholds are available as part of the user license. The customer still needs the relevant Microsoft 365 workload and identity entitlements, and a small set of APIs/services has separate metered rules. <a href="#s10">[10]</a></p>
+      <p class="intro">Microsoft states that standard APIs within defined usage thresholds are available as part of the user license. If a customer already has the required Microsoft 365 plans, Graph access, Entra sign-in and the app registration usually add no separate subscription fee. The customer still needs the relevant workload and identity entitlements, and a small set of APIs/services has separate metered rules. <a href="#s10">[10]</a><a href="#s15">[15]</a></p>
       <div class="grid grid-3">
         <article class="card soft"><h3>Existing Microsoft rights</h3><p>Confirm licenses for each pilot user and workload. Do not buy a new suite until current entitlements are checked.</p></article>
         <article class="card soft"><h3>Aura delivery</h3><p>Budget for discovery, security review, implementation, testing, hosting, monitoring and support.</p></article>
         <article class="card soft"><h3>Exceptions and add-ons</h3><p>Budget only if the selected API is metered or the journey needs extra Azure, Entra or Microsoft 365 capability.</p></article>
       </div>
+      <h3 class="flow-title">Planning snapshot from the supplied brief</h3>
+      <div class="table-wrap"><table class="tight price-table"><thead><tr><th>Microsoft plan</th><th>USD / user / month</th><th>Planning note</th></tr></thead><tbody>
+        <tr><td>Business Basic</td><td><b>$7</b></td><td>Web/mobile Office, Teams, Exchange, SharePoint, OneDrive and Entra Free; business plans capped at 300 users.</td></tr>
+        <tr><td>Business Standard</td><td><b>$14</b></td><td>Adds desktop Office apps.</td></tr>
+        <tr><td>Business Premium</td><td><b>$22</b></td><td>Adds Entra ID P1, Intune and Defender for Business.</td></tr>
+        <tr><td>Office 365 E3</td><td><b>$26</b></td><td>Enterprise plan with no 300-user cap.</td></tr>
+        <tr><td>Microsoft 365 E3</td><td><b>$39</b></td><td>Enterprise suite with security and Entra ID P1.</td></tr>
+        <tr><td>Microsoft 365 E5</td><td><b>$60</b></td><td>Advanced security; includes Entra ID P2.</td></tr>
+        <tr><td>Frontline F1 / F3</td><td><b>$3 / $10</b></td><td>Frontline-worker plans.</td></tr>
+        <tr><td>Microsoft 365 Copilot add-on</td><td><b>$30 enterprise; about $21 business</b></td><td>Requires a qualifying base plan; excluded from the pilot.</td></tr>
+      </tbody></table></div>
+      <div class="table-wrap"><table class="tight price-table"><thead><tr><th>Standalone Entra option</th><th>USD / user / month</th><th>Planning note</th></tr></thead><tbody>
+        <tr><td>Entra ID Free</td><td><b>$0</b></td><td>Included with a Microsoft cloud subscription; directory and SSO basics.</td></tr>
+        <tr><td>Entra ID P1</td><td><b>About $6-$7</b></td><td>Advanced identity features including Conditional Access.</td></tr>
+        <tr><td>Entra ID P2</td><td><b>About $9-$10</b></td><td>Adds identity-risk and privileged-access capabilities.</td></tr>
+        <tr><td>Entra ID Governance</td><td><b>About $7</b></td><td>Add-on to P1 or P2.</td></tr>
+        <tr><td>Entra Suite</td><td><b>About $12</b></td><td>Broader identity and access bundle.</td></tr>
+      </tbody></table></div>
+      <p class="small" style="margin-top:10px"><span class="badge confirm">Reconfirm before buying</span> These are USD planning figures per user per month on annual commitment in the supplied October 2026 brief, based partly on third-party trackers after reported July 2026 changes. Monthly billing was reported as roughly 5%-20% higher. They are not an official Saudi quotation, and plan packaging, Teams inclusion, tax, exchange rates and negotiated terms can differ. <a href="#s14">[14]</a><a href="#s15">[15]</a></p>
       <div class="callout warn"><strong>Commercial confirmation required</strong>Public US plan pages are illustrative, not a Saudi quotation. Regional packaging, tax, contract discounts, Teams inclusion and July 2026 commercial changes can affect the customer’s actual price. Request a Microsoft/CSP quote for the named tenant and user count. <a href="#s14">[14]</a></div>
       <div class="cost-formula">Total = incremental Microsoft licenses + optional metered/add-on usage + one-time Aura build + recurring hosting/support</div>
-      <p style="margin-top:14px"><b>Important exception:</b> Microsoft’s current metered list says Teams APIs stopped being metered on 25 Aug 2025; the SharePoint/OneDrive for work or school <code>assignSensitivityLabel</code> API remains metered. The proposed pilot does not need that operation. <a href="#s11">[11]</a></p>
+      <p style="margin-top:14px"><b>Graph-specific cost:</b> standard Graph use has no separate per-call charge within licensed usage. Metered exceptions are billed through an Azure subscription. The supplied brief cites <code>assignSensitivityLabel</code> for SharePoint/OneDrive for work or school at about <b>$0.00185 per call</b>; Microsoft’s current list also says Teams APIs stopped being metered on 25 Aug 2025. The proposed pilot needs neither metered operation nor Copilot. <a href="#s11">[11]</a><a href="#s15">[15]</a></p>
+      <p><b>Development:</b> Graph Explorer can be used with sample data at no charge. A Microsoft 365 Developer Program sandbox has historically provided an E5 test tenant with 25 users, but eligibility and availability must be checked when the pilot starts.</p>
       <p><b>To obtain the actual cost:</b> send Microsoft/CSP the current tenant plans, pilot user count, selected workloads, delegated/application permission list, expected request volume, hosting region and any security/compliance add-ons. Obtain a separate Aura delivery estimate.</p>
       <div class="decision"><h3>Board decision</h3><p>Approve a customer-backed, read-first pilot covering sign-in, profile, today’s calendar and permitted documents. Release build funding after tenant access, least-privilege consent, test data, security approval and the incremental Microsoft cost are confirmed.</p></div>
     </section>
 
-    <footer><span>AURA · Enterprise &amp; Saudi connector programme</span><span>NTGApps-inspired design · Research checked 01 Oct 2026</span></footer>
+    <footer><span>AURA · Enterprise &amp; Saudi connector programme</span><span>NTGApps-inspired design · Updated from supplied brief 04 Oct 2026</span></footer>
   </main>
   <script>
     document.querySelectorAll('a[href^="#s"]').forEach(a=>a.addEventListener('click',()=>{const t=document.querySelector(a.getAttribute('href'));if(t&&t.closest('details'))t.closest('details').open=true;}));
