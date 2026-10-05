@@ -37,18 +37,24 @@ AURA-Connector-Documentation-Hub/
 
 Python must be installed for `run-local.bat`. The script supports both the `py` and `python` commands and does not require additional packages.
 
-## Update website data
+## Update the static website data
 
 1. Open `outputs/enterprise-phase-one-2026-10-05/AURA_Connector_Prioritization_Enterprise_Phase_One_2026-10-05.xlsx` in Excel.
-2. Edit `Prioritized Connector Register` for connector data. The `Day-one Journeys` sheet remains available through the API for compatibility, but it no longer controls the lifecycle visualization.
+2. Edit `Prioritized Connector Register` for connector data. The `Day-one Journeys` sheet remains in the published JSON for compatibility, but it no longer controls the lifecycle visualization.
 3. Save the workbook so Excel stores all recalculated portfolio and enterprise-launch values.
-4. Refresh the website in the browser.
+4. Regenerate the committed website data:
 
-The `/api/connectors` response preserves the existing connector fields and adds an `enterpriseLaunch` object to each connector plus a top-level `phaseOne` object. The server rejects missing fields, duplicate journey IDs, invalid launch stages/depths/scores, unresolved connector keys, and formulas without saved results. If a later workbook read fails, the last valid dataset is served with a stale-data warning.
+   ```bat
+   python export_static_data.py
+   ```
+
+5. Commit the workbook and `data/connectors.json` together, then refresh the website.
+
+The exporter validates required fields, duplicate journey IDs, launch stages, depths, scores, connector keys, and saved formula results before writing the static JSON file.
 
 Portfolio rank and score are not recalculated by the website. They remain independent from the enterprise launch index.
 
-The Excel connection requires the local server. Opening `index.html` directly does not load workbook data.
+The published website never reads the Excel file and does not call a backend API. It reads only `data/connectors.json` and the committed HTML files. Use GitHub Pages or a local static web server; some browsers block JSON loading when `index.html` is opened directly with a `file:` URL.
 
 ## Publish workbook data to GitHub Pages
 
@@ -58,7 +64,7 @@ GitHub Pages cannot run the Python workbook service. Before publishing workbook 
 python export_static_data.py
 ```
 
-The website first uses `/api/connectors` locally and automatically falls back to `data/connectors.json` on static hosting. Commit the generated snapshot together with the workbook and website changes.
+The website always reads `data/connectors.json`, including during local preview. No application server or API is required on GitHub Pages. Commit the generated snapshot together with the workbook and website changes.
 
 ## Upload to GitHub
 

@@ -29,6 +29,7 @@
     }
 
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
@@ -395,8 +396,8 @@
       <article class="stat attention"><div id="planned-briefings" class="stat-value">—</div><div class="stat-label">Briefings still planned</div></article>
     </section>
 
-    <section id="phase-one" class="lifecycle-map" aria-labelledby="lifecycle-title">
-      <div class="lifecycle-heading">
+    <section id="phase-one" class="lifecycle-map" aria-labelledby="lifecycle-title" hidden>
+      <div class="lifecycle-heading" hidden>
         <div>
           <p class="eyebrow">Employee journey architecture</p>
           <h2 id="lifecycle-title">Employee Lifecycle Integration Map</h2>
@@ -438,7 +439,7 @@
       <div class="journey-track" aria-hidden="true"></div>
 
       <div class="pipeline-stack" aria-label="AURA lifecycle integration layers">
-        <section class="phase-priority" aria-labelledby="phase-priority-title">
+        <section class="phase-priority" aria-labelledby="phase-priority-title" hidden>
           <header>
             <div>
               <h3 id="phase-priority-title">Phase 1 Build Priorities</h3>
@@ -572,7 +573,7 @@
         </section>
       </div>
 
-      <section class="timing-section" aria-labelledby="timing-title">
+      <section class="timing-section" aria-labelledby="timing-title" hidden>
         <div class="timing-heading">
           <h3 id="timing-title">When to integrate</h3>
           <p>Capabilities are introduced when they create value in the employee journey, while AURA remains the experience and orchestration layer.</p>
@@ -823,33 +824,21 @@
       empty.style.display = items.length ? "none" : "block";
     }
 
-    async function fetchWorkbookPayload() {
-      const isStaticHost = location.protocol === "file:" || location.hostname.endsWith(".github.io");
-      const sources = isStaticHost
-        ? ["data/connectors.json"]
-        : ["/api/connectors", "data/connectors.json"];
-      let lastError = new Error("No workbook data source was available.");
-      for (const sourceUrl of sources) {
-        try {
-          const response = await fetch(sourceUrl, { cache: "no-store" });
-          const payload = await response.json().catch(() => ({}));
-          if (!response.ok) throw new Error(payload.error || `Data source returned ${response.status}.`);
-          if (!Array.isArray(payload.connectors) || !payload.source) {
-            throw new Error("Data source returned an invalid response.");
-          }
-          return payload;
-        } catch (error) {
-          lastError = error;
-        }
+    async function fetchStaticPayload() {
+      const response = await fetch("data/connectors.json", { cache: "no-store" });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(`Static data returned ${response.status}.`);
+      if (!Array.isArray(payload.connectors) || !payload.source) {
+        throw new Error("Static data returned an invalid response.");
       }
-      throw lastError;
+      return payload;
     }
 
     async function loadConnectors() {
       grid.setAttribute("aria-busy", "true");
-      setMessage("Loading connector data from Excel…", "loading");
+      setMessage("Loading published connector data...", "loading");
       try {
-        const payload = await fetchWorkbookPayload();
+        const payload = await fetchStaticPayload();
 
         connectors = payload.connectors;
         populateSelect(category, [...new Set(connectors.map(item => item.category))].sort(), "All categories");
@@ -862,19 +851,13 @@
         populateSelect(wave, waves, "All waves");
         updateSummary(payload.source);
         render();
-        if (payload.source.stale) {
-          setMessage(`Showing the last successfully loaded workbook data. Latest read failed: ${payload.source.warning}`, "warning");
-        } else if (payload.source.deliveryMode === "staticSnapshot") {
-          setMessage("Showing the published workbook snapshot. Run the local server for live workbook refresh.", "loading");
-        } else {
-          setMessage();
-        }
+        setMessage();
       } catch (error) {
         connectors = [];
         grid.replaceChildren();
         empty.style.display = "none";
         count.textContent = "Connector data unavailable";
-        setMessage(`Could not load the Excel workbook. ${error.message}`, "error");
+        setMessage(`Could not load the published connector data. ${error.message}`, "error");
       } finally {
         grid.setAttribute("aria-busy", "false");
       }

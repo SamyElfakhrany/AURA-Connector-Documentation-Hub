@@ -111,6 +111,12 @@ class WorkbookReaderTests(unittest.TestCase):
         self.assertEqual(current["phaseOne"], snapshot["phaseOne"])
         self.assertEqual("staticSnapshot", snapshot["source"]["deliveryMode"])
 
+    def test_published_site_uses_static_snapshot_only(self):
+        index = (server.ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('fetch("data/connectors.json"', index)
+        self.assertNotIn('fetch("/api/connectors"', index)
+        self.assertNotIn('["/api/connectors", "data/connectors.json"]', index)
+
     def test_missing_required_header_is_rejected(self):
         rows = make_rows()
         summary_column = list(server.FIELD_HEADERS.values()).index("AURA value rationale") + 1
