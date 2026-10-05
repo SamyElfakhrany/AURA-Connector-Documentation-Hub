@@ -553,14 +553,32 @@
       empty.style.display = items.length ? "none" : "block";
     }
 
+    async function fetchWorkbookPayload() {
+      const sources = location.protocol === "file:"
+        ? ["data/connectors.json"]
+        : ["/api/connectors", "data/connectors.json"];
+      let lastError = new Error("No workbook data source was available.");
+      for (const sourceUrl of sources) {
+        try {
+          const response = await fetch(sourceUrl, { cache: "no-store" });
+          const payload = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(payload.error || `Data source returned ${response.status}.`);
+          if (!Array.isArray(payload.connectors) || !payload.source || !payload.phaseOne || !Array.isArray(payload.phaseOne.journeys)) {
+            throw new Error("Data source returned an invalid response.");
+          }
+          return payload;
+        } catch (error) {
+          lastError = error;
+        }
+      }
+      throw lastError;
+    }
+
     async function loadConnectors() {
       grid.setAttribute("aria-busy", "true");
       setMessage("Loading connector data from Excel…", "loading");
       try {
-        const response = await fetch("/api/connectors", { cache: "no-store" });
-        const payload = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(payload.error || `The connector API returned ${response.status}.`);
-        if (!Array.isArray(payload.connectors) || !payload.source || !payload.phaseOne || !Array.isArray(payload.phaseOne.journeys)) throw new Error("The connector API returned an invalid response.");
+        const payload = await fetchWorkbookPayload();
 
         connectors = payload.connectors;
         renderPhaseOne(payload.phaseOne);
@@ -576,6 +594,8 @@
         render();
         if (payload.source.stale) {
           setMessage(`Showing the last successfully loaded workbook data. Latest read failed: ${payload.source.warning}`, "warning");
+        } else if (payload.source.deliveryMode === "staticSnapshot") {
+          setMessage("Showing the published workbook snapshot. Run the local server for live workbook refresh.", "loading");
         } else {
           setMessage();
         }

@@ -50,6 +50,16 @@ Portfolio rank and score are not recalculated by the website. They remain indepe
 
 The Excel connection requires the local server. Opening `index.html` directly does not load workbook data.
 
+## Publish workbook data to GitHub Pages
+
+GitHub Pages cannot run the Python workbook service. Before publishing workbook changes, regenerate the validated static snapshot:
+
+```bat
+python export_static_data.py
+```
+
+The website first uses `/api/connectors` locally and automatically falls back to `data/connectors.json` on static hosting. Commit the generated snapshot together with the workbook and website changes.
+
 ## Upload to GitHub
 
 Create an empty repository on GitHub, then run these commands in Command Prompt:

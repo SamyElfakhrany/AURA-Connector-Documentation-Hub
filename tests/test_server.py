@@ -1,6 +1,7 @@
 import shutil
 import tempfile
 import unittest
+import json
 from pathlib import Path
 from unittest.mock import patch
 
@@ -80,6 +81,14 @@ class WorkbookReaderTests(unittest.TestCase):
         self.assertEqual(6, len(payload["phaseOne"]["journeys"]))
         self.assertEqual(4, len(payload["phaseOne"]["stages"][0]["journeyIds"]))
         self.assertEqual(2, len(payload["phaseOne"]["stages"][1]["journeyIds"]))
+
+    def test_static_snapshot_matches_current_workbook(self):
+        snapshot_path = server.ROOT / "data" / "connectors.json"
+        snapshot = json.loads(snapshot_path.read_text(encoding="utf-8"))
+        current = server.read_connectors()
+        self.assertEqual(current["connectors"], snapshot["connectors"])
+        self.assertEqual(current["phaseOne"], snapshot["phaseOne"])
+        self.assertEqual("staticSnapshot", snapshot["source"]["deliveryMode"])
 
     def test_missing_required_header_is_rejected(self):
         rows = make_rows()
