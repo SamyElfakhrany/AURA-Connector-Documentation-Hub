@@ -123,6 +123,42 @@
     .stat.primary .stat-value { color: var(--accent-dark); }
     .stat.attention .stat-value { color: var(--red); }
 
+    .phase-one { margin-top: 18px; padding: 30px; background: #fff; border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 14px 38px rgba(16,32,60,.05); }
+    .phase-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; }
+    .phase-heading h2 { margin: 0; font-size: 31px; letter-spacing: -.03em; }
+    .phase-heading p { max-width: 690px; margin: 8px 0 0; color: var(--muted); }
+    .guardrail { flex: 0 0 285px; padding: 12px 14px; color: #8f1429; background: var(--red-soft); border: 1px solid #f2bdc6; border-radius: 12px; font-size: 13px; font-weight: 800; }
+    .foundation { margin-top: 21px; padding: 18px 20px; display: grid; grid-template-columns: minmax(180px,.45fr) 1fr; gap: 18px; align-items: center; color: #fff; background: linear-gradient(135deg, var(--ink), #1a345c); border-radius: 15px; }
+    .foundation strong { font-size: 18px; }
+    .foundation p { margin: 0; color: rgba(255,255,255,.75); font-size: 13px; }
+    .phase-map { display: grid; gap: 16px; margin-top: 16px; }
+    .phase-lane { padding: 20px; border-radius: 16px; border: 1px solid var(--line); }
+    .phase-lane.stage-l1 { background: linear-gradient(100deg, rgba(233,248,242,.8), #fff 45%); border-left: 6px solid var(--green); }
+    .phase-lane.stage-l2 { background: linear-gradient(100deg, rgba(255,246,223,.85), #fff 45%); border-left: 6px solid #d58b13; }
+    .lane-head { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; margin-bottom: 14px; }
+    .lane-head h3 { margin: 0; font-size: 20px; }
+    .lane-head span { color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .journey-list { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin: 0; padding: 0; counter-reset: journey; }
+    .stage-l2 .journey-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .journey-node { position: relative; min-height: 205px; padding: 16px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 8px 20px rgba(16,32,60,.045); }
+    .stage-l1 .journey-node:not(:last-child)::after { content: "→"; position: absolute; z-index: 2; right: -15px; top: 42%; width: 18px; color: var(--accent-dark); background: #fff; text-align: center; font-weight: 900; }
+    .stage-l2 .journey-node:not(:last-child)::after { content: "→"; position: absolute; z-index: 2; right: -15px; top: 42%; width: 18px; color: #a36a07; background: #fff; text-align: center; font-weight: 900; }
+    .journey-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+    .journey-id { color: var(--muted); font-size: 11px; font-weight: 900; letter-spacing: .1em; }
+    .depth { padding: 4px 7px; border-radius: 999px; color: #0c6687; background: var(--accent-soft); font-size: 10px; font-weight: 900; }
+    .depth.handoff { color: #7c4d00; background: var(--amber-soft); }
+    .journey-node h4 { margin: 11px 0 8px; font-size: 17px; line-height: 1.25; }
+    .journey-node h4 a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .journey-meta { margin: 7px 0 0; color: var(--muted); font-size: 12px; }
+    .journey-meta strong { color: var(--ink-2); }
+    .connector-links { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 11px; }
+    .connector-links a { padding: 4px 7px; color: #0c6687; background: var(--accent-soft); border-radius: 7px; font-size: 10px; font-weight: 900; text-decoration: none; }
+    .phase-gates { margin-top: 17px; padding: 18px 20px; background: #f7f9fb; border: 1px solid var(--line); border-radius: 15px; }
+    .phase-gates h3 { margin: 0 0 9px; font-size: 17px; }
+    .gate-list { columns: 2; gap: 35px; margin: 0; padding-left: 19px; color: var(--muted); font-size: 13px; }
+    .gate-list li { break-inside: avoid; margin-bottom: 7px; }
+    .gate-list strong { color: var(--ink); }
+
     .workspace { margin-top: 18px; padding: 25px; background: rgba(255,255,255,.94); border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 14px 38px rgba(16,32,60,.05); }
     .workspace-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
     .workspace h2 { margin: 0; font-size: 28px; letter-spacing: -.025em; }
@@ -135,8 +171,14 @@
     .status-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 15px; }
     .filter-chip { padding: 8px 12px; color: var(--ink-2); background: #f4f7f9; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 800; cursor: pointer; }
     .filter-chip[aria-pressed="true"] { color: #fff; background: var(--ink); border-color: var(--ink); }
+    .data-message { display: none; margin-top: 16px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 11px; font-size: 13px; font-weight: 700; }
+    .data-message.visible { display: block; }
+    .data-message.loading { color: #0c6687; background: var(--accent-soft); border-color: #b9e2f1; }
+    .data-message.warning { color: var(--amber); background: var(--amber-soft); border-color: #efd79f; }
+    .data-message.error { color: #8f1429; background: var(--red-soft); border-color: #f2bdc6; }
 
     .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+    .cards[aria-busy="true"] { opacity: .55; }
     .connector-card { position: relative; min-height: 328px; display: flex; flex-direction: column; padding: 20px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 12px 28px rgba(16,32,60,.055); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
     .connector-card:hover { transform: translateY(-2px); border-color: #c9dbe4; box-shadow: var(--shadow); }
     .connector-card.available { border-top: 4px solid var(--accent); padding-top: 17px; }
@@ -154,6 +196,8 @@
     .tag.saudi { color: #8f1429; background: var(--red-soft); }
     .tag.ready { color: var(--green); background: var(--green-soft); }
     .tag.discovery { color: var(--amber); background: var(--amber-soft); }
+    .tag.launch { color: #fff; background: var(--ink); }
+    .launch-summary { margin: 0 0 12px; padding: 10px 11px; color: var(--ink-2); background: linear-gradient(110deg, var(--accent-soft), #f8fbfc); border-left: 3px solid var(--accent-dark); border-radius: 8px; font-size: 12px; }
     .summary { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
     .use-case { margin: 0 0 16px; padding: 11px 12px; color: var(--ink-2); background: #f6f8fa; border-radius: 10px; font-size: 13px; }
     .card-footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -175,8 +219,9 @@
     .coverage-card p { margin: 10px 0 0; color: var(--muted); font-size: 13px; }
 
     .source-strip { margin-top: 18px; padding: 20px 22px; display: flex; justify-content: space-between; gap: 22px; align-items: center; background: linear-gradient(135deg, var(--ink), #1a345c); border-radius: 18px; color: #fff; }
+    .source-strip > div { min-width: 0; }
     .source-strip h2 { margin: 0 0 4px; font-size: 20px; }
-    .source-strip p { margin: 0; color: rgba(255,255,255,.72); font-size: 13px; }
+    .source-strip p { margin: 0; overflow-wrap: anywhere; color: rgba(255,255,255,.72); font-size: 13px; }
     .source-strip .btn { color: var(--ink); background: #fff; white-space: nowrap; }
     footer { padding: 26px 2px 0; display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
 
@@ -185,6 +230,10 @@
       .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .phase-heading { align-items: flex-start; flex-direction: column; }
+      .guardrail { flex-basis: auto; width: 100%; }
+      .journey-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .stage-l1 .journey-node:nth-child(2)::after { display: none; }
     }
     @media (max-width: 680px) {
       .shell { width: min(100% - 20px, 1240px); }
@@ -193,6 +242,12 @@
       .hero { padding: 32px 24px; }
       .hero-note { padding: 20px; }
       .stats, .toolbar, .cards, .coverage { grid-template-columns: 1fr; }
+      .phase-one { padding: 22px 16px; }
+      .foundation { grid-template-columns: 1fr; }
+      .journey-list, .stage-l2 .journey-list { grid-template-columns: 1fr; }
+      .stage-l1 .journey-node::after, .stage-l2 .journey-node::after { content: "↓" !important; display: block !important; left: 50%; right: auto !important; top: auto !important; bottom: -17px; }
+      .stage-l1 .journey-node:last-child::after, .stage-l2 .journey-node:last-child::after { display: none !important; }
+      .gate-list { columns: 1; }
       .workspace { padding: 20px 16px; }
       .workspace-head, .source-strip, footer { align-items: flex-start; flex-direction: column; }
       .connector-card { min-height: 0; }
@@ -206,7 +261,7 @@
       body { background: #fff; }
       .shell { width: 100%; }
       main { padding: 0; }
-      .hero, .workspace, .stat, .connector-card, .coverage-card { box-shadow: none; break-inside: avoid; }
+      .hero, .phase-one, .phase-lane, .journey-node, .workspace, .stat, .connector-card, .coverage-card { box-shadow: none; break-inside: avoid; }
       .hero { padding: 25px; }
       .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
@@ -223,7 +278,7 @@
       </a>
       <div class="top-actions">
         <a class="btn secondary" href="https://drive.google.com/drive/folders/1Yc6D6niwYnjmWIzRFgLP1OfVVcR03-OZ" target="_blank" rel="noopener">Detailed Documents</a>
-        <a class="btn accent" href="#connector-grid">Browse briefings</a>
+        <a class="btn accent" href="#phase-one">View Phase One</a>
       </div>
     </div>
   </div>
@@ -236,17 +291,37 @@
         <p class="lead">One view of AURA connector priorities, delivery waves, access readiness, and the board briefings available for review.</p>
       </div>
       <aside class="hero-note" aria-label="Current documentation focus">
-        <span class="kicker">Current focus</span>
-        <strong>Build the strongest enterprise layer first.</strong>
-        <p>Advance Microsoft Graph/Entra, SAP S/4HANA, SuccessFactors, and ServiceNow. Run SPL as a conditional Saudi pilot after product access is confirmed.</p>
+        <span class="kicker">Enterprise Phase One</span>
+        <strong>Launch six day-one journeys in two controlled stages.</strong>
+        <p>Start with identity, employee day, address verification, and Qiwa handoff. Add residency and insurance/wage guidance when customer access is validated. S/4HANA and ServiceNow remain demand-gated.</p>
       </aside>
     </section>
 
     <section class="stats" aria-label="Documentation summary">
-      <article class="stat"><div class="stat-value">30</div><div class="stat-label">Connectors prioritized</div></article>
-      <article class="stat primary"><div class="stat-value">30</div><div class="stat-label">HTML briefings available</div></article>
-      <article class="stat"><div class="stat-value">100%</div><div class="stat-label">Documentation coverage</div></article>
-      <article class="stat attention"><div class="stat-value">0</div><div class="stat-label">Briefings still planned</div></article>
+      <article class="stat"><div id="total-connectors" class="stat-value">—</div><div class="stat-label">Connectors prioritized</div></article>
+      <article class="stat primary"><div id="available-briefings" class="stat-value">—</div><div class="stat-label">HTML briefings available</div></article>
+      <article class="stat"><div id="coverage-percent" class="stat-value">—</div><div class="stat-label">Documentation coverage</div></article>
+      <article class="stat attention"><div id="planned-briefings" class="stat-value">—</div><div class="stat-label">Briefings still planned</div></article>
+    </section>
+
+    <section id="phase-one" class="phase-one" aria-labelledby="phase-title">
+      <div class="phase-heading">
+        <div>
+          <p class="eyebrow">Day-one journey architecture</p>
+          <h2 id="phase-title">Enterprise Phase One</h2>
+          <p id="phase-scope">Loading the phased dependency map from the workbook.</p>
+        </div>
+        <div id="phase-guardrail" class="guardrail">Read-only APIs and official handoffs; no transactional writes.</div>
+      </div>
+      <div id="phase-foundation" class="foundation" aria-label="Shared enterprise foundation">
+        <strong>Shared enterprise foundation</strong>
+        <p>Loading foundation dependencies and customer access gates.</p>
+      </div>
+      <div id="phase-map" class="phase-map" aria-live="polite" aria-busy="true"></div>
+      <div class="phase-gates">
+        <h3>Release gates</h3>
+        <ol id="phase-gate-list" class="gate-list"><li>Loading validation gates from the workbook.</li></ol>
+      </div>
     </section>
 
     <section class="workspace" aria-labelledby="library-title">
@@ -267,18 +342,12 @@
           <label for="category">Category</label>
           <select id="category">
             <option value="all">All categories</option>
-            <option value="Enterprise">Enterprise</option>
-            <option value="Saudi">Saudi</option>
           </select>
         </div>
         <div class="field">
           <label for="wave">Delivery wave</label>
           <select id="wave">
             <option value="all">All waves</option>
-            <option value="1 - Build">Wave 1 - Build</option>
-            <option value="2 - Conditional">Wave 2 - Conditional</option>
-            <option value="3 - Demand led">Wave 3 - Demand led</option>
-            <option value="D - Discovery">Discovery</option>
           </select>
         </div>
         <div class="field">
@@ -297,7 +366,8 @@
         <button class="filter-chip" type="button" data-status="planned" aria-pressed="false">Planned briefings</button>
       </div>
 
-      <div id="connector-grid" class="cards" aria-live="polite"></div>
+      <div id="data-message" class="data-message loading visible" role="status">Loading connector data from Excel…</div>
+      <div id="connector-grid" class="cards" aria-live="polite" aria-busy="true"></div>
       <div id="empty-state" class="empty">
         <strong>No connectors match these filters.</strong>
         Adjust the search or choose a broader category, wave, or status.
@@ -306,88 +376,89 @@
 
     <section class="coverage" aria-label="Coverage by category">
       <article class="coverage-card">
-        <header><h3>Enterprise connectors</h3><strong>6 of 6</strong></header>
-        <div class="progress" aria-label="Enterprise documentation coverage 100 percent"><span style="width:100%"></span></div>
-        <p>All six enterprise connectors now have local HTML briefings.</p>
+        <header><h3>Enterprise connectors</h3><strong id="enterprise-count">—</strong></header>
+        <div id="enterprise-progress" class="progress" aria-label="Enterprise documentation coverage"><span style="width:0"></span></div>
+        <p id="enterprise-description">Loading workbook data.</p>
       </article>
       <article class="coverage-card">
-        <header><h3>Saudi connectors</h3><strong>24 of 24</strong></header>
-        <div class="progress" aria-label="Saudi documentation coverage 100 percent"><span style="width:100%"></span></div>
-        <p>All 24 Saudi connectors now have local HTML briefings.</p>
+        <header><h3>Saudi connectors</h3><strong id="saudi-count">—</strong></header>
+        <div id="saudi-progress" class="progress" aria-label="Saudi documentation coverage"><span style="width:0"></span></div>
+        <p id="saudi-description">Loading workbook data.</p>
       </article>
     </section>
 
     <section class="source-strip" aria-labelledby="source-title">
       <div>
         <h2 id="source-title">Priority source</h2>
-        <p>Ranks, scores, waves, access status, and use cases come from AURA_Connector_Prioritization_2026-09-29.xlsx.</p>
+        <p id="source-description">Loading ranks, scores, waves, access status, and use cases from the local Excel workbook.</p>
       </div>
-      <a class="btn" href="https://drive.google.com/file/d/1-e-GRxaLLD3P52Wz7h3Hgk3ZQEXOGCOh/view" target="_blank" rel="noopener">Open source workbook</a>
+      <a id="source-workbook-link" class="btn" href="outputs/enterprise-phase-one-2026-10-05/AURA_Connector_Prioritization_Enterprise_Phase_One_2026-10-05.xlsx">Open source workbook</a>
     </section>
 
     <footer>
       <span>AURA Connector Documentation Hub</span>
-      <span>Updated 1 October 2026</span>
+      <span id="footer-updated">Workbook data loading</span>
     </footer>
   </main>
 
   <script>
-    const connectors = [
-      {rank:1,name:"Microsoft 365 / Microsoft Graph + Entra",category:"Enterprise",wave:"1 - Build",score:85,access:"Build eligible",summary:"Broad daily reach and a reusable identity and collaboration layer.",useCase:"Employee sign-in, profiles, mail, calendar, Teams, and file actions.",url:"briefings/microsoft-365-graph-entra.html"},
-      {rank:2,name:"SAP S/4HANA",category:"Enterprise",wave:"1 - Build",score:84,access:"Build eligible",summary:"Core enterprise execution system and the roadmap's first enterprise release.",useCase:"Create or track procurement requests, orders, invoices, suppliers, and approvals.",url:"briefings/sap-s4hana.html"},
-      {rank:3,name:"SAP SuccessFactors",category:"Enterprise",wave:"1 - Build",score:84,access:"Build eligible",summary:"Primary HR source for SAP customers.",useCase:"Employee and organization information, leave, and HR request status.",url:"briefings/sap-successfactors.html"},
-      {rank:4,name:"ServiceNow",category:"Enterprise",wave:"1 - Build",score:82,access:"Build eligible",summary:"Strong employee service-desk execution and ticket transparency.",useCase:"Submit IT incidents or service requests and display approvals and ticket status.",url:"briefings/servicenow.html"},
-      {rank:5,name:"SPL National Address",category:"Saudi",wave:"2 - Conditional",score:75,access:"Build eligible",summary:"Saudi-local onboarding quality with broad employee reach.",useCase:"Validate employee or office national addresses for onboarding and service delivery.",url:"briefings/spl-national-address.html"},
-      {rank:6,name:"Oracle Fusion ERP / HCM",category:"Enterprise",wave:"2 - Conditional",score:72,access:"Build eligible",summary:"Large-enterprise alternative to SAP.",useCase:"Read worker and leave information, and create or track procurement requisitions.",url:"briefings/oracle-fusion-erp-hcm.html"},
-      {rank:7,name:"Dynamics 365 / Dataverse",category:"Enterprise",wave:"2 - Conditional",score:70,access:"Build eligible",summary:"Reusable extension for Microsoft-based customer environments.",useCase:"Create or view employee service cases and show case progress in AURA.",url:"briefings/dynamics-365-dataverse.html"},
-      {rank:8,name:"PayTabs",category:"Saudi",wave:"2 - Conditional",score:63,access:"Build eligible",summary:"Payment capability where AURA owns a payable employee journey.",useCase:"Collect eligible service fees and reconcile payment before fulfilment.",url:"briefings/paytabs.html"},
-      {rank:9,name:"IATA",category:"Saudi",wave:"3 - Demand led",score:45,access:"Build eligible",summary:"Useful for a narrow travel-partner workflow.",useCase:"Validate travel-agency codes during onboarding and record result freshness.",url:"briefings/iata.html"},
-      {rank:10,name:"Nafath",category:"Saudi",wave:"D - Discovery",score:68,access:"Discovery required",summary:"High potential trust and reach for Saudi employee journeys.",useCase:"Verify national digital identity and support trusted sign-in or approval.",url:"briefings/nafath.html"},
-      {rank:11,name:"Qiwa",category:"Saudi",wave:"D - Discovery",score:65,access:"Discovery required",summary:"Major value across Saudi employee lifecycle services.",useCase:"Show contract or job-change status and guide employees through labor services.",url:"briefings/qiwa.html"},
-      {rank:12,name:"Etimad APIs",category:"Saudi",wave:"D - Discovery",score:64,access:"Discovery required",summary:"Strategic for AURA customers in the Saudi public sector.",useCase:"Show procurement information and track a selected government purchase request.",url:"briefings/etimad-apis.html"},
-      {rank:13,name:"Absher",category:"Saudi",wave:"D - Discovery",score:56,access:"Discovery required",summary:"Broad recognition, with direct execution rights still uncertain.",useCase:"Guide employees to government transactions and show status when authorized.",url:"briefings/absher.html"},
-      {rank:14,name:"GOSI",category:"Saudi",wave:"D - Discovery",score:56,access:"Discovery required",summary:"Useful for HR verification in Saudi employers.",useCase:"Show social-insurance status and employer contribution visibility when authorized.",url:"briefings/gosi.html"},
-      {rank:15,name:"Muqeem",category:"Saudi",wave:"D - Discovery",score:53,access:"Discovery required",summary:"Relevant to employer mobility and expatriate-service workflows.",useCase:"Track residency or visa services and present employee status or official handoff.",url:"briefings/muqeem.html"},
-      {rank:16,name:"Yaqeen",category:"Saudi",wave:"D - Discovery",score:53,access:"Discovery required",summary:"Improves onboarding data quality and fraud controls for eligible workflows.",useCase:"Verify selected identity fields and improve employee onboarding data quality.",url:"briefings/yaqeen.html"},
-      {rank:17,name:"ZATCA Integration Service",category:"Saudi",wave:"D - Discovery",score:49,access:"Discovery required",summary:"Relevant when AURA bills locally for a paid employee service.",useCase:"Issue invoices and retrieve invoice status or files for finance.",url:"briefings/zatca-integration-service.html"},
-      {rank:18,name:"NIC",category:"Saudi",wave:"D - Discovery",score:46,access:"Discovery required",summary:"High value for pilgrimage-sector operators, with limited general hub reach.",useCase:"Check Hajj eligibility and validate, create, or cancel worker permits when authorized.",url:"briefings/nic.html"},
-      {rank:19,name:"Ministry of Commerce",category:"Saudi",wave:"D - Discovery",score:44,access:"Discovery required",summary:"Relevant to external organization validation.",useCase:"Verify commercial registration and owner relationships when authorized.",url:"briefings/ministry-of-commerce.html"},
-      {rank:20,name:"Mudad",category:"Saudi",wave:"D - Discovery",score:44,access:"Discovery required",summary:"Valuable to HR and payroll customers, with a narrow employee-facing flow.",useCase:"Show payroll or WPS status and assist with salary-related requests.",url:"briefings/mudad.html"},
-      {rank:21,name:"SADAD",category:"Saudi",wave:"D - Discovery",score:44,access:"Discovery required",summary:"Alternative payment rail where a biller relationship exists.",useCase:"Issue bill references and reconcile settlement before service completion.",url:"briefings/sadad.html"},
-      {rank:22,name:"Ajeer",category:"Saudi",wave:"D - Discovery",score:41,access:"Discovery required",summary:"Sector-specific employee and temporary-work services.",useCase:"Show assignment or permit status and guide eligible employer requests.",url:"briefings/ajeer.html"},
-      {rank:23,name:"CRS",category:"Saudi",wave:"D - Discovery",score:37,access:"Discovery required",summary:"Potential staff-travel value, but the provider identity is unresolved.",useCase:"Search hotel availability and reserve, modify, or cancel a booking.",url:"briefings/crs.html"},
-      {rank:24,name:"SAR through Masar Integration Gateway",category:"Saudi",wave:"D - Discovery",score:37,access:"Discovery required",summary:"Sector-specific rail fulfilment through an intermediary gateway; direct SAR API access is not assumed.",useCase:"Search and inquire first; gate booking, payment and cancellation behind verified authority and controls.",url:"briefings/sar-masar-gateway.html"},
-      {rank:25,name:"MOFA",category:"Saudi",wave:"D - Discovery",score:34,access:"Discovery required",summary:"Narrow travel and pilgrimage operations use case.",useCase:"Register an approved external agent and track acceptance or rejection.",url:"briefings/mofa.html"},
-      {rank:26,name:"MOI",category:"Saudi",wave:"D - Discovery",score:34,access:"Discovery required",summary:"Narrow Umrah-agent create/update gateway; not a general MOI or Absher connector.",useCase:"Create or update an approved Umrah-agent record and durably track the provider outcome.",url:"briefings/moi-umrah-agent.html"},
-      {rank:27,name:"Nusuk Imtithal / Sahab",category:"Saudi",wave:"D - Discovery",score:34,access:"Discovery required",summary:"Pilgrimage operations outside the general employee-hub core.",useCase:"Send inspection and incident updates linked to tickets, employees, or locations.",url:"briefings/nusuk-imtithal-sahab.html"},
-      {rank:28,name:"Tasheer Connect",category:"Saudi",wave:"D - Discovery",score:34,access:"Discovery required",summary:"Specialist visa-form execution through a private, provider-approved gateway.",useCase:"Submit a form, then manage approved updates, email changes or holds against the same request.",url:"briefings/tasheer-connect.html"},
-      {rank:29,name:"Atlas",category:"Saudi",wave:"D - Discovery",score:29,access:"Discovery required",summary:"Supporting lookup data for pilgrimage travel, with narrow hub relevance.",useCase:"Synchronize nationality reference data and hotel lookup data.",url:"briefings/atlas.html"},
-      {rank:30,name:"Kidana",category:"Saudi",wave:"D - Discovery",score:29,access:"Discovery required",summary:"Specialized read-only handover-report delivery for authorized Holy Sites operations.",useCase:"Retrieve a known handover report by ID, validate the file, and deliver it securely to an authorized employee.",url:"briefings/kidana-handover-files.html"}
-    ];
-
+    let connectors = [];
+    let phaseOne = null;
     const grid = document.getElementById("connector-grid");
+    const phaseMap = document.getElementById("phase-map");
     const search = document.getElementById("search");
     const category = document.getElementById("category");
     const wave = document.getElementById("wave");
     const sort = document.getElementById("sort");
     const count = document.getElementById("result-count");
     const empty = document.getElementById("empty-state");
+    const dataMessage = document.getElementById("data-message");
     const chips = [...document.querySelectorAll(".filter-chip")];
     let status = "all";
 
     const escapeHtml = value => String(value).replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"})[char]);
+    const formatMultiline = value => escapeHtml(value).replace(/\r?\n/g, "<br>");
     const scoreColor = score => score >= 80 ? "#1688b3" : score >= 60 ? "#2fb4df" : score >= 45 ? "#d58b13" : "#a7b0ba";
     const waveLabel = value => ({"1 - Build":"Wave 1","2 - Conditional":"Wave 2","3 - Demand led":"Wave 3","D - Discovery":"Discovery"})[value] || value;
 
+    function renderPhaseOne(data) {
+      phaseOne = data;
+      document.getElementById("phase-scope").textContent = data.scope;
+      document.getElementById("phase-guardrail").textContent = data.guardrail;
+      document.getElementById("phase-foundation").innerHTML = `<strong>${escapeHtml(data.foundation.title)}</strong><p>${escapeHtml(data.foundation.gate)}</p>`;
+
+      phaseMap.innerHTML = data.stages.map(stage => {
+        const journeys = stage.journeyIds.map(id => data.journeys.find(journey => journey.id === id)).filter(Boolean);
+        return `<section class="phase-lane stage-${escapeHtml(stage.id.toLowerCase())}" aria-labelledby="lane-${escapeHtml(stage.id.toLowerCase())}">
+          <div class="lane-head"><h3 id="lane-${escapeHtml(stage.id.toLowerCase())}">${escapeHtml(stage.id)} · ${escapeHtml(stage.label)}</h3><span>${journeys.length} journeys · dependency order</span></div>
+          <ol class="journey-list">${journeys.map(journey => {
+            const primary = journey.connectorRefs.find(ref => ref.key === journey.primaryConnectorKey);
+            const primaryHref = primary?.url || `#connector-${journey.primaryConnectorKey}`;
+            const linkClass = journey.depth.includes("Handoff") ? "depth handoff" : "depth";
+            return `<li class="journey-node">
+              <div class="journey-top"><span class="journey-id">${escapeHtml(journey.id)}</span><span class="${linkClass}">${escapeHtml(journey.depth)}</span></div>
+              <h4><a href="${escapeHtml(primaryHref)}">${escapeHtml(journey.name)}</a></h4>
+              <p class="journey-meta"><strong>Depends on:</strong> ${escapeHtml(journey.dependsOn)}</p>
+              <p class="journey-meta"><strong>Gate:</strong> ${escapeHtml(journey.validationState)}</p>
+              <div class="connector-links" aria-label="Supporting connector briefings">${journey.connectorRefs.map(ref => `<a href="${escapeHtml(ref.url || `#connector-${ref.key}`)}">${escapeHtml(ref.name)}</a>`).join("")}</div>
+            </li>`;
+          }).join("")}</ol>
+        </section>`;
+      }).join("");
+      document.getElementById("phase-gate-list").innerHTML = data.gates.map(gate => `<li><strong>${escapeHtml(gate.journeyId)} · ${escapeHtml(gate.state)}:</strong> ${escapeHtml(gate.nextGate)}</li>`).join("");
+      phaseMap.setAttribute("aria-busy", "false");
+    }
+
     function cardTemplate(item) {
       const available = Boolean(item.url);
-      const driveLinked = available && /^https:\/\/drive\.google\.com\//.test(item.url);
       const accessClass = item.access === "Build eligible" ? "ready" : "discovery";
+      const categoryClass = item.category === "Enterprise" ? "enterprise" : item.category === "Saudi" ? "saudi" : "";
+      const launch = item.enterpriseLaunch;
       const action = available
-        ? `<a class="btn accent" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open ${escapeHtml(item.name)} board briefing${driveLinked ? " in Drive" : ""}">${driveLinked ? "Open Drive briefing" : "Open briefing"}</a>`
+        ? `<a class="btn accent" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open ${escapeHtml(item.name)} board briefing">Open briefing</a>`
         : `<span class="btn disabled" aria-disabled="true">Briefing planned</span>`;
 
-      return `<article class="connector-card ${available ? "available" : "planned"}" data-rank="${item.rank}">
+      return `<article id="connector-${escapeHtml(item.key)}" class="connector-card ${available ? "available" : "planned"}" data-rank="${item.rank}">
         <div class="card-head">
           <div>
             <div class="rank">Priority ${item.rank}</div>
@@ -398,23 +469,72 @@
           </div>
         </div>
         <div class="tags">
-          <span class="tag ${item.category.toLowerCase()}">${escapeHtml(item.category)}</span>
+          <span class="tag ${categoryClass}">${escapeHtml(item.category)}</span>
           <span class="tag">${escapeHtml(waveLabel(item.wave))}</span>
           <span class="tag ${accessClass}">${escapeHtml(item.access)}</span>
+          ${launch ? `<span class="tag launch">Enterprise ${escapeHtml(launch.wave)}</span>` : ""}
         </div>
-        <p class="summary">${escapeHtml(item.summary)}</p>
-        <p class="use-case"><strong>Use case:</strong> ${escapeHtml(item.useCase)}</p>
+        ${launch ? `<p class="launch-summary"><strong>${escapeHtml(launch.bucket)} · ${escapeHtml(launch.priorityIndex)}/100</strong><br>${escapeHtml(launch.rationale)}</p>` : ""}
+        <p class="summary">${formatMultiline(item.summary)}</p>
+        <p class="use-case"><strong>Use case:</strong><br>${formatMultiline(item.useCase)}</p>
         <div class="card-footer">
-          <span class="status">${driveLinked ? "Drive HTML linked" : available ? "Local document available" : "Not yet documented"}</span>
+          <span class="status">${available ? "Local document available" : "Not yet documented"}</span>
           ${action}
         </div>
       </article>`;
     }
 
+    function setMessage(text = "", type = "loading") {
+      dataMessage.textContent = text;
+      dataMessage.className = `data-message ${type}${text ? " visible" : ""}`;
+      dataMessage.setAttribute("role", type === "error" ? "alert" : "status");
+    }
+
+    function populateSelect(select, values, allLabel) {
+      const selected = select.value;
+      select.replaceChildren(new Option(allLabel, "all"));
+      values.forEach(value => select.add(new Option(value === "D - Discovery" ? "Discovery" : value, value)));
+      select.value = values.includes(selected) ? selected : "all";
+    }
+
+    function setCategoryCoverage(categoryName, idPrefix) {
+      const categoryItems = connectors.filter(item => item.category === categoryName);
+      const available = categoryItems.filter(item => item.url).length;
+      const total = categoryItems.length;
+      const percent = total ? Math.round((available / total) * 100) : 0;
+      document.getElementById(`${idPrefix}-count`).textContent = `${available} of ${total}`;
+      const progress = document.getElementById(`${idPrefix}-progress`);
+      progress.setAttribute("aria-label", `${categoryName} documentation coverage ${percent} percent`);
+      progress.querySelector("span").style.width = `${percent}%`;
+      document.getElementById(`${idPrefix}-description`).textContent = total && available === total
+        ? `All ${total} ${categoryName.toLowerCase()} connectors have local HTML briefings.`
+        : `${available} of ${total} ${categoryName.toLowerCase()} connectors have local HTML briefings.`;
+    }
+
+    function updateSummary(source) {
+      const total = connectors.length;
+      const available = connectors.filter(item => item.url).length;
+      const planned = total - available;
+      const percent = total ? Math.round((available / total) * 100) : 0;
+      document.getElementById("total-connectors").textContent = total;
+      document.getElementById("available-briefings").textContent = available;
+      document.getElementById("coverage-percent").textContent = `${percent}%`;
+      document.getElementById("planned-briefings").textContent = planned;
+      setCategoryCoverage("Enterprise", "enterprise");
+      setCategoryCoverage("Saudi", "saudi");
+
+      const savedAt = new Date(source.modifiedAt);
+      const savedLabel = Number.isNaN(savedAt.getTime()) ? "an unknown time" : savedAt.toLocaleString();
+      document.getElementById("source-description").textContent = `Portfolio ranks and scores, enterprise launch fields, and day-one journeys are loaded from ${source.file}. Workbook saved ${savedLabel}.`;
+      document.getElementById("source-workbook-link").href = source.href;
+      document.getElementById("footer-updated").textContent = `Workbook saved ${savedLabel}`;
+    }
+
     function render() {
       const term = search.value.trim().toLowerCase();
       let items = connectors.filter(item => {
-        const matchesText = !term || [item.name, item.summary, item.useCase, item.access, item.wave].join(" ").toLowerCase().includes(term);
+        const enterpriseText = item.enterpriseLaunch ? [item.enterpriseLaunch.bucket, item.enterpriseLaunch.wave, item.enterpriseLaunch.rationale].join(" ") : "";
+        const matchesText = !term || [item.name, item.summary, item.useCase, item.access, item.wave, enterpriseText].join(" ").toLowerCase().includes(term);
         const matchesCategory = category.value === "all" || item.category === category.value;
         const matchesWave = wave.value === "all" || item.wave === wave.value;
         const availability = item.url ? "available" : "planned";
@@ -433,6 +553,49 @@
       empty.style.display = items.length ? "none" : "block";
     }
 
+    async function loadConnectors() {
+      grid.setAttribute("aria-busy", "true");
+      setMessage("Loading connector data from Excel…", "loading");
+      try {
+        const response = await fetch("/api/connectors", { cache: "no-store" });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(payload.error || `The connector API returned ${response.status}.`);
+        if (!Array.isArray(payload.connectors) || !payload.source || !payload.phaseOne || !Array.isArray(payload.phaseOne.journeys)) throw new Error("The connector API returned an invalid response.");
+
+        connectors = payload.connectors;
+        renderPhaseOne(payload.phaseOne);
+        populateSelect(category, [...new Set(connectors.map(item => item.category))].sort(), "All categories");
+        const waveOrder = ["1 - Build", "2 - Conditional", "3 - Demand led", "D - Discovery"];
+        const waves = [...new Set(connectors.map(item => item.wave))].sort((a, b) => {
+          const aIndex = waveOrder.indexOf(a);
+          const bIndex = waveOrder.indexOf(b);
+          return (aIndex < 0 ? waveOrder.length : aIndex) - (bIndex < 0 ? waveOrder.length : bIndex) || a.localeCompare(b);
+        });
+        populateSelect(wave, waves, "All waves");
+        updateSummary(payload.source);
+        render();
+        if (payload.source.stale) {
+          setMessage(`Showing the last successfully loaded workbook data. Latest read failed: ${payload.source.warning}`, "warning");
+        } else {
+          setMessage();
+        }
+      } catch (error) {
+        connectors = [];
+        phaseOne = null;
+        document.getElementById("phase-scope").textContent = "Phase One data is unavailable until the workbook can be read.";
+        document.getElementById("phase-foundation").innerHTML = "<strong>Shared enterprise foundation</strong><p>Workbook data unavailable.</p>";
+        phaseMap.innerHTML = `<div class="data-message error visible" role="alert">Phase One data is unavailable because the workbook could not be loaded.</div>`;
+        document.getElementById("phase-gate-list").innerHTML = "<li>Resolve the workbook error and refresh to restore release gates.</li>";
+        phaseMap.setAttribute("aria-busy", "false");
+        grid.replaceChildren();
+        empty.style.display = "none";
+        count.textContent = "Connector data unavailable";
+        setMessage(`Could not load the Excel workbook. ${error.message}`, "error");
+      } finally {
+        grid.setAttribute("aria-busy", "false");
+      }
+    }
+
     [search, category, wave, sort].forEach(control => control.addEventListener(control === search ? "input" : "change", render));
     chips.forEach(chip => chip.addEventListener("click", () => {
       status = chip.dataset.status;
@@ -440,7 +603,7 @@
       render();
     }));
 
-    render();
+    loadConnectors();
   </script>
 </body>
 </html>

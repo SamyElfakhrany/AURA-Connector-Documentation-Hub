@@ -1,14 +1,18 @@
 # AURA Connector Documentation Hub
 
-A static local website containing the AURA connector landing page and 30 local board briefings. All prioritized connectors now have a local HTML briefing.
+A local website containing the Enterprise Phase One dependency map, the 30-connector portfolio, and 30 local board briefings. Portfolio rankings remain separate from the 60% enterprise value / 40% customer-obtainable access launch model. Both the connector register and the six day-one journeys are read from the saved Excel workbook whenever the page is refreshed.
 
 ## Project structure
 
 ```text
 AURA-Connector-Documentation-Hub/
 ├── index.html
+├── server.py
 ├── run-local.bat
 ├── README.md
+├── outputs/
+│   └── enterprise-phase-one-2026-10-05/
+│       └── AURA_Connector_Prioritization_Enterprise_Phase_One_2026-10-05.xlsx
 └── briefings/
     └── 30 standalone connector briefing files
 ```
@@ -31,11 +35,20 @@ AURA-Connector-Documentation-Hub/
 
 5. To stop the local server, return to the command window and press `Ctrl+C`.
 
-Python must be installed for `run-local.bat`. The script supports both the `py` and `python` commands.
+Python must be installed for `run-local.bat`. The script supports both the `py` and `python` commands and does not require additional packages.
 
-## Run without a local server
+## Update website data
 
-You can also double-click `index.html`. Search, filters, and briefing links work directly from the folder. Internet access is only required for external source and Google Drive links.
+1. Open `outputs/enterprise-phase-one-2026-10-05/AURA_Connector_Prioritization_Enterprise_Phase_One_2026-10-05.xlsx` in Excel.
+2. Edit `Prioritized Connector Register` for connector data and `Day-one Journeys` for the Phase One map.
+3. Save the workbook so Excel stores all recalculated portfolio and enterprise-launch values.
+4. Refresh the website in the browser.
+
+The `/api/connectors` response preserves the existing connector fields and adds an `enterpriseLaunch` object to each connector plus a top-level `phaseOne` object. The server rejects missing fields, duplicate journey IDs, invalid launch stages/depths/scores, unresolved connector keys, and formulas without saved results. If a later workbook read fails, the last valid dataset is served with a stale-data warning.
+
+Portfolio rank and score are not recalculated by the website. They remain independent from the enterprise launch index.
+
+The Excel connection requires the local server. Opening `index.html` directly does not load workbook data.
 
 ## Upload to GitHub
 
