@@ -72,8 +72,29 @@ class WorkbookReaderTests(unittest.TestCase):
         records = payload["connectors"]
         self.assertEqual(30, len(records))
         self.assertEqual("Microsoft 365 / Microsoft Graph + Entra", records[0]["name"])
-        self.assertEqual(85, records[0]["score"])
+        self.assertEqual(100, records[0]["score"])
         self.assertEqual("1 - Build", records[0]["wave"])
+        self.assertEqual(
+            "briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html",
+            records[0]["url"],
+        )
+        self.assertEqual(
+            [
+                "Microsoft 365 / Microsoft Graph + Entra",
+                "SAP SuccessFactors",
+                "SPL National Address",
+                "Qiwa",
+                "Muqeem",
+                "GOSI",
+                "Mudad",
+            ],
+            [record["name"] for record in records[:7]],
+        )
+        self.assertTrue(all(record["wave"] == "1 - Build" for record in records[:7]))
+        self.assertEqual(
+            [100, 98, 97, 96, 95, 94, 93],
+            [record["score"] for record in records[:7]],
+        )
         self.assertEqual("Kidana", records[-1]["name"])
         self.assertEqual(30, sum(bool(record["url"]) for record in records))
         self.assertEqual(92, records[0]["enterpriseLaunch"]["priorityIndex"])

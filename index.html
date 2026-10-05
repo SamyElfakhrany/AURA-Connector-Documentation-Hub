@@ -88,7 +88,7 @@
       transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
     .btn:hover { transform: translateY(-1px); box-shadow: 0 9px 20px rgba(16,32,60,.12); }
-    .btn:focus-visible, .filter-chip:focus-visible, .stage-card:focus-visible, .pipeline-tile:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid rgba(47,180,223,.35); outline-offset: 3px; }
+    .btn:focus-visible, .filter-chip:focus-visible, .stage-card:focus-visible, .pipeline-tile:focus-visible, .priority-links a:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid rgba(47,180,223,.35); outline-offset: 3px; }
     .btn.secondary { color: var(--ink); background: #fff; border-color: var(--line); }
     .btn.accent { background: linear-gradient(135deg, var(--accent-dark), #0f789e); }
     .btn.disabled { color: #7c8795; background: #edf1f5; border-color: #e1e6ec; pointer-events: none; box-shadow: none; }
@@ -145,6 +145,17 @@
     .journey-track { position: relative; height: 24px; margin: 0 13px; border-bottom: 2px solid var(--accent); }
     .journey-track::after { content: ""; position: absolute; right: -1px; bottom: -5px; border: 4px solid transparent; border-left: 8px solid var(--accent); }
     .pipeline-stack { padding: 13px; background: #f7f9fb; border: 1px solid var(--line); border-radius: 18px; }
+    .phase-priority { margin-bottom: 12px; padding: 16px; color: #fff; background: linear-gradient(120deg, #10203c, #193c68 58%, #0d6f92); border: 1px solid #315878; border-radius: 14px; }
+    .phase-priority > header { display: flex; align-items: end; justify-content: space-between; gap: 18px; }
+    .phase-priority h3 { margin: 0; font-size: 19px; }
+    .phase-priority > header p { margin: 0; color: rgba(255,255,255,.72); font-size: 11px; }
+    .priority-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+    .priority-card { min-width: 0; padding: 12px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 11px; }
+    .priority-card h4 { margin: 0; font-size: 13px; line-height: 1.3; }
+    .priority-meta { display: block; margin-top: 4px; color: #aee9fb; font-size: 9px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
+    .priority-links { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
+    .priority-links a { padding: 4px 7px; color: #fff; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22); border-radius: 999px; font-size: 9px; font-weight: 800; line-height: 1.2; text-decoration: none; }
+    .priority-links a:hover { background: rgba(255,255,255,.2); }
     .pipeline-band { display: grid; grid-template-columns: 176px minmax(0, 1fr); overflow: hidden; border: 1px solid var(--line); border-radius: 14px; }
     .pipeline-label { padding: 17px 15px; display: flex; align-items: center; gap: 11px; color: #fff; }
     .pipeline-label svg { width: 31px; height: 31px; flex: 0 0 auto; stroke: currentColor; fill: none; stroke-width: 1.8; }
@@ -273,6 +284,7 @@
       .lifecycle-stages { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .stage-card::after { display: none !important; }
       .pipeline-band { grid-template-columns: 145px minmax(0, 1fr); }
+      .priority-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .flow-row { padding-left: 145px; }
       .band-aura .pipeline-items, .band-integration .pipeline-items { grid-template-columns: repeat(3, minmax(90px, 1fr)); }
       .band-microsoft .pipeline-items, .band-saudi .pipeline-items { grid-template-columns: repeat(3, minmax(90px, 1fr)); }
@@ -294,6 +306,8 @@
       .stage-card small { margin-left: 37px; }
       .journey-track { display: none; }
       .pipeline-stack { padding: 8px; }
+      .phase-priority > header { align-items: flex-start; flex-direction: column; }
+      .priority-grid { grid-template-columns: 1fr; }
       .pipeline-band { grid-template-columns: 1fr; }
       .pipeline-label { padding: 13px 14px; }
       .pipeline-label svg { width: 26px; height: 26px; }
@@ -320,6 +334,7 @@
       .hero { padding: 25px; }
       .lifecycle-map { padding: 20px; }
       .pipeline-stack { padding: 8px; }
+      .priority-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .pipeline-tile { min-height: 54px; }
       .timing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -423,6 +438,60 @@
       <div class="journey-track" aria-hidden="true"></div>
 
       <div class="pipeline-stack" aria-label="AURA lifecycle integration layers">
+        <section class="phase-priority" aria-labelledby="phase-priority-title">
+          <header>
+            <div>
+              <h3 id="phase-priority-title">Phase 1 Build Priorities</h3>
+              <p>Six launch journeys powered by the seven highest-scoring connectors.</p>
+            </div>
+            <p>Build Wave · Ranks #1–#7 · Scores 100–93</p>
+          </header>
+          <div class="priority-grid">
+            <article class="priority-card">
+              <h4>Entra + SuccessFactors</h4>
+              <span class="priority-meta">Ranks #1 + #2 · Scores 100 + 98</span>
+              <div class="priority-links">
+                <a href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener">Microsoft &amp; Entra briefing</a>
+                <a href="briefings/sap-successfactors.html" target="_blank" rel="noopener">SuccessFactors briefing</a>
+              </div>
+            </article>
+            <article class="priority-card">
+              <h4>SuccessFactors Time Off + Graph calendar</h4>
+              <span class="priority-meta">Ranks #2 + #1 · Scores 98 + 100</span>
+              <div class="priority-links">
+                <a href="briefings/sap-successfactors.html" target="_blank" rel="noopener">Time Off briefing</a>
+                <a href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener">Graph calendar briefing</a>
+              </div>
+            </article>
+            <article class="priority-card">
+              <h4>SPL National Address</h4>
+              <span class="priority-meta">Rank #3 · Score 97</span>
+              <div class="priority-links"><a href="briefings/spl-national-address.html" target="_blank" rel="noopener">SPL briefing</a></div>
+            </article>
+            <article class="priority-card">
+              <h4>Qiwa</h4>
+              <span class="priority-meta">Rank #4 · Score 96</span>
+              <div class="priority-links"><a href="briefings/qiwa.html" target="_blank" rel="noopener">Qiwa briefing</a></div>
+            </article>
+            <article class="priority-card">
+              <h4>Muqeem + SuccessFactors match</h4>
+              <span class="priority-meta">Ranks #5 + #2 · Scores 95 + 98</span>
+              <div class="priority-links">
+                <a href="briefings/muqeem.html" target="_blank" rel="noopener">Muqeem briefing</a>
+                <a href="briefings/sap-successfactors.html" target="_blank" rel="noopener">SuccessFactors briefing</a>
+              </div>
+            </article>
+            <article class="priority-card">
+              <h4>GOSI + Mudad</h4>
+              <span class="priority-meta">Ranks #6 + #7 · Scores 94 + 93</span>
+              <div class="priority-links">
+                <a href="briefings/gosi.html" target="_blank" rel="noopener">GOSI briefing</a>
+                <a href="briefings/mudad.html" target="_blank" rel="noopener">Mudad briefing</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
         <section class="pipeline-band band-aura" aria-labelledby="aura-band-title">
           <header class="pipeline-label">
             <svg aria-hidden="true"><use href="#icon-hub"></use></svg>
@@ -468,16 +537,16 @@
             <span><strong id="microsoft-band-title">Microsoft 365</strong><small>via Microsoft Graph</small></span>
           </header>
           <div class="pipeline-items">
-            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">ID</span><strong>Entra ID</strong><small>Identity &amp; lifecycle</small></a>
-            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">OL</span><strong>Outlook</strong><small>Mail &amp; calendar</small></a>
-            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">TM</span><strong>Teams</strong><small>Meetings &amp; chat</small></a>
-            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">SP</span><strong>SharePoint</strong><small>Documents</small></a>
-            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">OD</span><strong>OneDrive</strong><small>Personal files</small></a>
-            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">PL</span><strong>Planner</strong><small>Tasks &amp; projects</small></a>
-            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">TD</span><strong>To Do</strong><small>Personal tasks</small></a>
-            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">VI</span><strong>Viva</strong><small>Engagement</small></a>
-            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">PV</span><strong>Purview</strong><small>Data governance</small></a>
-            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">PP</span><strong>Power Platform</strong><small>Automation</small></a>
+            <a class="pipeline-tile" href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener"><span class="service-mark">ID</span><strong>Entra ID</strong><small>Identity &amp; lifecycle</small></a>
+            <a class="pipeline-tile" href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener"><span class="service-mark">OL</span><strong>Outlook</strong><small>Mail &amp; calendar</small></a>
+            <a class="pipeline-tile" href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener"><span class="service-mark">TM</span><strong>Teams</strong><small>Meetings &amp; chat</small></a>
+            <a class="pipeline-tile" href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener"><span class="service-mark">SP</span><strong>SharePoint</strong><small>Documents</small></a>
+            <a class="pipeline-tile" href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener"><span class="service-mark">OD</span><strong>OneDrive</strong><small>Personal files</small></a>
+            <a class="pipeline-tile" href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener"><span class="service-mark">PL</span><strong>Planner</strong><small>Tasks &amp; projects</small></a>
+            <a class="pipeline-tile" href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener"><span class="service-mark">TD</span><strong>To Do</strong><small>Personal tasks</small></a>
+            <a class="pipeline-tile" href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener"><span class="service-mark">VI</span><strong>Viva</strong><small>Engagement</small></a>
+            <a class="pipeline-tile" href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener"><span class="service-mark">PV</span><strong>Purview</strong><small>Data governance</small></a>
+            <a class="pipeline-tile" href="briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html" target="_blank" rel="noopener"><span class="service-mark">PP</span><strong>Power Platform</strong><small>Automation</small></a>
           </div>
         </section>
 
@@ -489,6 +558,7 @@
             <span><strong id="saudi-band-title">Saudi Connectors</strong><small>Government &amp; employment</small></span>
           </header>
           <div class="pipeline-items">
+            <a class="pipeline-tile" href="briefings/spl-national-address.html" target="_blank" rel="noopener"><span class="service-mark">SPL</span><strong>SPL National Address</strong><small>Address validation</small></a>
             <a class="pipeline-tile" href="briefings/nafath.html" target="_blank" rel="noopener"><span class="service-mark">NF</span><strong>Nafath</strong><small>Identity verification</small></a>
             <a class="pipeline-tile" href="briefings/yaqeen.html" target="_blank" rel="noopener"><span class="service-mark">YQ</span><strong>Yaqeen</strong><small>Identity data</small></a>
             <a class="pipeline-tile" href="briefings/qiwa.html" target="_blank" rel="noopener"><span class="service-mark">QW</span><strong>Qiwa</strong><small>Employment contract</small></a>

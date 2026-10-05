@@ -4,10 +4,10 @@
     "href": "outputs/enterprise-phase-one-2026-10-05/AURA_Connector_Prioritization_Enterprise_Phase_One_2026-10-05.xlsx",
     "sheet": "Prioritized Connector Register",
     "journeySheet": "Day-one Journeys",
-    "modifiedAt": "2026-10-05T12:22:08.278677+00:00",
+    "modifiedAt": "2026-10-05T14:31:19.875372+00:00",
     "stale": false,
     "deliveryMode": "staticSnapshot",
-    "generatedAt": "2026-10-05T13:22:21.116428+00:00"
+    "generatedAt": "2026-10-05T14:34:27.053875+00:00"
   },
   "connectors": [
     {
@@ -16,11 +16,11 @@
       "name": "Microsoft 365 / Microsoft Graph + Entra",
       "category": "Enterprise",
       "wave": "1 - Build",
-      "score": 85,
+      "score": 100,
       "access": "Build eligible",
       "useCase": "• Employee sign-in and directory profile\n• Mail, calendar, Teams and file actions in AURA",
       "summary": "Broad daily reach and reusable identity/collaboration layer",
-      "url": "briefings/microsoft-365-graph-entra.html",
+      "url": "briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html",
       "enterpriseLaunch": {
         "model": "BYO",
         "value": 5,
@@ -34,8 +34,146 @@
       }
     },
     {
-      "key": "sap-s4hana",
+      "key": "sap-successfactors",
       "rank": 2,
+      "name": "SAP SuccessFactors",
+      "category": "Enterprise",
+      "wave": "1 - Build",
+      "score": 98,
+      "access": "Build eligible",
+      "useCase": "• Show employee and organization information\n• Track leave and HR request status where modules support it",
+      "summary": "Primary HR source for SAP customers",
+      "url": "briefings/sap-successfactors.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 5,
+        "accessScore": 4,
+        "critical": true,
+        "depth": "Read",
+        "priorityIndex": 92,
+        "bucket": "1 Build now",
+        "wave": "L1",
+        "rationale": "HR system of record for all three enterprises. Needs a customer test/preview tenant. Source of truth for Qiwa/GOSI/Muqeem matching."
+      }
+    },
+    {
+      "key": "spl-national-address",
+      "rank": 3,
+      "name": "SPL National Address",
+      "category": "Saudi",
+      "wave": "1 - Build",
+      "score": 97,
+      "access": "Build eligible",
+      "useCase": "• Validate employee or office national address\n• Use verified address data for onboarding/service delivery",
+      "summary": "Saudi-local onboarding quality with broad reach",
+      "url": "briefings/spl-national-address.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 4,
+        "accessScore": 3,
+        "critical": true,
+        "depth": "Read",
+        "priorityIndex": 72,
+        "bucket": "1 Build now",
+        "wave": "L1",
+        "rationale": "Day-one journey 3; no government approval needed beyond customer registering for the SPL key. Confirm quota/price in writing."
+      }
+    },
+    {
+      "key": "qiwa",
+      "rank": 4,
+      "name": "Qiwa",
+      "category": "Saudi",
+      "wave": "1 - Build",
+      "score": 96,
+      "access": "Build eligible",
+      "useCase": "• Show employment-contract or job-change status\n• Guide employee through selected labor service",
+      "summary": "Major Saudi employee lifecycle value",
+      "url": "briefings/qiwa.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 5,
+        "accessScore": 2,
+        "critical": true,
+        "depth": "Handoff",
+        "priorityIndex": 76,
+        "bucket": "1 Build now",
+        "wave": "L1",
+        "rationale": "Highest Saudi employee value; no public API evidenced. Ship guided handoff now (contract review, certificate); API only if Qiwa/HRSD approves."
+      }
+    },
+    {
+      "key": "muqeem",
+      "rank": 5,
+      "name": "Muqeem",
+      "category": "Saudi",
+      "wave": "1 - Build",
+      "score": 95,
+      "access": "Build eligible",
+      "useCase": "• Track expatriate residency or visa services\n• Present employee status or official handoff",
+      "summary": "Relevant to Saudi employer mobility workflows",
+      "url": "briefings/muqeem.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 4,
+        "accessScore": 2,
+        "critical": true,
+        "depth": "Handoff",
+        "priorityIndex": 64,
+        "bucket": "1 Build now",
+        "wave": "L2",
+        "rationale": "Professional package advertises API; customer-obtainable but AURA integrator rights and spec unverified. Elm is the Muqeem operator: use as access lever."
+      }
+    },
+    {
+      "key": "gosi",
+      "rank": 6,
+      "name": "GOSI",
+      "category": "Saudi",
+      "wave": "1 - Build",
+      "score": 94,
+      "access": "Build eligible",
+      "useCase": "• Show social-insurance status when authorized\n• Support employer contribution visibility",
+      "summary": "Useful for HR verification in Saudi employers",
+      "url": "briefings/gosi.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 4,
+        "accessScore": 2,
+        "critical": true,
+        "depth": "Handoff",
+        "priorityIndex": 64,
+        "bucket": "1 Build now",
+        "wave": "L2",
+        "rationale": "S2S exists for large companies (Elm/stc/Al Rajhi qualify). Start with read/reconciliation vs SuccessFactors; no writes."
+      }
+    },
+    {
+      "key": "mudad",
+      "rank": 7,
+      "name": "Mudad",
+      "category": "Saudi",
+      "wave": "1 - Build",
+      "score": 93,
+      "access": "Build eligible",
+      "useCase": "• Show payroll/WPS process status if authorized\n• Assist employees with salary-related requests",
+      "summary": "Valuable to HR/payroll customers but narrow employee-facing flow",
+      "url": "briefings/mudad.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 4,
+        "accessScore": 2,
+        "critical": true,
+        "depth": "Handoff",
+        "priorityIndex": 64,
+        "bucket": "1 Build now",
+        "wave": "L2",
+        "rationale": "Wage-issue journey is high value. Al Rajhi's bank documents an automated WPS route, so employer-side status may come via the bank, not a Mudad API."
+      }
+    },
+    {
+      "key": "sap-s4hana",
+      "rank": 8,
       "name": "SAP S/4HANA",
       "category": "Enterprise",
       "wave": "1 - Build",
@@ -57,31 +195,8 @@
       }
     },
     {
-      "key": "sap-successfactors",
-      "rank": 3,
-      "name": "SAP SuccessFactors",
-      "category": "Enterprise",
-      "wave": "1 - Build",
-      "score": 84,
-      "access": "Build eligible",
-      "useCase": "• Show employee and organization information\n• Track leave and HR request status where modules support it",
-      "summary": "Primary HR source for SAP customers",
-      "url": "briefings/sap-successfactors.html",
-      "enterpriseLaunch": {
-        "model": "BYO",
-        "value": 5,
-        "accessScore": 4,
-        "critical": true,
-        "depth": "Read",
-        "priorityIndex": 92,
-        "bucket": "1 Build now",
-        "wave": "L1",
-        "rationale": "HR system of record for all three enterprises. Needs a customer test/preview tenant. Source of truth for Qiwa/GOSI/Muqeem matching."
-      }
-    },
-    {
       "key": "servicenow",
-      "rank": 4,
+      "rank": 9,
       "name": "ServiceNow",
       "category": "Enterprise",
       "wave": "1 - Build",
@@ -103,31 +218,8 @@
       }
     },
     {
-      "key": "spl-national-address",
-      "rank": 5,
-      "name": "SPL National Address",
-      "category": "Saudi",
-      "wave": "2 - Conditional",
-      "score": 75,
-      "access": "Build eligible",
-      "useCase": "• Validate employee or office national address\n• Use verified address data for onboarding/service delivery",
-      "summary": "Saudi-local onboarding quality with broad reach",
-      "url": "briefings/spl-national-address.html",
-      "enterpriseLaunch": {
-        "model": "BYO",
-        "value": 4,
-        "accessScore": 3,
-        "critical": true,
-        "depth": "Read",
-        "priorityIndex": 72,
-        "bucket": "1 Build now",
-        "wave": "L1",
-        "rationale": "Day-one journey 3; no government approval needed beyond customer registering for the SPL key. Confirm quota/price in writing."
-      }
-    },
-    {
       "key": "oracle-fusion-erp-hcm",
-      "rank": 6,
+      "rank": 10,
       "name": "Oracle Fusion ERP / HCM",
       "category": "Enterprise",
       "wave": "2 - Conditional",
@@ -150,7 +242,7 @@
     },
     {
       "key": "dynamics-365-dataverse",
-      "rank": 7,
+      "rank": 11,
       "name": "Dynamics 365 / Dataverse",
       "category": "Enterprise",
       "wave": "2 - Conditional",
@@ -173,7 +265,7 @@
     },
     {
       "key": "paytabs",
-      "rank": 8,
+      "rank": 12,
       "name": "PayTabs",
       "category": "Saudi",
       "wave": "2 - Conditional",
@@ -196,7 +288,7 @@
     },
     {
       "key": "iata",
-      "rank": 9,
+      "rank": 13,
       "name": "IATA",
       "category": "Saudi",
       "wave": "3 - Demand led",
@@ -219,7 +311,7 @@
     },
     {
       "key": "nafath",
-      "rank": 10,
+      "rank": 14,
       "name": "Nafath",
       "category": "Saudi",
       "wave": "D - Discovery",
@@ -241,31 +333,8 @@
       }
     },
     {
-      "key": "qiwa",
-      "rank": 11,
-      "name": "Qiwa",
-      "category": "Saudi",
-      "wave": "D - Discovery",
-      "score": 65,
-      "access": "Discovery required",
-      "useCase": "• Show employment-contract or job-change status\n• Guide employee through selected labor service",
-      "summary": "Major Saudi employee lifecycle value",
-      "url": "briefings/qiwa.html",
-      "enterpriseLaunch": {
-        "model": "BYO",
-        "value": 5,
-        "accessScore": 2,
-        "critical": false,
-        "depth": "Handoff",
-        "priorityIndex": 76,
-        "bucket": "2 Negotiate access",
-        "wave": "L1",
-        "rationale": "Highest Saudi employee value; no public API evidenced. Ship guided handoff now (contract review, certificate); API only if Qiwa/HRSD approves."
-      }
-    },
-    {
       "key": "etimad-apis",
-      "rank": 12,
+      "rank": 15,
       "name": "Etimad APIs",
       "category": "Saudi",
       "wave": "D - Discovery",
@@ -288,7 +357,7 @@
     },
     {
       "key": "absher",
-      "rank": 13,
+      "rank": 16,
       "name": "Absher",
       "category": "Saudi",
       "wave": "D - Discovery",
@@ -310,54 +379,8 @@
       }
     },
     {
-      "key": "gosi",
-      "rank": 14,
-      "name": "GOSI",
-      "category": "Saudi",
-      "wave": "D - Discovery",
-      "score": 56,
-      "access": "Discovery required",
-      "useCase": "• Show social-insurance status when authorized\n• Support employer contribution visibility",
-      "summary": "Useful for HR verification in Saudi employers",
-      "url": "briefings/gosi.html",
-      "enterpriseLaunch": {
-        "model": "BYO",
-        "value": 4,
-        "accessScore": 2,
-        "critical": false,
-        "depth": "Handoff",
-        "priorityIndex": 64,
-        "bucket": "2 Negotiate access",
-        "wave": "L2",
-        "rationale": "S2S exists for large companies (Elm/stc/Al Rajhi qualify). Start with read/reconciliation vs SuccessFactors; no writes."
-      }
-    },
-    {
-      "key": "muqeem",
-      "rank": 15,
-      "name": "Muqeem",
-      "category": "Saudi",
-      "wave": "D - Discovery",
-      "score": 53,
-      "access": "Discovery required",
-      "useCase": "• Track expatriate residency or visa services\n• Present employee status or official handoff",
-      "summary": "Relevant to Saudi employer mobility workflows",
-      "url": "briefings/muqeem.html",
-      "enterpriseLaunch": {
-        "model": "BYO",
-        "value": 4,
-        "accessScore": 2,
-        "critical": false,
-        "depth": "Handoff",
-        "priorityIndex": 64,
-        "bucket": "2 Negotiate access",
-        "wave": "L2",
-        "rationale": "Professional package advertises API; customer-obtainable but AURA integrator rights and spec unverified. Elm is the Muqeem operator: use as access lever."
-      }
-    },
-    {
       "key": "yaqeen",
-      "rank": 16,
+      "rank": 17,
       "name": "Yaqeen",
       "category": "Saudi",
       "wave": "D - Discovery",
@@ -380,7 +403,7 @@
     },
     {
       "key": "zatca-integration-service",
-      "rank": 17,
+      "rank": 18,
       "name": "ZATCA Integration Service",
       "category": "Saudi",
       "wave": "D - Discovery",
@@ -403,7 +426,7 @@
     },
     {
       "key": "nic",
-      "rank": 18,
+      "rank": 19,
       "name": "NIC",
       "category": "Saudi",
       "wave": "D - Discovery",
@@ -426,7 +449,7 @@
     },
     {
       "key": "ministry-of-commerce",
-      "rank": 19,
+      "rank": 20,
       "name": "Ministry of Commerce",
       "category": "Saudi",
       "wave": "D - Discovery",
@@ -445,29 +468,6 @@
         "bucket": "4 Park",
         "wave": "-",
         "rationale": "Business-entity checks; low employee value; transactional access unverified."
-      }
-    },
-    {
-      "key": "mudad",
-      "rank": 20,
-      "name": "Mudad",
-      "category": "Saudi",
-      "wave": "D - Discovery",
-      "score": 44,
-      "access": "Discovery required",
-      "useCase": "• Show payroll/WPS process status if authorized\n• Assist employees with salary-related requests",
-      "summary": "Valuable to HR/payroll customers but narrow employee-facing flow",
-      "url": "briefings/mudad.html",
-      "enterpriseLaunch": {
-        "model": "BYO",
-        "value": 4,
-        "accessScore": 2,
-        "critical": false,
-        "depth": "Handoff",
-        "priorityIndex": 64,
-        "bucket": "2 Negotiate access",
-        "wave": "L2",
-        "rationale": "Wage-issue journey is high value. Al Rajhi's bank documents an automated WPS route, so employer-side status may come via the bank, not a Mudad API."
       }
     },
     {
@@ -755,12 +755,12 @@
             "key": "microsoft-365-graph-entra",
             "name": "Microsoft 365 / Microsoft Graph + Entra",
             "rank": 1,
-            "url": "briefings/microsoft-365-graph-entra.html"
+            "url": "briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html"
           },
           {
             "key": "sap-successfactors",
             "name": "SAP SuccessFactors",
-            "rank": 3,
+            "rank": 2,
             "url": "briefings/sap-successfactors.html"
           }
         ]
@@ -785,14 +785,14 @@
           {
             "key": "sap-successfactors",
             "name": "SAP SuccessFactors",
-            "rank": 3,
+            "rank": 2,
             "url": "briefings/sap-successfactors.html"
           },
           {
             "key": "microsoft-365-graph-entra",
             "name": "Microsoft 365 / Microsoft Graph + Entra",
             "rank": 1,
-            "url": "briefings/microsoft-365-graph-entra.html"
+            "url": "briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html"
           }
         ]
       },
@@ -815,7 +815,7 @@
           {
             "key": "spl-national-address",
             "name": "SPL National Address",
-            "rank": 5,
+            "rank": 3,
             "url": "briefings/spl-national-address.html"
           }
         ]
@@ -839,7 +839,7 @@
           {
             "key": "qiwa",
             "name": "Qiwa",
-            "rank": 11,
+            "rank": 4,
             "url": "briefings/qiwa.html"
           }
         ]
@@ -864,13 +864,13 @@
           {
             "key": "muqeem",
             "name": "Muqeem",
-            "rank": 15,
+            "rank": 5,
             "url": "briefings/muqeem.html"
           },
           {
             "key": "sap-successfactors",
             "name": "SAP SuccessFactors",
-            "rank": 3,
+            "rank": 2,
             "url": "briefings/sap-successfactors.html"
           }
         ]
@@ -895,13 +895,13 @@
           {
             "key": "gosi",
             "name": "GOSI",
-            "rank": 14,
+            "rank": 6,
             "url": "briefings/gosi.html"
           },
           {
             "key": "mudad",
             "name": "Mudad",
-            "rank": 20,
+            "rank": 7,
             "url": "briefings/mudad.html"
           }
         ]

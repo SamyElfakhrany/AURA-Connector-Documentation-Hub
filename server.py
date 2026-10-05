@@ -81,7 +81,7 @@ ENTERPRISE_BUCKETS = {
 }
 
 BRIEFING_FILES = {
-    "Microsoft 365 / Microsoft Graph + Entra": "briefings/microsoft-365-graph-entra.html",
+    "Microsoft 365 / Microsoft Graph + Entra": "briefings/AURA_Microsoft_365_Employee_Digital_Hub_FINAL_EN.html",
     "SAP S/4HANA": "briefings/sap-s4hana.html",
     "SAP SuccessFactors": "briefings/sap-successfactors.html",
     "ServiceNow": "briefings/servicenow.html",
@@ -113,9 +113,10 @@ BRIEFING_FILES = {
     "Kidana": "briefings/kidana-handover-files.html",
 }
 
-CONNECTOR_NAMES_BY_KEY = {
-    Path(path).stem: name for name, path in BRIEFING_FILES.items()
-}
+CONNECTOR_KEYS = {name: Path(path).stem for name, path in BRIEFING_FILES.items()}
+# Preserve the public connector key when a briefing filename changes.
+CONNECTOR_KEYS["Microsoft 365 / Microsoft Graph + Entra"] = "microsoft-365-graph-entra"
+CONNECTOR_NAMES_BY_KEY = {key: name for name, key in CONNECTOR_KEYS.items()}
 
 
 class WorkbookError(Exception):
@@ -371,7 +372,7 @@ def _records_from_rows(rows: dict[int, dict[int, dict]], root: Path) -> list[dic
 
         briefing_file = BRIEFING_FILES.get(name)
         briefing_url = briefing_file if briefing_file and (root / briefing_file).is_file() else None
-        connector_key = Path(briefing_file).stem if briefing_file else _slug(name)
+        connector_key = CONNECTOR_KEYS.get(name, _slug(name))
         records.append(
             {
                 "key": connector_key,
