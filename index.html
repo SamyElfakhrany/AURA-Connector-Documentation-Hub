@@ -554,7 +554,8 @@
     }
 
     async function fetchWorkbookPayload() {
-      const sources = location.protocol === "file:"
+      const isStaticHost = location.protocol === "file:" || location.hostname.endsWith(".github.io");
+      const sources = isStaticHost
         ? ["data/connectors.json"]
         : ["/api/connectors", "data/connectors.json"];
       let lastError = new Error("No workbook data source was available.");

@@ -1,0 +1,943 @@
+{
+  "source": {
+    "file": "AURA_Connector_Prioritization_Enterprise_Phase_One_2026-10-05.xlsx",
+    "href": "outputs/enterprise-phase-one-2026-10-05/AURA_Connector_Prioritization_Enterprise_Phase_One_2026-10-05.xlsx",
+    "sheet": "Prioritized Connector Register",
+    "journeySheet": "Day-one Journeys",
+    "modifiedAt": "2026-10-05T12:22:08.278677+00:00",
+    "stale": false,
+    "deliveryMode": "staticSnapshot",
+    "generatedAt": "2026-10-05T13:22:21.116428+00:00"
+  },
+  "connectors": [
+    {
+      "key": "microsoft-365-graph-entra",
+      "rank": 1,
+      "name": "Microsoft 365 / Microsoft Graph + Entra",
+      "category": "Enterprise",
+      "wave": "1 - Build",
+      "score": 85,
+      "access": "Build eligible",
+      "useCase": "• Employee sign-in and directory profile\n• Mail, calendar, Teams and file actions in AURA",
+      "summary": "Broad daily reach and reusable identity/collaboration layer",
+      "url": "briefings/microsoft-365-graph-entra.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 5,
+        "accessScore": 4,
+        "critical": true,
+        "depth": "Read",
+        "priorityIndex": 92,
+        "bucket": "1 Build now",
+        "wave": "L1",
+        "rationale": "Identity layer for every other journey. Assumes customers run Entra (to confirm). Build SSO as generic OIDC/SAML with Entra as first adapter."
+      }
+    },
+    {
+      "key": "sap-s4hana",
+      "rank": 2,
+      "name": "SAP S/4HANA",
+      "category": "Enterprise",
+      "wave": "1 - Build",
+      "score": 84,
+      "access": "Build eligible",
+      "useCase": "• Create or track procurement requests and orders\n• Show invoice status, supplier data and selected approvals",
+      "summary": "Live pipeline and core execution system; roadmap states first enterprise release",
+      "url": "briefings/sap-s4hana.html",
+      "enterpriseLaunch": {
+        "model": "Demand-gated",
+        "value": 3,
+        "accessScore": 4,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 68,
+        "bucket": "Demand-gated",
+        "wave": "-",
+        "rationale": "ERP for procurement/finance. SuccessFactors does not imply S/4: build only when a customer confirms it."
+      }
+    },
+    {
+      "key": "sap-successfactors",
+      "rank": 3,
+      "name": "SAP SuccessFactors",
+      "category": "Enterprise",
+      "wave": "1 - Build",
+      "score": 84,
+      "access": "Build eligible",
+      "useCase": "• Show employee and organization information\n• Track leave and HR request status where modules support it",
+      "summary": "Primary HR source for SAP customers",
+      "url": "briefings/sap-successfactors.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 5,
+        "accessScore": 4,
+        "critical": true,
+        "depth": "Read",
+        "priorityIndex": 92,
+        "bucket": "1 Build now",
+        "wave": "L1",
+        "rationale": "HR system of record for all three enterprises. Needs a customer test/preview tenant. Source of truth for Qiwa/GOSI/Muqeem matching."
+      }
+    },
+    {
+      "key": "servicenow",
+      "rank": 4,
+      "name": "ServiceNow",
+      "category": "Enterprise",
+      "wave": "1 - Build",
+      "score": 82,
+      "access": "Build eligible",
+      "useCase": "• Submit employee IT incidents or service requests\n• Display approval and ticket status in AURA",
+      "summary": "Strong employee service desk execution and ticket transparency",
+      "url": "briefings/servicenow.html",
+      "enterpriseLaunch": {
+        "model": "Demand-gated",
+        "value": 3,
+        "accessScore": 4,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 68,
+        "bucket": "Demand-gated",
+        "wave": "-",
+        "rationale": "Strong IT/service-desk fit but unknown whether launch customers run it."
+      }
+    },
+    {
+      "key": "spl-national-address",
+      "rank": 5,
+      "name": "SPL National Address",
+      "category": "Saudi",
+      "wave": "2 - Conditional",
+      "score": 75,
+      "access": "Build eligible",
+      "useCase": "• Validate employee or office national address\n• Use verified address data for onboarding/service delivery",
+      "summary": "Saudi-local onboarding quality with broad reach",
+      "url": "briefings/spl-national-address.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 4,
+        "accessScore": 3,
+        "critical": true,
+        "depth": "Read",
+        "priorityIndex": 72,
+        "bucket": "1 Build now",
+        "wave": "L1",
+        "rationale": "Day-one journey 3; no government approval needed beyond customer registering for the SPL key. Confirm quota/price in writing."
+      }
+    },
+    {
+      "key": "oracle-fusion-erp-hcm",
+      "rank": 6,
+      "name": "Oracle Fusion ERP / HCM",
+      "category": "Enterprise",
+      "wave": "2 - Conditional",
+      "score": 72,
+      "access": "Build eligible",
+      "useCase": "• Read worker and leave information\n• Create or track procurement requisitions",
+      "summary": "Large-enterprise alternative to SAP",
+      "url": "briefings/oracle-fusion-erp-hcm.html",
+      "enterpriseLaunch": {
+        "model": "Demand-gated",
+        "value": 1,
+        "accessScore": 4,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 44,
+        "bucket": "Demand-gated",
+        "wave": "-",
+        "rationale": "Customers run SuccessFactors; not needed for launch."
+      }
+    },
+    {
+      "key": "dynamics-365-dataverse",
+      "rank": 7,
+      "name": "Dynamics 365 / Dataverse",
+      "category": "Enterprise",
+      "wave": "2 - Conditional",
+      "score": 70,
+      "access": "Build eligible",
+      "useCase": "• Create or view customer/employee service cases\n• Show case progress in AURA",
+      "summary": "Reusable Microsoft ecosystem extension",
+      "url": "briefings/dynamics-365-dataverse.html",
+      "enterpriseLaunch": {
+        "model": "Demand-gated",
+        "value": 1,
+        "accessScore": 4,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 44,
+        "bucket": "Demand-gated",
+        "wave": "-",
+        "rationale": "Not evidenced in launch customers' stack."
+      }
+    },
+    {
+      "key": "paytabs",
+      "rank": 8,
+      "name": "PayTabs",
+      "category": "Saudi",
+      "wave": "2 - Conditional",
+      "score": 63,
+      "access": "Build eligible",
+      "useCase": "• Collect a fee for an eligible employee service\n• Reconcile payment before fulfilling the request",
+      "summary": "Monetization only where AURA owns a payable journey",
+      "url": "briefings/paytabs.html",
+      "enterpriseLaunch": {
+        "model": "AURA-as-party",
+        "value": 2,
+        "accessScore": 3,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 48,
+        "bucket": "Parked: AURA-as-party",
+        "wave": "-",
+        "rationale": "Merchant-of-record model undecided; most Hub journeys are free to employees."
+      }
+    },
+    {
+      "key": "iata",
+      "rank": 9,
+      "name": "IATA",
+      "category": "Saudi",
+      "wave": "3 - Demand led",
+      "score": 45,
+      "access": "Build eligible",
+      "useCase": "• Validate a travel agency code during vendor onboarding\n• Record valid/invalid result and freshness",
+      "summary": "Useful for a narrow travel partner workflow",
+      "url": "briefings/iata.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 1,
+        "accessScore": 3,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 36,
+        "bucket": "4 Park",
+        "wave": "-",
+        "rationale": "Supplier onboarding for travel agencies; Employee Hub fit 29."
+      }
+    },
+    {
+      "key": "nafath",
+      "rank": 10,
+      "name": "Nafath",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 68,
+      "access": "Discovery required",
+      "useCase": "• Verify national digital identity for an employee journey\n• Potentially support trusted sign-in or approval",
+      "summary": "High potential trust and reach",
+      "url": "briefings/nafath.html",
+      "enterpriseLaunch": {
+        "model": "AURA-as-party",
+        "value": 4,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 56,
+        "bucket": "Parked: AURA-as-party",
+        "wave": "-",
+        "rationale": "Needs AURA/customer as relying party. Keep corporate SSO as normal login; consider step-up for sensitive HR changes later."
+      }
+    },
+    {
+      "key": "qiwa",
+      "rank": 11,
+      "name": "Qiwa",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 65,
+      "access": "Discovery required",
+      "useCase": "• Show employment-contract or job-change status\n• Guide employee through selected labor service",
+      "summary": "Major Saudi employee lifecycle value",
+      "url": "briefings/qiwa.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 5,
+        "accessScore": 2,
+        "critical": false,
+        "depth": "Handoff",
+        "priorityIndex": 76,
+        "bucket": "2 Negotiate access",
+        "wave": "L1",
+        "rationale": "Highest Saudi employee value; no public API evidenced. Ship guided handoff now (contract review, certificate); API only if Qiwa/HRSD approves."
+      }
+    },
+    {
+      "key": "etimad-apis",
+      "rank": 12,
+      "name": "Etimad APIs",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 64,
+      "access": "Discovery required",
+      "useCase": "• Show public-sector procurement information\n• Track a selected government purchase request",
+      "summary": "Strategic for Saudi government customers",
+      "url": "briefings/etimad-apis.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 2,
+        "accessScore": 3,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 48,
+        "bucket": "4 Park",
+        "wave": "L3",
+        "rationale": "Government/semi-government products only; none of the launch customers evidenced as in scope."
+      }
+    },
+    {
+      "key": "absher",
+      "rank": 13,
+      "name": "Absher",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 56,
+      "access": "Discovery required",
+      "useCase": "• Guide employees to a government transaction\n• Show status only if an authorized route exists",
+      "summary": "Broad recognition but direct execution rights uncertain",
+      "url": "briefings/absher.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 3,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "Handoff",
+        "priorityIndex": 44,
+        "bucket": "3 Quick win (handoff)",
+        "wave": "L2",
+        "rationale": "No public API; official-channel handoff only. Never collect Absher/Nafath credentials or OTPs."
+      }
+    },
+    {
+      "key": "gosi",
+      "rank": 14,
+      "name": "GOSI",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 56,
+      "access": "Discovery required",
+      "useCase": "• Show social-insurance status when authorized\n• Support employer contribution visibility",
+      "summary": "Useful for HR verification in Saudi employers",
+      "url": "briefings/gosi.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 4,
+        "accessScore": 2,
+        "critical": false,
+        "depth": "Handoff",
+        "priorityIndex": 64,
+        "bucket": "2 Negotiate access",
+        "wave": "L2",
+        "rationale": "S2S exists for large companies (Elm/stc/Al Rajhi qualify). Start with read/reconciliation vs SuccessFactors; no writes."
+      }
+    },
+    {
+      "key": "muqeem",
+      "rank": 15,
+      "name": "Muqeem",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 53,
+      "access": "Discovery required",
+      "useCase": "• Track expatriate residency or visa services\n• Present employee status or official handoff",
+      "summary": "Relevant to Saudi employer mobility workflows",
+      "url": "briefings/muqeem.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 4,
+        "accessScore": 2,
+        "critical": false,
+        "depth": "Handoff",
+        "priorityIndex": 64,
+        "bucket": "2 Negotiate access",
+        "wave": "L2",
+        "rationale": "Professional package advertises API; customer-obtainable but AURA integrator rights and spec unverified. Elm is the Muqeem operator: use as access lever."
+      }
+    },
+    {
+      "key": "yaqeen",
+      "rank": 16,
+      "name": "Yaqeen",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 53,
+      "access": "Discovery required",
+      "useCase": "• Verify selected employee/beneficiary identity fields\n• Improve onboarding data quality",
+      "summary": "Improves data quality and fraud controls for eligible workflows",
+      "url": "briefings/yaqeen.html",
+      "enterpriseLaunch": {
+        "model": "AURA-as-party",
+        "value": 3,
+        "accessScore": 2,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 52,
+        "bucket": "Parked: AURA-as-party",
+        "wave": "-",
+        "rationale": "Integrator role must be granted by Elm. Elm is a customer: ask for the integrator pathway."
+      }
+    },
+    {
+      "key": "zatca-integration-service",
+      "rank": 17,
+      "name": "ZATCA Integration Service",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 49,
+      "access": "Discovery required",
+      "useCase": "• Issue an invoice for a paid employee service\n• Retrieve invoice status or file for finance",
+      "summary": "Useful finance workflow only when AURA bills locally",
+      "url": "briefings/zatca-integration-service.html",
+      "enterpriseLaunch": {
+        "model": "AURA-as-party",
+        "value": 3,
+        "accessScore": 2,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 52,
+        "bucket": "Parked: AURA-as-party",
+        "wave": "-",
+        "rationale": "Depends on who the taxable seller is; no clear paid employee journey yet."
+      }
+    },
+    {
+      "key": "nic",
+      "rank": 18,
+      "name": "NIC",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 46,
+      "access": "Discovery required",
+      "useCase": "• Check Hajj person eligibility when authorized\n• Validate/create/cancel worker permit in relevant program",
+      "summary": "High for pilgrimage-sector operators; limited general hub reach",
+      "url": "briefings/nic.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 1,
+        "accessScore": 2,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 28,
+        "bucket": "4 Park",
+        "wave": "-",
+        "rationale": "Hajj-sector specific. Revisit only for a Hajj operator customer."
+      }
+    },
+    {
+      "key": "ministry-of-commerce",
+      "rank": 19,
+      "name": "Ministry of Commerce",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 44,
+      "access": "Discovery required",
+      "useCase": "• Verify company commercial registration for agent onboarding\n• Check owner relationship only if authorized",
+      "summary": "Relevant to external organization validation",
+      "url": "briefings/ministry-of-commerce.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 2,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 32,
+        "bucket": "4 Park",
+        "wave": "-",
+        "rationale": "Business-entity checks; low employee value; transactional access unverified."
+      }
+    },
+    {
+      "key": "mudad",
+      "rank": 20,
+      "name": "Mudad",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 44,
+      "access": "Discovery required",
+      "useCase": "• Show payroll/WPS process status if authorized\n• Assist employees with salary-related requests",
+      "summary": "Valuable to HR/payroll customers but narrow employee-facing flow",
+      "url": "briefings/mudad.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 4,
+        "accessScore": 2,
+        "critical": false,
+        "depth": "Handoff",
+        "priorityIndex": 64,
+        "bucket": "2 Negotiate access",
+        "wave": "L2",
+        "rationale": "Wage-issue journey is high value. Al Rajhi's bank documents an automated WPS route, so employer-side status may come via the bank, not a Mudad API."
+      }
+    },
+    {
+      "key": "sadad",
+      "rank": 21,
+      "name": "SADAD",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 44,
+      "access": "Discovery required",
+      "useCase": "• Issue a bill reference for a paid service\n• Reconcile settlement before completion",
+      "summary": "Alternative payment rail where a biller relationship exists",
+      "url": "briefings/sadad.html",
+      "enterpriseLaunch": {
+        "model": "AURA-as-party",
+        "value": 2,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 32,
+        "bucket": "Parked: AURA-as-party",
+        "wave": "-",
+        "rationale": "Requires biller/sub-biller status; bill creation is not payment confirmation."
+      }
+    },
+    {
+      "key": "ajeer",
+      "rank": 22,
+      "name": "Ajeer",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 41,
+      "access": "Discovery required",
+      "useCase": "• Show temporary-worker assignment/permit status\n• Guide an eligible employer service request",
+      "summary": "Sector-specific employee services",
+      "url": "briefings/ajeer.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 2,
+        "accessScore": 2,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 40,
+        "bucket": "4 Park",
+        "wave": "-",
+        "rationale": "Seasonal/temporary labor; limited fit for these enterprises."
+      }
+    },
+    {
+      "key": "crs",
+      "rank": 23,
+      "name": "CRS",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 37,
+      "access": "Discovery required",
+      "useCase": "• Search hotel availability for staff travel\n• Reserve, modify or cancel a selected booking",
+      "summary": "Potential travel benefits, but provider identity unresolved",
+      "url": "briefings/crs.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 1,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 20,
+        "bucket": "4 Park",
+        "wave": "-",
+        "rationale": "Supplier unidentified; booking liability unresolved."
+      }
+    },
+    {
+      "key": "sar-masar-gateway",
+      "rank": 24,
+      "name": "SAR through Masar Integration Gateway",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 37,
+      "access": "Discovery required",
+      "useCase": "• Search and book rail for staff travel\n• Pay, inquire or cancel using saved booking ID",
+      "summary": "Sector-specific travel fulfilment",
+      "url": "briefings/sar-masar-gateway.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 1,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 20,
+        "bucket": "4 Park",
+        "wave": "-",
+        "rationale": "Intermediary authority unverified."
+      }
+    },
+    {
+      "key": "mofa",
+      "rank": 25,
+      "name": "MOFA",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 34,
+      "access": "Discovery required",
+      "useCase": "• Register an approved external agent for visa workflow\n• Track accepted or rejected registration",
+      "summary": "Narrow travel/pilgrimage operations",
+      "url": "briefings/mofa.html",
+      "enterpriseLaunch": {
+        "model": "AURA-as-party",
+        "value": 1,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 20,
+        "bucket": "Parked: AURA-as-party",
+        "wave": "-",
+        "rationale": "Travel-agent registration; indirect employee value."
+      }
+    },
+    {
+      "key": "moi-umrah-agent",
+      "rank": 26,
+      "name": "MOI",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 34,
+      "access": "Discovery required",
+      "useCase": "• Create or update an Umrah agent record\n• Track accepted/rejected agent status",
+      "summary": "Narrow sector execution use case",
+      "url": "briefings/moi-umrah-agent.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 1,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 20,
+        "bucket": "4 Park",
+        "wave": "-",
+        "rationale": "Regulated agent registration; not an employee journey."
+      }
+    },
+    {
+      "key": "nusuk-imtithal-sahab",
+      "rank": 27,
+      "name": "Nusuk Imtithal / Sahab",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 34,
+      "access": "Discovery required",
+      "useCase": "• Send field-inspection and incident updates\n• Correlate them to ticket and employee/location",
+      "summary": "Pilgrimage operations, outside general employee hub",
+      "url": "briefings/nusuk-imtithal-sahab.html",
+      "enterpriseLaunch": {
+        "model": "AURA-as-party",
+        "value": 1,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 20,
+        "bucket": "Parked: AURA-as-party",
+        "wave": "-",
+        "rationale": "Hajj inspection workflow; owner and inbound API unverified."
+      }
+    },
+    {
+      "key": "tasheer-connect",
+      "rank": 28,
+      "name": "Tasheer Connect",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 34,
+      "access": "Discovery required",
+      "useCase": "• Submit a visa/travel service form\n• Update email, change form or hold request",
+      "summary": "Travel-specialist request execution",
+      "url": "briefings/tasheer-connect.html",
+      "enterpriseLaunch": {
+        "model": "AURA-as-party",
+        "value": 1,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 20,
+        "bucket": "Parked: AURA-as-party",
+        "wave": "-",
+        "rationale": "All four routes are writes; visa-form specialist."
+      }
+    },
+    {
+      "key": "atlas",
+      "rank": 29,
+      "name": "Atlas",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 29,
+      "access": "Discovery required",
+      "useCase": "• Sync nationality reference data\n• Sync hotel lookup data for travel workflows",
+      "summary": "Supporting lookup data for pilgrimage travel, narrow hub relevance",
+      "url": "briefings/atlas.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 1,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 20,
+        "bucket": "4 Park",
+        "wave": "-",
+        "rationale": "Provider identity unknown; name collides with an unrelated Saudi Atlas."
+      }
+    },
+    {
+      "key": "kidana-handover-files",
+      "rank": 30,
+      "name": "Kidana",
+      "category": "Saudi",
+      "wave": "D - Discovery",
+      "score": 29,
+      "access": "Discovery required",
+      "useCase": "• Retrieve a Hajj-site handover report file\n• Deliver it to an authorized employee",
+      "summary": "Specialized Hajj operations",
+      "url": "briefings/kidana-handover-files.html",
+      "enterpriseLaunch": {
+        "model": "BYO",
+        "value": 1,
+        "accessScore": 1,
+        "critical": false,
+        "depth": "-",
+        "priorityIndex": 20,
+        "bucket": "4 Park",
+        "wave": "-",
+        "rationale": "Single document-retrieval route; Holy Sites operations only."
+      }
+    }
+  ],
+  "phaseOne": {
+    "title": "Enterprise Phase One",
+    "scope": "Shared Saudi enterprise journey architecture for Elm, stc and Al Rajhi",
+    "guardrail": "Read-only APIs and official handoffs; no transactional writes.",
+    "foundation": {
+      "title": "Shared enterprise foundation",
+      "connectorKeys": [
+        "microsoft-365-graph-entra",
+        "sap-successfactors"
+      ],
+      "gate": "Confirm each customer's Entra tenant and SuccessFactors test access."
+    },
+    "stages": [
+      {
+        "id": "L1",
+        "label": "Launch core",
+        "journeyIds": [
+          "J1",
+          "J2",
+          "J3",
+          "J4"
+        ]
+      },
+      {
+        "id": "L2",
+        "label": "Access-enabled",
+        "journeyIds": [
+          "J5",
+          "J6"
+        ]
+      }
+    ],
+    "journeys": [
+      {
+        "id": "J1",
+        "name": "Sign in, profile and job info",
+        "connectorKeys": [
+          "microsoft-365-graph-entra",
+          "sap-successfactors"
+        ],
+        "connectors": "Microsoft Graph + Entra; SAP SuccessFactors",
+        "stage": "L1",
+        "depth": "Read",
+        "dependsOn": "Customer Entra app registration; SuccessFactors test tenant",
+        "validationState": "Assumption-gated",
+        "nextGate": "Confirm each customer's Entra tenant and provide a SuccessFactors test tenant.",
+        "primaryConnectorKey": "microsoft-365-graph-entra",
+        "writeControl": "Read only",
+        "sourceNote": "Official APIs verified; customer stack remains to be confirmed.",
+        "connectorRefs": [
+          {
+            "key": "microsoft-365-graph-entra",
+            "name": "Microsoft 365 / Microsoft Graph + Entra",
+            "rank": 1,
+            "url": "briefings/microsoft-365-graph-entra.html"
+          },
+          {
+            "key": "sap-successfactors",
+            "name": "SAP SuccessFactors",
+            "rank": 3,
+            "url": "briefings/sap-successfactors.html"
+          }
+        ]
+      },
+      {
+        "id": "J2",
+        "name": "Leave status and 'my day'",
+        "connectorKeys": [
+          "sap-successfactors",
+          "microsoft-365-graph-entra"
+        ],
+        "connectors": "SAP SuccessFactors Time Off; Microsoft Graph calendar",
+        "stage": "L1",
+        "depth": "Read",
+        "dependsOn": "Time Off module licensed; calendar consent",
+        "validationState": "Licensed-module gate",
+        "nextGate": "Confirm Time Off licensing, employee scope and delegated calendar consent.",
+        "primaryConnectorKey": "sap-successfactors",
+        "writeControl": "Read only",
+        "sourceNote": "OData and Graph are documented; tenant modules and consent are customer-specific.",
+        "connectorRefs": [
+          {
+            "key": "sap-successfactors",
+            "name": "SAP SuccessFactors",
+            "rank": 3,
+            "url": "briefings/sap-successfactors.html"
+          },
+          {
+            "key": "microsoft-365-graph-entra",
+            "name": "Microsoft 365 / Microsoft Graph + Entra",
+            "rank": 1,
+            "url": "briefings/microsoft-365-graph-entra.html"
+          }
+        ]
+      },
+      {
+        "id": "J3",
+        "name": "Address update/verification",
+        "connectorKeys": [
+          "spl-national-address"
+        ],
+        "connectors": "SPL National Address",
+        "stage": "L1",
+        "depth": "Read",
+        "dependsOn": "Customer SPL registration; quota and price confirmed",
+        "validationState": "Access gate",
+        "nextGate": "Register the customer, select the address API product and confirm quota, terms and production use.",
+        "primaryConnectorKey": "spl-national-address",
+        "writeControl": "Verify only",
+        "sourceNote": "Official address APIs and subscription products are published.",
+        "connectorRefs": [
+          {
+            "key": "spl-national-address",
+            "name": "SPL National Address",
+            "rank": 5,
+            "url": "briefings/spl-national-address.html"
+          }
+        ]
+      },
+      {
+        "id": "J4",
+        "name": "Employment contract / certificate",
+        "connectorKeys": [
+          "qiwa"
+        ],
+        "connectors": "Qiwa",
+        "stage": "L1",
+        "depth": "Handoff",
+        "dependsOn": "Official deep links; no public API claimed",
+        "validationState": "Handoff only",
+        "nextGate": "Confirm official service links and keep employee approval and certification in Qiwa.",
+        "primaryConnectorKey": "qiwa",
+        "writeControl": "No writes",
+        "sourceNote": "Official service journeys are documented; machine access remains unverified.",
+        "connectorRefs": [
+          {
+            "key": "qiwa",
+            "name": "Qiwa",
+            "rank": 11,
+            "url": "briefings/qiwa.html"
+          }
+        ]
+      },
+      {
+        "id": "J5",
+        "name": "Residency / Iqama expiry",
+        "connectorKeys": [
+          "muqeem",
+          "sap-successfactors"
+        ],
+        "connectors": "Muqeem; SAP SuccessFactors match",
+        "stage": "L2",
+        "depth": "Handoff, then Read",
+        "dependsOn": "Elm/customer Professional package; specification and sandbox",
+        "validationState": "Access gate",
+        "nextGate": "Confirm customer entitlement, direct-API scope, specification, sandbox and identifier matching.",
+        "primaryConnectorKey": "muqeem",
+        "writeControl": "No writes",
+        "sourceNote": "Public product material indicates an API product; exact AURA rights remain unverified.",
+        "connectorRefs": [
+          {
+            "key": "muqeem",
+            "name": "Muqeem",
+            "rank": 15,
+            "url": "briefings/muqeem.html"
+          },
+          {
+            "key": "sap-successfactors",
+            "name": "SAP SuccessFactors",
+            "rank": 3,
+            "url": "briefings/sap-successfactors.html"
+          }
+        ]
+      },
+      {
+        "id": "J6",
+        "name": "Insurance status and wage-issue guidance",
+        "connectorKeys": [
+          "gosi",
+          "mudad"
+        ],
+        "connectors": "GOSI; Mudad or customer bank route",
+        "stage": "L2",
+        "depth": "Handoff, then Read",
+        "dependsOn": "GOSI S2S eligibility; bank WPS route; sandbox",
+        "validationState": "Access gate",
+        "nextGate": "Confirm GOSI S2S eligibility and the customer's bank/Mudad route, permitted status data and test access.",
+        "primaryConnectorKey": "gosi",
+        "writeControl": "No writes",
+        "sourceNote": "GOSI S2S and Al Rajhi automated WPS routes are public; exact customer rights remain gated.",
+        "connectorRefs": [
+          {
+            "key": "gosi",
+            "name": "GOSI",
+            "rank": 14,
+            "url": "briefings/gosi.html"
+          },
+          {
+            "key": "mudad",
+            "name": "Mudad",
+            "rank": 20,
+            "url": "briefings/mudad.html"
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "journeyId": "J1",
+        "state": "Assumption-gated",
+        "nextGate": "Confirm each customer's Entra tenant and provide a SuccessFactors test tenant."
+      },
+      {
+        "journeyId": "J2",
+        "state": "Licensed-module gate",
+        "nextGate": "Confirm Time Off licensing, employee scope and delegated calendar consent."
+      },
+      {
+        "journeyId": "J3",
+        "state": "Access gate",
+        "nextGate": "Register the customer, select the address API product and confirm quota, terms and production use."
+      },
+      {
+        "journeyId": "J4",
+        "state": "Handoff only",
+        "nextGate": "Confirm official service links and keep employee approval and certification in Qiwa."
+      },
+      {
+        "journeyId": "J5",
+        "state": "Access gate",
+        "nextGate": "Confirm customer entitlement, direct-API scope, specification, sandbox and identifier matching."
+      },
+      {
+        "journeyId": "J6",
+        "state": "Access gate",
+        "nextGate": "Confirm GOSI S2S eligibility and the customer's bank/Mudad route, permitted status data and test access."
+      }
+    ]
+  }
+}
