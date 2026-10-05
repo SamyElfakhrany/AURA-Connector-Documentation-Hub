@@ -5,3 +5,4 @@ Desktop.ini
 .vscode/
 __pycache__/
 tests/__pycache__/
+tmp/

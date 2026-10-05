@@ -41,6 +41,7 @@
     }
     button, input, select { font: inherit; }
     a { color: inherit; }
+    .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
     .skip { position: absolute; left: -9999px; }
     .skip:focus { left: 16px; top: 12px; z-index: 100; padding: 9px 12px; background: #fff; border: 2px solid var(--accent); border-radius: 8px; }
 
@@ -87,7 +88,7 @@
       transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
     .btn:hover { transform: translateY(-1px); box-shadow: 0 9px 20px rgba(16,32,60,.12); }
-    .btn:focus-visible, .filter-chip:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid rgba(47,180,223,.35); outline-offset: 2px; }
+    .btn:focus-visible, .filter-chip:focus-visible, .stage-card:focus-visible, .pipeline-tile:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid rgba(47,180,223,.35); outline-offset: 3px; }
     .btn.secondary { color: var(--ink); background: #fff; border-color: var(--line); }
     .btn.accent { background: linear-gradient(135deg, var(--accent-dark), #0f789e); }
     .btn.disabled { color: #7c8795; background: #edf1f5; border-color: #e1e6ec; pointer-events: none; box-shadow: none; }
@@ -123,41 +124,79 @@
     .stat.primary .stat-value { color: var(--accent-dark); }
     .stat.attention .stat-value { color: var(--red); }
 
-    .phase-one { margin-top: 18px; padding: 30px; background: #fff; border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 14px 38px rgba(16,32,60,.05); }
-    .phase-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; }
-    .phase-heading h2 { margin: 0; font-size: 31px; letter-spacing: -.03em; }
-    .phase-heading p { max-width: 690px; margin: 8px 0 0; color: var(--muted); }
-    .guardrail { flex: 0 0 285px; padding: 12px 14px; color: #8f1429; background: var(--red-soft); border: 1px solid #f2bdc6; border-radius: 12px; font-size: 13px; font-weight: 800; }
-    .foundation { margin-top: 21px; padding: 18px 20px; display: grid; grid-template-columns: minmax(180px,.45fr) 1fr; gap: 18px; align-items: center; color: #fff; background: linear-gradient(135deg, var(--ink), #1a345c); border-radius: 15px; }
-    .foundation strong { font-size: 18px; }
-    .foundation p { margin: 0; color: rgba(255,255,255,.75); font-size: 13px; }
-    .phase-map { display: grid; gap: 16px; margin-top: 16px; }
-    .phase-lane { padding: 20px; border-radius: 16px; border: 1px solid var(--line); }
-    .phase-lane.stage-l1 { background: linear-gradient(100deg, rgba(233,248,242,.8), #fff 45%); border-left: 6px solid var(--green); }
-    .phase-lane.stage-l2 { background: linear-gradient(100deg, rgba(255,246,223,.85), #fff 45%); border-left: 6px solid #d58b13; }
-    .lane-head { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; margin-bottom: 14px; }
-    .lane-head h3 { margin: 0; font-size: 20px; }
-    .lane-head span { color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
-    .journey-list { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin: 0; padding: 0; counter-reset: journey; }
-    .stage-l2 .journey-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .journey-node { position: relative; min-height: 205px; padding: 16px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 8px 20px rgba(16,32,60,.045); }
-    .stage-l1 .journey-node:not(:last-child)::after { content: "→"; position: absolute; z-index: 2; right: -15px; top: 42%; width: 18px; color: var(--accent-dark); background: #fff; text-align: center; font-weight: 900; }
-    .stage-l2 .journey-node:not(:last-child)::after { content: "→"; position: absolute; z-index: 2; right: -15px; top: 42%; width: 18px; color: #a36a07; background: #fff; text-align: center; font-weight: 900; }
-    .journey-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
-    .journey-id { color: var(--muted); font-size: 11px; font-weight: 900; letter-spacing: .1em; }
-    .depth { padding: 4px 7px; border-radius: 999px; color: #0c6687; background: var(--accent-soft); font-size: 10px; font-weight: 900; }
-    .depth.handoff { color: #7c4d00; background: var(--amber-soft); }
-    .journey-node h4 { margin: 11px 0 8px; font-size: 17px; line-height: 1.25; }
-    .journey-node h4 a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
-    .journey-meta { margin: 7px 0 0; color: var(--muted); font-size: 12px; }
-    .journey-meta strong { color: var(--ink-2); }
-    .connector-links { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 11px; }
-    .connector-links a { padding: 4px 7px; color: #0c6687; background: var(--accent-soft); border-radius: 7px; font-size: 10px; font-weight: 900; text-decoration: none; }
-    .phase-gates { margin-top: 17px; padding: 18px 20px; background: #f7f9fb; border: 1px solid var(--line); border-radius: 15px; }
-    .phase-gates h3 { margin: 0 0 9px; font-size: 17px; }
-    .gate-list { columns: 2; gap: 35px; margin: 0; padding-left: 19px; color: var(--muted); font-size: 13px; }
-    .gate-list li { break-inside: avoid; margin-bottom: 7px; }
-    .gate-list strong { color: var(--ink); }
+    .lifecycle-map { margin-top: 18px; padding: 30px; background: #fff; border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 14px 38px rgba(16,32,60,.05); }
+    .lifecycle-map, .lifecycle-heading > *, .pipeline-band, .pipeline-items, .pipeline-tile, .timing-card { min-width: 0; }
+    .lifecycle-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; }
+    .lifecycle-heading h2 { margin: 0; font-size: 31px; letter-spacing: -.03em; }
+    .lifecycle-heading p { max-width: 720px; margin: 8px 0 0; color: var(--muted); }
+    .flow-legend { flex: 0 0 auto; display: flex; flex-wrap: wrap; gap: 8px 14px; padding: 11px 13px; background: #f7fafc; border: 1px solid var(--line); border-radius: 12px; color: var(--ink-2); font-size: 11px; font-weight: 800; }
+    .flow-legend span { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+    .legend-line { width: 29px; height: 0; border-top: 2px solid var(--accent); }
+    .legend-line.data { border-color: var(--red); border-top-style: dashed; }
+    .legend-line.integration { border-color: var(--ink); border-top-style: dashed; }
+    .lifecycle-stages { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; margin-top: 22px; }
+    .stage-card { position: relative; min-height: 113px; padding: 15px 13px; color: var(--ink); background: linear-gradient(135deg, #eefaff, #cfeffc); border: 1px solid #b9e4f4; border-radius: 13px; text-decoration: none; }
+    .stage-card:nth-child(even) { background: linear-gradient(135deg, #e8f8fd, #bde7f7); }
+    .stage-card:not(:last-child)::after { content: "›"; position: absolute; z-index: 2; right: -10px; top: 35px; width: 18px; height: 34px; display: grid; place-items: center; color: var(--accent-dark); background: #fff; border-radius: 999px; font-size: 25px; font-weight: 900; }
+    .stage-top { display: flex; align-items: center; gap: 9px; }
+    .stage-number { width: 28px; height: 28px; flex: 0 0 auto; display: grid; place-items: center; color: #fff; background: var(--ink); border-radius: 50%; font-size: 12px; font-weight: 900; }
+    .stage-card strong { font-size: 14px; line-height: 1.2; }
+    .stage-card small { display: block; margin: 8px 0 0 37px; color: #35516d; font-size: 11px; line-height: 1.35; }
+    .journey-track { position: relative; height: 24px; margin: 0 13px; border-bottom: 2px solid var(--accent); }
+    .journey-track::after { content: ""; position: absolute; right: -1px; bottom: -5px; border: 4px solid transparent; border-left: 8px solid var(--accent); }
+    .pipeline-stack { padding: 13px; background: #f7f9fb; border: 1px solid var(--line); border-radius: 18px; }
+    .pipeline-band { display: grid; grid-template-columns: 176px minmax(0, 1fr); overflow: hidden; border: 1px solid var(--line); border-radius: 14px; }
+    .pipeline-label { padding: 17px 15px; display: flex; align-items: center; gap: 11px; color: #fff; }
+    .pipeline-label svg { width: 31px; height: 31px; flex: 0 0 auto; stroke: currentColor; fill: none; stroke-width: 1.8; }
+    .pipeline-label strong { display: block; font-size: 15px; line-height: 1.2; }
+    .pipeline-label small { display: block; margin-top: 3px; color: rgba(255,255,255,.76); font-size: 10px; }
+    .band-aura { border-color: #86d5f1; }
+    .band-aura .pipeline-label { background: linear-gradient(135deg, #082c5a, #075d91); }
+    .band-integration { border-color: #ef9bab; }
+    .band-integration .pipeline-label { background: linear-gradient(135deg, #a8042e, #df0d40); }
+    .band-microsoft { border-color: #9edcf2; }
+    .band-microsoft .pipeline-label { color: var(--ink); background: linear-gradient(135deg, #eaf8fd, #caedfa); }
+    .band-microsoft .pipeline-label small { color: #4b637c; }
+    .band-saudi { border-color: #85d9c4; }
+    .band-saudi .pipeline-label { background: linear-gradient(135deg, #086c57, #0f9474); }
+    .pipeline-items { display: grid; gap: 7px; padding: 9px; background: rgba(255,255,255,.86); }
+    .band-aura .pipeline-items { grid-template-columns: repeat(6, minmax(84px, 1fr)); }
+    .band-integration .pipeline-items { grid-template-columns: repeat(6, minmax(100px, 1fr)); background: #fff2f5; }
+    .band-microsoft .pipeline-items { grid-template-columns: repeat(5, minmax(92px, 1fr)); background: #f2fbfe; }
+    .band-saudi .pipeline-items { grid-template-columns: repeat(5, minmax(92px, 1fr)); background: #eefbf7; }
+    .pipeline-tile { min-height: 66px; padding: 9px 7px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; color: var(--ink); background: rgba(255,255,255,.95); border: 1px solid rgba(216,226,235,.95); border-radius: 10px; text-align: center; text-decoration: none; box-shadow: 0 4px 12px rgba(16,32,60,.035); transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+    a.pipeline-tile:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 8px 18px rgba(16,32,60,.09); }
+    .pipeline-tile svg { width: 25px; height: 25px; color: var(--accent-dark); stroke: currentColor; fill: none; stroke-width: 1.8; }
+    .pipeline-tile strong { overflow-wrap: anywhere; font-size: 10.5px; line-height: 1.25; }
+    .pipeline-tile small { color: var(--muted); font-size: 9px; line-height: 1.2; }
+    .service-mark { min-width: 29px; height: 29px; padding: 0 5px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--accent-dark), #08648a); border-radius: 8px; font-size: 9px; font-weight: 900; letter-spacing: -.02em; }
+    .band-saudi .service-mark { background: linear-gradient(135deg, #08745d, #11a27e); }
+    .band-integration .pipeline-tile { min-height: 54px; color: #74132a; background: rgba(255,255,255,.82); box-shadow: none; }
+    .flow-row { height: 25px; display: grid; grid-template-columns: repeat(6, 1fr); padding-left: 176px; }
+    .flow-row span { position: relative; justify-self: center; height: 25px; border-left: 2px dashed var(--ink); }
+    .flow-row span::before, .flow-row span::after { content: ""; position: absolute; left: -5px; border: 4px solid transparent; }
+    .flow-row span::before { top: -2px; border-bottom-color: var(--ink); }
+    .flow-row span::after { bottom: -2px; border-top-color: var(--ink); }
+    .flow-row.data span { border-color: var(--red); }
+    .flow-row.data span::before { border-bottom-color: var(--red); }
+    .flow-row.data span::after { border-top-color: var(--red); }
+    .timing-section { margin-top: 24px; }
+    .timing-heading { display: flex; justify-content: space-between; gap: 18px; align-items: end; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .timing-heading h3 { margin: 0; font-size: 22px; }
+    .timing-heading p { max-width: 640px; margin: 0; color: var(--muted); font-size: 12px; }
+    .timing-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin-top: 13px; }
+    .timing-card { overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 13px; }
+    .timing-card > header { min-height: 62px; padding: 11px; color: var(--ink); background: linear-gradient(135deg, #eaf8fd, #c8ecf9); }
+    .timing-card > header span { color: var(--accent-dark); font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+    .timing-card > header h4 { margin: 3px 0 0; font-size: 14px; }
+    .timing-row { min-height: 116px; padding: 10px; border-top: 1px solid var(--line); }
+    .timing-row h5 { margin: 0 0 6px; color: var(--ink); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; }
+    .timing-row h5::before { content: ""; width: 6px; height: 6px; display: inline-block; margin-right: 5px; background: var(--accent); border-radius: 50%; vertical-align: 1px; }
+    .timing-row.saudi h5::before { background: var(--green); }
+    .timing-row.integration h5::before { background: var(--red); }
+    .timing-row.aura h5::before { background: var(--ink); }
+    .timing-row ul { margin: 0; padding-left: 15px; color: var(--muted); font-size: 10.5px; line-height: 1.35; }
+    .timing-row li + li { margin-top: 3px; }
 
     .workspace { margin-top: 18px; padding: 25px; background: rgba(255,255,255,.94); border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 14px 38px rgba(16,32,60,.05); }
     .workspace-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
@@ -230,24 +269,40 @@
       .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .phase-heading { align-items: flex-start; flex-direction: column; }
-      .guardrail { flex-basis: auto; width: 100%; }
-      .journey-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .stage-l1 .journey-node:nth-child(2)::after { display: none; }
+      .lifecycle-heading { align-items: flex-start; flex-direction: column; }
+      .lifecycle-stages { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .stage-card::after { display: none !important; }
+      .pipeline-band { grid-template-columns: 145px minmax(0, 1fr); }
+      .flow-row { padding-left: 145px; }
+      .band-aura .pipeline-items, .band-integration .pipeline-items { grid-template-columns: repeat(3, minmax(90px, 1fr)); }
+      .band-microsoft .pipeline-items, .band-saudi .pipeline-items { grid-template-columns: repeat(3, minmax(90px, 1fr)); }
+      .timing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 680px) {
       .shell { width: min(100% - 20px, 1240px); }
-      .topbar-inner { align-items: flex-start; }
+      .topbar-inner { align-items: stretch; flex-direction: column; gap: 9px; }
+      .top-actions { width: 100%; }
       .top-actions .btn:first-child { display: none; }
+      .top-actions .btn:last-child { width: 100%; }
       .hero { padding: 32px 24px; }
       .hero-note { padding: 20px; }
       .stats, .toolbar, .cards, .coverage { grid-template-columns: 1fr; }
-      .phase-one { padding: 22px 16px; }
-      .foundation { grid-template-columns: 1fr; }
-      .journey-list, .stage-l2 .journey-list { grid-template-columns: 1fr; }
-      .stage-l1 .journey-node::after, .stage-l2 .journey-node::after { content: "↓" !important; display: block !important; left: 50%; right: auto !important; top: auto !important; bottom: -17px; }
-      .stage-l1 .journey-node:last-child::after, .stage-l2 .journey-node:last-child::after { display: none !important; }
-      .gate-list { columns: 1; }
+      .lifecycle-map { padding: 22px 14px; }
+      .flow-legend { width: 100%; }
+      .lifecycle-stages { grid-template-columns: 1fr; }
+      .stage-card { min-height: 0; }
+      .stage-card small { margin-left: 37px; }
+      .journey-track { display: none; }
+      .pipeline-stack { padding: 8px; }
+      .pipeline-band { grid-template-columns: 1fr; }
+      .pipeline-label { padding: 13px 14px; }
+      .pipeline-label svg { width: 26px; height: 26px; }
+      .band-aura .pipeline-items, .band-integration .pipeline-items, .band-microsoft .pipeline-items, .band-saudi .pipeline-items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow-row { height: 22px; padding-left: 0; }
+      .flow-row span { height: 22px; }
+      .timing-heading { align-items: flex-start; flex-direction: column; }
+      .timing-grid { grid-template-columns: 1fr; }
+      .timing-row { min-height: 0; }
       .workspace { padding: 20px 16px; }
       .workspace-head, .source-strip, footer { align-items: flex-start; flex-direction: column; }
       .connector-card { min-height: 0; }
@@ -261,14 +316,35 @@
       body { background: #fff; }
       .shell { width: 100%; }
       main { padding: 0; }
-      .hero, .phase-one, .phase-lane, .journey-node, .workspace, .stat, .connector-card, .coverage-card { box-shadow: none; break-inside: avoid; }
+      .hero, .lifecycle-map, .pipeline-band, .timing-card, .workspace, .stat, .connector-card, .coverage-card { box-shadow: none; break-inside: avoid; }
       .hero { padding: 25px; }
+      .lifecycle-map { padding: 20px; }
+      .pipeline-stack { padding: 8px; }
+      .pipeline-tile { min-height: 54px; }
+      .timing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
 <body>
   <a class="skip" href="#connector-grid">Skip to connector documents</a>
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-hub" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h3v3H8zm5 0h3v3h-3zm-5 5h3v2H8zm5 0h3v2h-3z"/></symbol>
+    <symbol id="icon-home" viewBox="0 0 24 24"><path d="m3 11 9-7 9 7M5 10v10h14V10M9 20v-6h6v6"/></symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24"><circle cx="10" cy="7" r="3"/><path d="M4 20v-3a6 6 0 0 1 12 0v3m3-12v6m-3-3h6"/></symbol>
+    <symbol id="icon-card" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="9" r="2.5"/><path d="M8 17c.7-2 2-3 4-3s3.3 1 4 3"/></symbol>
+    <symbol id="icon-services" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+    <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 7h7l2 2h9v10H3z"/></symbol>
+    <symbol id="icon-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2"/><path d="M3 20v-3a6 6 0 0 1 12 0v3m1-6a4 4 0 0 1 5 4v2"/></symbol>
+    <symbol id="icon-growth" viewBox="0 0 24 24"><path d="M4 20V10m6 10V5m6 15v-8m4 8V3"/></symbol>
+    <symbol id="icon-travel" viewBox="0 0 24 24"><path d="m3 13 8-2 6-7 2 1-4 7 5 3-1 2-6-1-3 5-2-1 1-5-6-1z"/></symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18m0-18a14 14 0 0 0 0 18"/></symbol>
+    <symbol id="icon-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V4h8v3m-13 5h18M10 12v2h4v-2"/></symbol>
+    <symbol id="icon-exit" viewBox="0 0 24 24"><path d="M13 5V3H4v18h9v-2m-3-7h11m-4-4 4 4-4 4"/></symbol>
+    <symbol id="icon-cloud" viewBox="0 0 24 24"><path d="M7 18h11a4 4 0 0 0 .6-8 7 7 0 0 0-13.2-2A5 5 0 0 0 7 18zM12 11v9m-3-3 3 3 3-3"/></symbol>
+    <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></symbol>
+    <symbol id="icon-landmark" viewBox="0 0 24 24"><path d="M3 9h18L12 3zm2 0v9m4-9v9m6-9v9m4-9v9M3 21h18M2 18h20"/></symbol>
+  </svg>
 
   <div class="topbar">
     <div class="shell topbar-inner">
@@ -278,7 +354,7 @@
       </a>
       <div class="top-actions">
         <a class="btn secondary" href="https://drive.google.com/drive/folders/1Yc6D6niwYnjmWIzRFgLP1OfVVcR03-OZ" target="_blank" rel="noopener">Detailed Documents</a>
-        <a class="btn accent" href="#phase-one">View Phase One</a>
+        <a class="btn accent" href="#phase-one">View Lifecycle Map</a>
       </div>
     </div>
   </div>
@@ -291,9 +367,9 @@
         <p class="lead">One view of AURA connector priorities, delivery waves, access readiness, and the board briefings available for review.</p>
       </div>
       <aside class="hero-note" aria-label="Current documentation focus">
-        <span class="kicker">Enterprise Phase One</span>
-        <strong>Launch six day-one journeys in two controlled stages.</strong>
-        <p>Start with identity, employee day, address verification, and Qiwa handoff. Add residency and insurance/wage guidance when customer access is validated. S/4HANA and ServiceNow remain demand-gated.</p>
+        <span class="kicker">Employee lifecycle integration</span>
+        <strong>Connect every employee stage through one AURA experience.</strong>
+        <p>See where AURA modules, Microsoft 365 services, the integration layer, and Saudi connectors work together from pre-join through exit or rehire.</p>
       </aside>
     </section>
 
@@ -304,24 +380,178 @@
       <article class="stat attention"><div id="planned-briefings" class="stat-value">—</div><div class="stat-label">Briefings still planned</div></article>
     </section>
 
-    <section id="phase-one" class="phase-one" aria-labelledby="phase-title">
-      <div class="phase-heading">
+    <section id="phase-one" class="lifecycle-map" aria-labelledby="lifecycle-title">
+      <div class="lifecycle-heading">
         <div>
-          <p class="eyebrow">Day-one journey architecture</p>
-          <h2 id="phase-title">Enterprise Phase One</h2>
-          <p id="phase-scope">Loading the phased dependency map from the workbook.</p>
+          <p class="eyebrow">Employee journey architecture</p>
+          <h2 id="lifecycle-title">Employee Lifecycle Integration Map</h2>
+          <p>How AURA connects Microsoft 365 and Saudi government and employment services across the employee journey.</p>
         </div>
-        <div id="phase-guardrail" class="guardrail">Read-only APIs and official handoffs; no transactional writes.</div>
+        <div class="flow-legend" aria-label="Map legend">
+          <span><i class="legend-line" aria-hidden="true"></i>User journey</span>
+          <span><i class="legend-line data" aria-hidden="true"></i>Data flow</span>
+          <span><i class="legend-line integration" aria-hidden="true"></i>Integration</span>
+        </div>
       </div>
-      <div id="phase-foundation" class="foundation" aria-label="Shared enterprise foundation">
-        <strong>Shared enterprise foundation</strong>
-        <p>Loading foundation dependencies and customer access gates.</p>
+
+      <nav class="lifecycle-stages" aria-label="Employee lifecycle stages">
+        <a id="lifecycle-prejoin" class="stage-card" href="#timing-prejoin">
+          <span class="stage-top"><span class="stage-number">1</span><strong>Pre-Join</strong></span>
+          <small>Attract, verify and prepare</small>
+        </a>
+        <a id="lifecycle-onboarding" class="stage-card" href="#timing-onboarding">
+          <span class="stage-top"><span class="stage-number">2</span><strong>Onboarding</strong></span>
+          <small>Set up access and enable work</small>
+        </a>
+        <a id="lifecycle-daily" class="stage-card" href="#timing-daily">
+          <span class="stage-top"><span class="stage-number">3</span><strong>Daily Work</strong></span>
+          <small>Collaborate and be productive</small>
+        </a>
+        <a id="lifecycle-services" class="stage-card" href="#timing-services">
+          <span class="stage-top"><span class="stage-number">4</span><strong>Employee Services</strong></span>
+          <small>Access support and requests</small>
+        </a>
+        <a id="lifecycle-growth" class="stage-card" href="#timing-growth">
+          <span class="stage-top"><span class="stage-number">5</span><strong>Move &amp; Grow</strong></span>
+          <small>Develop, travel and progress</small>
+        </a>
+        <a id="lifecycle-exit" class="stage-card" href="#timing-exit">
+          <span class="stage-top"><span class="stage-number">6</span><strong>Exit / Rehire</strong></span>
+          <small>Finish securely or return</small>
+        </a>
+      </nav>
+      <div class="journey-track" aria-hidden="true"></div>
+
+      <div class="pipeline-stack" aria-label="AURA lifecycle integration layers">
+        <section class="pipeline-band band-aura" aria-labelledby="aura-band-title">
+          <header class="pipeline-label">
+            <svg aria-hidden="true"><use href="#icon-hub"></use></svg>
+            <span><strong id="aura-band-title">AURA Employee Digital Hub</strong><small>Unified employee experience</small></span>
+          </header>
+          <div class="pipeline-items">
+            <a class="pipeline-tile" href="#lifecycle-daily"><svg aria-hidden="true"><use href="#icon-home"></use></svg><strong>Home &amp; My Day</strong></a>
+            <a class="pipeline-tile" href="#lifecycle-onboarding"><svg aria-hidden="true"><use href="#icon-user"></use></svg><strong>Onboarding</strong></a>
+            <a class="pipeline-tile" href="#lifecycle-onboarding"><svg aria-hidden="true"><use href="#icon-card"></use></svg><strong>Profile &amp; Employment</strong></a>
+            <a class="pipeline-tile" href="#lifecycle-services"><svg aria-hidden="true"><use href="#icon-services"></use></svg><strong>Employee Services</strong></a>
+            <a class="pipeline-tile" href="#lifecycle-daily"><svg aria-hidden="true"><use href="#icon-folder"></use></svg><strong>Documents &amp; Knowledge</strong></a>
+            <a class="pipeline-tile" href="#lifecycle-growth"><svg aria-hidden="true"><use href="#icon-team"></use></svg><strong>Manager Hub</strong></a>
+            <a class="pipeline-tile" href="#lifecycle-growth"><svg aria-hidden="true"><use href="#icon-growth"></use></svg><strong>Learning &amp; Growth</strong></a>
+            <a class="pipeline-tile" href="#lifecycle-growth"><svg aria-hidden="true"><use href="#icon-travel"></use></svg><strong>Mobility &amp; Travel</strong></a>
+            <a class="pipeline-tile" href="#lifecycle-services"><svg aria-hidden="true"><use href="#icon-globe"></use></svg><strong>Expatriate Services</strong></a>
+            <a class="pipeline-tile" href="#lifecycle-daily"><svg aria-hidden="true"><use href="#icon-briefcase"></use></svg><strong>Projects &amp; Contingent</strong></a>
+            <a class="pipeline-tile" href="#lifecycle-exit"><svg aria-hidden="true"><use href="#icon-exit"></use></svg><strong>Exit &amp; Rehire</strong></a>
+          </div>
+        </section>
+
+        <div class="flow-row data" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+        <section class="pipeline-band band-integration" aria-labelledby="integration-band-title">
+          <header class="pipeline-label">
+            <svg aria-hidden="true"><use href="#icon-cloud"></use></svg>
+            <span><strong id="integration-band-title">AURA Integration Layer</strong><small>Secure orchestration and control</small></span>
+          </header>
+          <div class="pipeline-items">
+            <div class="pipeline-tile"><strong>API Management</strong></div>
+            <div class="pipeline-tile"><strong>Data Mapping &amp; Normalization</strong></div>
+            <div class="pipeline-tile"><strong>Security &amp; Compliance</strong></div>
+            <div class="pipeline-tile"><strong>Orchestration &amp; Workflows</strong></div>
+            <div class="pipeline-tile"><strong>Monitoring &amp; Audit</strong></div>
+            <div class="pipeline-tile"><strong>Error Handling &amp; Retry</strong></div>
+          </div>
+        </section>
+
+        <div class="flow-row" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+        <section class="pipeline-band band-microsoft" aria-labelledby="microsoft-band-title">
+          <header class="pipeline-label">
+            <svg aria-hidden="true"><use href="#icon-grid"></use></svg>
+            <span><strong id="microsoft-band-title">Microsoft 365</strong><small>via Microsoft Graph</small></span>
+          </header>
+          <div class="pipeline-items">
+            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">ID</span><strong>Entra ID</strong><small>Identity &amp; lifecycle</small></a>
+            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">OL</span><strong>Outlook</strong><small>Mail &amp; calendar</small></a>
+            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">TM</span><strong>Teams</strong><small>Meetings &amp; chat</small></a>
+            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">SP</span><strong>SharePoint</strong><small>Documents</small></a>
+            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">OD</span><strong>OneDrive</strong><small>Personal files</small></a>
+            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">PL</span><strong>Planner</strong><small>Tasks &amp; projects</small></a>
+            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">TD</span><strong>To Do</strong><small>Personal tasks</small></a>
+            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">VI</span><strong>Viva</strong><small>Engagement</small></a>
+            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">PV</span><strong>Purview</strong><small>Data governance</small></a>
+            <a class="pipeline-tile" href="briefings/microsoft-365-graph-entra.html" target="_blank" rel="noopener"><span class="service-mark">PP</span><strong>Power Platform</strong><small>Automation</small></a>
+          </div>
+        </section>
+
+        <div class="flow-row" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+        <section class="pipeline-band band-saudi" aria-labelledby="saudi-band-title">
+          <header class="pipeline-label">
+            <svg aria-hidden="true"><use href="#icon-landmark"></use></svg>
+            <span><strong id="saudi-band-title">Saudi Connectors</strong><small>Government &amp; employment</small></span>
+          </header>
+          <div class="pipeline-items">
+            <a class="pipeline-tile" href="briefings/nafath.html" target="_blank" rel="noopener"><span class="service-mark">NF</span><strong>Nafath</strong><small>Identity verification</small></a>
+            <a class="pipeline-tile" href="briefings/yaqeen.html" target="_blank" rel="noopener"><span class="service-mark">YQ</span><strong>Yaqeen</strong><small>Identity data</small></a>
+            <a class="pipeline-tile" href="briefings/qiwa.html" target="_blank" rel="noopener"><span class="service-mark">QW</span><strong>Qiwa</strong><small>Employment contract</small></a>
+            <a class="pipeline-tile" href="briefings/mudad.html" target="_blank" rel="noopener"><span class="service-mark">MD</span><strong>Mudad</strong><small>Payroll &amp; wage protection</small></a>
+            <a class="pipeline-tile" href="briefings/gosi.html" target="_blank" rel="noopener"><span class="service-mark">GS</span><strong>GOSI</strong><small>Social insurance</small></a>
+            <a class="pipeline-tile" href="briefings/muqeem.html" target="_blank" rel="noopener"><span class="service-mark">MQ</span><strong>Muqeem</strong><small>Residency &amp; visa</small></a>
+            <a class="pipeline-tile" href="briefings/absher.html" target="_blank" rel="noopener"><span class="service-mark">AB</span><strong>Absher Business</strong><small>Government services</small></a>
+            <a class="pipeline-tile" href="briefings/ajeer.html" target="_blank" rel="noopener"><span class="service-mark">AJ</span><strong>Ajeer</strong><small>Temporary work permits</small></a>
+            <a class="pipeline-tile" href="briefings/sadad.html" target="_blank" rel="noopener"><span class="service-mark">SD</span><strong>SADAD</strong><small>Payments</small></a>
+          </div>
+        </section>
       </div>
-      <div id="phase-map" class="phase-map" aria-live="polite" aria-busy="true"></div>
-      <div class="phase-gates">
-        <h3>Release gates</h3>
-        <ol id="phase-gate-list" class="gate-list"><li>Loading validation gates from the workbook.</li></ol>
-      </div>
+
+      <section class="timing-section" aria-labelledby="timing-title">
+        <div class="timing-heading">
+          <h3 id="timing-title">When to integrate</h3>
+          <p>Capabilities are introduced when they create value in the employee journey, while AURA remains the experience and orchestration layer.</p>
+        </div>
+        <div class="timing-grid">
+          <article id="timing-prejoin" class="timing-card">
+            <header><span>Stage 1</span><h4>Pre-Join</h4></header>
+            <div class="timing-row"><h5>Microsoft 365</h5><ul><li>Create guest or pre-hire identity</li></ul></div>
+            <div class="timing-row saudi"><h5>Saudi Connectors</h5><ul><li>Nafath identity check</li><li>Yaqeen data validation</li></ul></div>
+            <div class="timing-row integration"><h5>AURA Integration</h5><ul><li>Identity verification flow</li></ul></div>
+            <div class="timing-row aura"><h5>AURA Modules</h5><ul><li>Candidate Portal</li></ul></div>
+          </article>
+          <article id="timing-onboarding" class="timing-card">
+            <header><span>Stage 2</span><h4>Onboarding</h4></header>
+            <div class="timing-row"><h5>Microsoft 365</h5><ul><li>Create Entra ID</li><li>Assign licenses</li><li>Set up Teams and Outlook</li></ul></div>
+            <div class="timing-row saudi"><h5>Saudi Connectors</h5><ul><li>Qiwa employment contract</li><li>GOSI registration</li><li>Mudad payroll setup</li><li>Muqeem for expatriates</li></ul></div>
+            <div class="timing-row integration"><h5>AURA Integration</h5><ul><li>Orchestrate multi-system setup</li><li>Map employee data</li></ul></div>
+            <div class="timing-row aura"><h5>AURA Modules</h5><ul><li>Onboarding Hub</li></ul></div>
+          </article>
+          <article id="timing-daily" class="timing-card">
+            <header><span>Stage 3</span><h4>Daily Work</h4></header>
+            <div class="timing-row"><h5>Microsoft 365</h5><ul><li>Teams, Outlook and SharePoint</li><li>Planner, To Do and Viva</li></ul></div>
+            <div class="timing-row saudi"><h5>Saudi Connectors</h5><ul><li>Ongoing status checks</li><li>Expiry alerts and compliance updates</li></ul></div>
+            <div class="timing-row integration"><h5>AURA Integration</h5><ul><li>Event synchronization</li><li>Real-time notifications</li></ul></div>
+            <div class="timing-row aura"><h5>AURA Modules</h5><ul><li>My Day and My Focus</li><li>Projects</li></ul></div>
+          </article>
+          <article id="timing-services" class="timing-card">
+            <header><span>Stage 4</span><h4>Employee Services</h4></header>
+            <div class="timing-row"><h5>Microsoft 365</h5><ul><li>Document storage</li><li>Workflow notifications</li></ul></div>
+            <div class="timing-row saudi"><h5>Saudi Connectors</h5><ul><li>Absher government services</li><li>Ajeer temporary work</li><li>SADAD payments where applicable</li></ul></div>
+            <div class="timing-row integration"><h5>AURA Integration</h5><ul><li>Integrate service requests</li><li>Retrieve documents</li></ul></div>
+            <div class="timing-row aura"><h5>AURA Modules</h5><ul><li>Employee Services</li><li>Employment Profile</li><li>Expatriate Services</li></ul></div>
+          </article>
+          <article id="timing-growth" class="timing-card">
+            <header><span>Stage 5</span><h4>Move &amp; Grow</h4></header>
+            <div class="timing-row"><h5>Microsoft 365</h5><ul><li>Learning and collaboration</li><li>New-role access</li></ul></div>
+            <div class="timing-row saudi"><h5>Saudi Connectors</h5><ul><li>Contract updates through Qiwa</li><li>Role or permit changes through Muqeem</li></ul></div>
+            <div class="timing-row integration"><h5>AURA Integration</h5><ul><li>Update employee profile and role</li><li>Approve and provision new access</li></ul></div>
+            <div class="timing-row aura"><h5>AURA Modules</h5><ul><li>Learning &amp; Growth</li><li>Manager Hub</li><li>Mobility &amp; Travel</li></ul></div>
+          </article>
+          <article id="timing-exit" class="timing-card">
+            <header><span>Stage 6</span><h4>Exit / Rehire</h4></header>
+            <div class="timing-row"><h5>Microsoft 365</h5><ul><li>Disable access</li><li>Archive data</li><li>Reactivate for rehire</li></ul></div>
+            <div class="timing-row saudi"><h5>Saudi Connectors</h5><ul><li>Contract termination through Qiwa</li><li>GOSI end of service</li><li>Final government clearances</li></ul></div>
+            <div class="timing-row integration"><h5>AURA Integration</h5><ul><li>Deprovisioning workflow</li><li>Data archival and rehire workflow</li></ul></div>
+            <div class="timing-row aura"><h5>AURA Modules</h5><ul><li>Exit &amp; Rehire</li></ul></div>
+          </article>
+        </div>
+      </section>
     </section>
 
     <section class="workspace" aria-labelledby="library-title">
@@ -403,9 +633,7 @@
 
   <script>
     let connectors = [];
-    let phaseOne = null;
     const grid = document.getElementById("connector-grid");
-    const phaseMap = document.getElementById("phase-map");
     const search = document.getElementById("search");
     const category = document.getElementById("category");
     const wave = document.getElementById("wave");
@@ -420,34 +648,6 @@
     const formatMultiline = value => escapeHtml(value).replace(/\r?\n/g, "<br>");
     const scoreColor = score => score >= 80 ? "#1688b3" : score >= 60 ? "#2fb4df" : score >= 45 ? "#d58b13" : "#a7b0ba";
     const waveLabel = value => ({"1 - Build":"Wave 1","2 - Conditional":"Wave 2","3 - Demand led":"Wave 3","D - Discovery":"Discovery"})[value] || value;
-
-    function renderPhaseOne(data) {
-      phaseOne = data;
-      document.getElementById("phase-scope").textContent = data.scope;
-      document.getElementById("phase-guardrail").textContent = data.guardrail;
-      document.getElementById("phase-foundation").innerHTML = `<strong>${escapeHtml(data.foundation.title)}</strong><p>${escapeHtml(data.foundation.gate)}</p>`;
-
-      phaseMap.innerHTML = data.stages.map(stage => {
-        const journeys = stage.journeyIds.map(id => data.journeys.find(journey => journey.id === id)).filter(Boolean);
-        return `<section class="phase-lane stage-${escapeHtml(stage.id.toLowerCase())}" aria-labelledby="lane-${escapeHtml(stage.id.toLowerCase())}">
-          <div class="lane-head"><h3 id="lane-${escapeHtml(stage.id.toLowerCase())}">${escapeHtml(stage.id)} · ${escapeHtml(stage.label)}</h3><span>${journeys.length} journeys · dependency order</span></div>
-          <ol class="journey-list">${journeys.map(journey => {
-            const primary = journey.connectorRefs.find(ref => ref.key === journey.primaryConnectorKey);
-            const primaryHref = primary?.url || `#connector-${journey.primaryConnectorKey}`;
-            const linkClass = journey.depth.includes("Handoff") ? "depth handoff" : "depth";
-            return `<li class="journey-node">
-              <div class="journey-top"><span class="journey-id">${escapeHtml(journey.id)}</span><span class="${linkClass}">${escapeHtml(journey.depth)}</span></div>
-              <h4><a href="${escapeHtml(primaryHref)}">${escapeHtml(journey.name)}</a></h4>
-              <p class="journey-meta"><strong>Depends on:</strong> ${escapeHtml(journey.dependsOn)}</p>
-              <p class="journey-meta"><strong>Gate:</strong> ${escapeHtml(journey.validationState)}</p>
-              <div class="connector-links" aria-label="Supporting connector briefings">${journey.connectorRefs.map(ref => `<a href="${escapeHtml(ref.url || `#connector-${ref.key}`)}">${escapeHtml(ref.name)}</a>`).join("")}</div>
-            </li>`;
-          }).join("")}</ol>
-        </section>`;
-      }).join("");
-      document.getElementById("phase-gate-list").innerHTML = data.gates.map(gate => `<li><strong>${escapeHtml(gate.journeyId)} · ${escapeHtml(gate.state)}:</strong> ${escapeHtml(gate.nextGate)}</li>`).join("");
-      phaseMap.setAttribute("aria-busy", "false");
-    }
 
     function cardTemplate(item) {
       const available = Boolean(item.url);
@@ -564,7 +764,7 @@
           const response = await fetch(sourceUrl, { cache: "no-store" });
           const payload = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(payload.error || `Data source returned ${response.status}.`);
-          if (!Array.isArray(payload.connectors) || !payload.source || !payload.phaseOne || !Array.isArray(payload.phaseOne.journeys)) {
+          if (!Array.isArray(payload.connectors) || !payload.source) {
             throw new Error("Data source returned an invalid response.");
           }
           return payload;
@@ -582,7 +782,6 @@
         const payload = await fetchWorkbookPayload();
 
         connectors = payload.connectors;
-        renderPhaseOne(payload.phaseOne);
         populateSelect(category, [...new Set(connectors.map(item => item.category))].sort(), "All categories");
         const waveOrder = ["1 - Build", "2 - Conditional", "3 - Demand led", "D - Discovery"];
         const waves = [...new Set(connectors.map(item => item.wave))].sort((a, b) => {
@@ -602,12 +801,6 @@
         }
       } catch (error) {
         connectors = [];
-        phaseOne = null;
-        document.getElementById("phase-scope").textContent = "Phase One data is unavailable until the workbook can be read.";
-        document.getElementById("phase-foundation").innerHTML = "<strong>Shared enterprise foundation</strong><p>Workbook data unavailable.</p>";
-        phaseMap.innerHTML = `<div class="data-message error visible" role="alert">Phase One data is unavailable because the workbook could not be loaded.</div>`;
-        document.getElementById("phase-gate-list").innerHTML = "<li>Resolve the workbook error and refresh to restore release gates.</li>";
-        phaseMap.setAttribute("aria-busy", "false");
         grid.replaceChildren();
         empty.style.display = "none";
         count.textContent = "Connector data unavailable";

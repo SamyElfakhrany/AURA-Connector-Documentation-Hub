@@ -1,6 +1,6 @@
 # AURA Connector Documentation Hub
 
-A local website containing the Enterprise Phase One dependency map, the 30-connector portfolio, and 30 local board briefings. Portfolio rankings remain separate from the 60% enterprise value / 40% customer-obtainable access launch model. Both the connector register and the six day-one journeys are read from the saved Excel workbook whenever the page is refreshed.
+A local website containing a code-native Employee Lifecycle Integration Map, the 30-connector portfolio, and 30 local board briefings. The lifecycle map connects AURA modules, Microsoft 365 services, the integration layer, and Saudi connectors from pre-join through exit or rehire. Portfolio rankings remain separate from the 60% enterprise value / 40% customer-obtainable access launch model.
 
 ## Project structure
 
@@ -40,7 +40,7 @@ Python must be installed for `run-local.bat`. The script supports both the `py` 
 ## Update website data
 
 1. Open `outputs/enterprise-phase-one-2026-10-05/AURA_Connector_Prioritization_Enterprise_Phase_One_2026-10-05.xlsx` in Excel.
-2. Edit `Prioritized Connector Register` for connector data and `Day-one Journeys` for the Phase One map.
+2. Edit `Prioritized Connector Register` for connector data. The `Day-one Journeys` sheet remains available through the API for compatibility, but it no longer controls the lifecycle visualization.
 3. Save the workbook so Excel stores all recalculated portfolio and enterprise-launch values.
 4. Refresh the website in the browser.
 
